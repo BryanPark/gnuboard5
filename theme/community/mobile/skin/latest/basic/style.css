@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+/* 최근게시물 스킨 (latest) */
+
+.lt_Box{position:relative;width:100%;border-top:1px solid #ddd; background: #fff; box-shadow:0px 0px 1px 0px #d5d5d5}
+.lt_Box .lt_title {display: inline-block;padding: 0 15px;background: url("img/icon_blue.png") no-repeat top left;margin: 10px 5px 0 10px;height: 25px;}
+.lt_Box .lt_title strong{margin-left:8px;}
+.lt {margin:0 0 10px 0;padding:0 10px 0px;border-top:1px solid #ddd; border-bottom:1px solid #ddd;}
+.lt ul {margin:0 0 10px;padding:0;list-style:none}
+.lt ul li{border-bottom:1px solid #ddd; width:100%; overflow: hidden}
+.lt ul li:last-child{border-bottom:none;}
+.lt ul li a {display:block;padding:8px 0;color:#000;text-decoration:none}
+.lt ul li:last-child a{padding:8px 0 0 0;}
+.lt .lt_more a{width:6px;height:11px;position:absolute;top:10px;right:10px; background:url("img/icon_more_m.gif") no-repeat 100% 50%; text-indent:-9999px; display:inline-block;}
+.lt .cnt_cmt {display:inline-block;margin:0 0 0 3px;font-weight:bold; color:#2c68b0; float:right}
+.lt .no_bd{width: 100%;text-align: center;line-height: 100px;}
