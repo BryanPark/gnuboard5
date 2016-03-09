@@ -11,4 +11,24 @@ $(function () {
         var activeTab = $(this).attr("rel");
         $("#" + activeTab).fadeIn()
     });
+	
+	$('.tab_container').hammer().on('swipeleft', function(){
+		//do smth 
+		console.log("onswipe");
+		//$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+		$(this).removeClass("active").css("color", "darkred");
+		
+	});
+	$('.tab_container').hammer().on('swiperight', function(){
+		//do smth 
+		console.log("onswipe");
+		//$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+		$(this).addClass("active").css("color", "darkred");
+		
+	});
+
+	/*$("div").on("swipe",function () {
+		
+	});*/
+
 });

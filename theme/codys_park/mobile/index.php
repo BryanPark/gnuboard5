@@ -26,7 +26,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 }
 ?>
 
-<div class = "tablside_container">
+<div class = "tabslide_container" id = "tabslide_container">
 		<ul class="tabs">
 			<li rel="tab1" class="active">자유게시판</li>
 			<li rel="tab2">커뮤니티2</li>

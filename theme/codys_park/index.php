@@ -13,6 +13,8 @@ include_once(G5_THEME_PATH.'/head.php');
 }
 add_javascript('<script src="'.G5_THEME_JS_URL.'/tabslide.js"></script>', 10);
 add_stylesheet('<link rel="stylesheet" href="'.G5_THEME_JS_URL.'/tabslide.css">', 0);
+add_javascript('<script src="'.G5_THEME_JS_URL.'/hammer.min.js"></script>', 10);
+add_javascript('<script src="'.G5_THEME_JS_URL.'/jquery.hammer.js"></script>', 10);
 include_once(G5_THEME_PATH.'/head.php');
 ?>
 
@@ -48,7 +50,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 <link rel="stylesheet" href="<?=G5_THEME_JS_URL?>/tabslide.css">
 -->
 <!--<img src = "/gnuboard5/data/file/gallery1/thumb-1025880956_Gp18l0hF_7593c493a1cf1c00f00754c8387e6e9d8ab873c4_174x124.jpg">-->
-<div class = "tablside_container">
+
+<div class = "tabslide_container" id="tabslide_container">
 		<ul class="tabs">
 			<li rel="tab1" class="active">자유게시판</li>
 			<li rel="tab2">커뮤니티2</li>
@@ -58,6 +61,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 		</ul>
 	</div>
 	<div class="tab_container">
+	
 		<div id="tab1" class="tab_content" style="float:left;<?php echo $lt_style ?>">
 			<?php
 			// 이 함수가 바로 최신글을 추출하는 역할을 합니다.

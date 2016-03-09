@@ -48,7 +48,16 @@ ul.tabs li.active {
     float: left;
     background: #FFFFFF;
 }
+.tabslide_container .title{
+    border-left: none;
+    font-weight: bold;
+    background: #fafafa;
+    position: absolute;
+	top: 0px;
+	right:0px;
+}
 .tab_content {
+	width:95%;
     padding: 5px;
     font-size: 12px;
     display: none;
@@ -61,7 +70,7 @@ ul.tabs li.active {
     padding:5px;
     list-style:none;
 }
-#tabslide_container {
+.tabslide_container {
 	margin-right:10px;
 	margin-bottom:20px;
 }
