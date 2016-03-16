@@ -84,7 +84,18 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             <td><input type="text" name="wr_homepage" value="<?php echo $homepage ?>" id="wr_homepage" class="frm_input" size="50"></td>
         </tr>
         <?php } ?>
-
+		<tr>
+            <th scope="row"><label for="wr_1">나이</label></th>
+            <td><input type="text" name="wr_1" value="<?php echo $write['wr_1'] ?>" id="wr_1" required class="frm_input" size="20"></td>
+        </tr>
+        <tr>
+            <th scope="row"><label for="wr_2">연락처</label></th>
+            <td><input type="text" name="wr_2" value="<?php echo $write['wr_2'] ?>" id="wr_2" required class="frm_input" size="20"></td>
+        </tr>
+        <tr>
+            <th scope="row"><label for="wr_3">카카오톡</label></th>
+            <td><input type="text" name="wr_3" value="<?php echo $write['wr_3'] ?>" id="wr_3" required class="frm_input" size="20"></td>
+        </tr>
         <?php if ($option) { ?>
         <tr>
             <th scope="row">옵션</th>

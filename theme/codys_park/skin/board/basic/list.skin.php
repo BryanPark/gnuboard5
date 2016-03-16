@@ -2,8 +2,8 @@
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 // 선택옵션으로 인해 셀합치기가 가변적으로 변함
-$colspan = 5;
-
+//$colspan = 5;
+$colspan = 8;
 if ($is_checkbox) $colspan++;
 if ($is_good) $colspan++;
 if ($is_nogood) $colspan++;
@@ -70,10 +70,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             <?php } ?>
             <th scope="col">제목</th>
             <th scope="col">글쓴이</th>
+			<th scope="col">나이</th>
+            <th scope="col">연락처</th>
+            <th scope="col">카카오톡</th>
             <th scope="col"><?php echo subject_sort_link('wr_datetime', $qstr2, 1) ?>날짜</a></th>
             <th scope="col"><?php echo subject_sort_link('wr_hit', $qstr2, 1) ?>조회</a></th>
-            <?php if ($is_good) { ?><th scope="col"><?php echo subject_sort_link('wr_good', $qstr2, 1) ?>추천</a></th><?php } ?>
-            <?php if ($is_nogood) { ?><th scope="col"><?php echo subject_sort_link('wr_nogood', $qstr2, 1) ?>비추천</a></th><?php } ?>
+            <!--<?php if ($is_good) { ?><th scope="col"><?php echo subject_sort_link('wr_good', $qstr2, 1) ?>추천</a></th><?php } ?>
+            <?php if ($is_nogood) { ?><th scope="col"><?php echo subject_sort_link('wr_nogood', $qstr2, 1) ?>비추천</a></th><?php } ?>-->
         </tr>
         </thead>
         <tbody>
@@ -122,11 +125,16 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
                  ?>
             </td>
+			
             <td class="td_name sv_use"><?php echo $list[$i]['name'] ?></td>
+
+			<td class="td_wr1"><?php echo $list[$i]['wr_1'] ?></td>
+            <td class="td_wr2"><?php echo $list[$i]['wr_2'] ?></td>
+            <td class="td_wr3"><?php echo $list[$i]['wr_3'] ?></td>
             <td class="td_date"><?php echo $list[$i]['datetime2'] ?></td>
             <td class="td_num"><?php echo $list[$i]['wr_hit'] ?></td>
-            <?php if ($is_good) { ?><td class="td_num"><?php echo $list[$i]['wr_good'] ?></td><?php } ?>
-            <?php if ($is_nogood) { ?><td class="td_num"><?php echo $list[$i]['wr_nogood'] ?></td><?php } ?>
+            <!--<?php //if ($is_good) { ?><td class="td_num"><?php //echo $list[$i]['wr_good'] ?></td><?//php } ?>
+            <?php //if ($is_nogood) { ?><td class="td_num"><?php //echo $list[$i]['wr_nogood'] ?></td><?//php } ?>-->
         </tr>
         <?php } ?>
         <?php if (count($list) == 0) { echo '<tr><td colspan="'.$colspan.'" class="empty_table">게시물이 없습니다.</td></tr>'; } ?>

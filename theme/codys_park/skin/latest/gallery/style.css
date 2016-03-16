@@ -26,7 +26,7 @@
 
 .lt_gal_Box{border-top:1px solid #e8e8e8;padding-top:27px;}
 .lt_gal_Box ul{margin:0; padding:0;}
-.lt_gal_Box ul li{list-style:none; float:left; width:170px; height:149px; margin-right:10px; margin-right:7px \9; }
+.lt_gal_Box ul li{list-style:none; float:left; width:170px; height:100%; margin-right:10px; margin-right:7px \9; }
 .lt_gal_Box ul li:last-child{margin-right:0px;}
 .lt_gal_Box ul li.no_bd{width:100%; text-align:center; line-height:100px;}
 .lt_gal_Box ul li .lt_image{display:inline-block; margin-bottom:15px;text-decoration:none}

@@ -126,7 +126,22 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
          ?>
     </div>
     <!-- } 게시물 상단 버튼 끝 -->
-
+	<div class="tbl_frm01 tbl_wrap">
+        <table>
+        <tr>
+            <th>나이</th>
+            <td><?php echo $view['wr_1'] ?></td>
+        </tr>
+        <tr>
+            <th>연락처</th>
+            <td><?php echo $view['wr_2'] ?></td>
+        </tr>
+        <tr>
+            <th>카카오톡</th>
+            <td><?php echo $view['wr_3'] ?></td>
+        </tr>
+        </table>
+    </div>
     <section id="bo_v_atc">
         <h2 id="bo_v_atc_title">본문</h2>
 

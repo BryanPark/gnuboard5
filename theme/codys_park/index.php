@@ -53,7 +53,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 
 <div class = "tabslide_container" id="tabslide_container">
 		<ul class="tabs">
-			<li rel="tab1" class="active">자유게시판</li>
+			<li rel="tab1" class="active">만남게시판</li>
 			<li rel="tab2">커뮤니티2</li>
 			<li rel="tab3">커뮤니티3</li>
 			<li rel="tab4">갤러리1</li>
@@ -92,7 +92,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 			// 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
 			// 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
 			$options = array(
-            'thumb_width'    => 170, // 썸네일 width
+            'thumb_width'    => 144, // 썸네일 width
             'thumb_height'   => 149,  // 썸네일 height
             'content_length' => 40   // 간단내용 길이
 			);
@@ -101,7 +101,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 		</div>
 	</div>
 </div>
-
+<?php if($is_member){echo poll('theme/layer');} // 설문조사, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정 ?>
 <?php
 include_once(G5_THEME_PATH.'/tail.php');
 ?>

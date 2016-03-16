@@ -9,7 +9,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$latest_skin_url.'/style.css">', 
 $thumb_width  = isset($options['thumb_width']) ? $options['thumb_width'] : $board['bo_gallery_width'];
 $thumb_height = isset($options['thumb_height']) ? $options['thumb_height'] : $board['bo_gallery_height'];
 $content_length = isset($options['content_length']) ? $options['content_length'] : 30;
-ChromePhp::log("보드 변수가 테마 컨피그에?" );
+ChromePhp::log("보드 변수" . $board['bo_subject'] );
 ?>
 
 <!-- <?php echo $bo_subject; ?> 최신글 시작 { -->

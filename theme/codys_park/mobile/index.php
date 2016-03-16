@@ -4,6 +4,8 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 include_once(G5_THEME_MOBILE_PATH.'/head.php');
 add_javascript('<script src="'.G5_THEME_JS_URL.'/tabslide.js"></script>', 10);
 add_stylesheet('<link rel="stylesheet" href="'.G5_THEME_JS_URL.'/tabslide.css">', 0);
+add_javascript('<script src="'.G5_THEME_JS_URL.'/hammer.min.js"></script>', 10);
+add_javascript('<script src="'.G5_THEME_JS_URL.'/jquery.hammer.js"></script>', 10);
 ?>
 
 <!-- 메인화면 최신글 시작 -->
@@ -36,7 +38,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 		</ul>
 	</div>
 	<div class="tab_container">
-		<div id="tab1" class="tab_content" style="float:left;<?php echo $lt_style ?>">
+		<div id="tab1" class="tab_content mobile" style="float:left;<?php echo $lt_style ?>">
 			<?php
 			// 이 함수가 바로 최신글을 추출하는 역할을 합니다.
 			// 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
@@ -44,7 +46,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 			echo latest('theme/basic', 'free_board', 5, 25);
 			?>
 		</div>
-		<div id="tab2" class="tab_content" style="float:left;<?php echo $lt_style ?>">
+		<div id="tab2" class="tab_content mobile" style="float:left;<?php echo $lt_style ?>">
 			<?php
 			// 이 함수가 바로 최신글을 추출하는 역할을 합니다.
 			// 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
@@ -52,7 +54,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 			echo latest('theme/basic', 'free_board2', 5, 25);
 			?>
 		</div>
-		<div id="tab3" class="tab_content" style="float:left;<?php echo $lt_style ?>">
+		<div id="tab3" class="tab_content mobile" style="float:left;<?php echo $lt_style ?>">
 			<?php
 			// 이 함수가 바로 최신글을 추출하는 역할을 합니다.
 			// 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
@@ -60,12 +62,17 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 			echo latest('theme/basic', 'free_board3', 5, 25);
 			?>
 		</div>
-		<div id="tab4" class="tab_content" style="float:left;<?php echo $lt_style ?>">
+		<div id="tab4" class="tab_content mobile" style="float:left;<?php echo $lt_style ?>">
 			<?php
 			// 이 함수가 바로 최신글을 추출하는 역할을 합니다.
 			// 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
 			// 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
-			echo latest('theme/gallery', 'gallery1', 5, 25);
+			$options = array(
+            'thumb_width'    => 176, // 썸네일 width
+            'thumb_height'   => 149,  // 썸네일 height
+            'content_length' => 40   // 간단내용 길이
+			);
+			echo latest('theme/gallery', 'gallery1', 4, 25, 2 , $options);
 			?>
 		</div>
 	</div>
