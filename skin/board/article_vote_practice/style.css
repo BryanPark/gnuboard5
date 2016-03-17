@@ -254,3 +254,25 @@ html.no-overflowscrolling #autosave_pop {height:auto;max-height:10000px !importa
 #bo_vc_sns:after {display:block;visibility:hidden;clear:both;content:""}
 #bo_vc_sns li {float:left;margin:0 20px 0 0}
 #bo_vc_sns input {margin:0 0 0 5px}
+
+
+/* poll board -> 게시글 투표 view 관련 css */
+
+/*투표 제목*/
+.pobo_div{}
+.pobo_form{}
+.pobo_subject {}
+/*투표 항목이름*/
+.pobo_poll{}
+/*투표 항목별 득표수*/
+.pobo_cnt{}
+/*투표 시작일*/
+.pobo_date{}
+/*투표 종료일(옵션)*/
+.pobo_end_date{}
+/*투표시 획득 포인트(옵션)*/
+.pobo_point{}
+/*투표 기타의견 - 또는 주관식할때 써도 될듯.*/
+.pobo_etc{}
+/*투표가능한 최소레벨*/
+.pobo_level{}
