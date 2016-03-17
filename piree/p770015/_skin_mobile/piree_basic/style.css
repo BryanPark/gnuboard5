@@ -1,0 +1,26 @@
+@charset "utf-8"; 
+/* PIREE 피리.고맹이 */
+
+
+/* 투표_등록__레이어 */
+#vote_write_form { display:none; clear:both; margin:6px 0; padding:10px 15px; width:576px; height:auto; border:2px solid #dfdfdf; background:#fff; }
+
+
+
+
+/* 투표_보기__레이어 */
+#article_vote_view { }
+#article_vote_out { margin:0 0 30px; padding:10px 18px 10px 18px; border:2px solid #e5e8ec; }
+#article_vote_out .vote_title { position:relative; float:left; padding-right:8px; width:97%; height:auto; font-weight:bold; line-height:2.0em; border-bottom:1px solid #dde4e9; }
+#article_vote_out .vote_line { position:relative; float:left; clear:both; width:97%; line-height:2.0em; border-bottom:1px solid #dde4e9; }
+
+#article_vote_out .vote_res_subject { float:left; clear:both; margin-right:8px; color:#777; line-height:2.0em; }
+#article_vote_out .vote_res_cont { float:left; color:#222; line-height:2.0em; }
+#article_vote_out .vote_res_poll { float:left; clear:both; color:#222; width:100%; padding-top:10px; line-height:1.8em; }
+
+#article_vote_out .vote_poll_top_line { float:left; clear:both; width:100%; height:1px; margin-bottom:8px; border-bottom:1px solid #efefef; }
+#article_vote_out .vote_poll_check { float:left; clear:both; position:relative; line-height:1.4em; }
+#article_vote_out .vote_poll_subject { float:left; position:relative; line-height:1.4em; }
+#article_vote_out .vote_poll_image { float:left; clear:both; position:relative; line-height:1.4em; }
+#article_vote_out .vote_poll_result { float:left; clear:both; position:relative; padding-bottom:6px; width:100%; }
+
