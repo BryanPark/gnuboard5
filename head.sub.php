@@ -19,6 +19,7 @@ else {
     $g5_head_title .= " | ".$config['cf_title'];
 }
 
+
 // 현재 접속자
 // 게시판 제목에 ' 포함되면 오류 발생
 $g5['lo_location'] = addslashes($g5['title']);
@@ -102,3 +103,4 @@ if ($is_member) { // 회원이라면 로그인 중이라는 메세지를 출력�
     echo '<a href="'.G5_BBS_URL.'/logout.php">로그아웃</a></div>';
 }
 ?>
+

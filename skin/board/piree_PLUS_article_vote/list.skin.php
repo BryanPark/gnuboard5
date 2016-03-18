@@ -1,5 +1,27 @@
 <?php
+error_reporting(E_ALL); 
+ini_set("display_errors", 1);
 IF (!defined('_GNUBOARD_')) exit; // 개별_페이지__접근_불가
+
+	#####################################################################
+	#added by BryanPark
+	#시작 =>  이 게시판에 해당하는 vote_row들을 받아서 vote_rows에 fetch
+	#####################################################################
+	// 피리_게시글에_투표__ROW_정보__가져오기 added by BryanPark
+	// 이걸 넣어야지 아래의 get__sam_file함수에서 $vote_row를 sql fetch를 통해 설정함.
+	$is_get__article_info = 1;
+	$is_get__piree_config = 1;
+	$is_get__article_vote = 1;
+	//=======================================================
+	// 피리_게시글에_투표__설정_정보_파일__경로
+	// 피리_메뉴__번호
+	$piree_menu_n = 770015;
+	include_once( get__sam_file($piree_menu_n, '') );
+
+	#####################################################################
+	#끝 => 이 게시판에 해당하는 vote_row들을 받아서 vote_rows에 fetch
+	#####################################################################
+
 
 // 선택옵션으로 인해 셀합치기가 가변적으로 변함
 $colspan = 5;
@@ -65,7 +87,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 								<label for="chkall" class="sound_only">현재 페이지 게시물 전체</label>
 								<input type="checkbox" id="chkall" onclick="if (this.checked) all_checked(true); else all_checked(false);">
 						</th>
-						<?php } ?>
+						<?php }?>
 						<th scope="col">제목</th>
 						<th scope="col">글쓴이</th>
 						<th scope="col"><?php echo subject_sort_link('wr_datetime', $qstr2, 1) ?>날짜</a></th>
@@ -95,30 +117,57 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 								<input type="checkbox" name="chk_wr_id[]" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id_<?php echo $i ?>">
 						</td>
 						<?php } ?>
+						<!--Added by BryanPark td_subject가 제목을 받아서 출력하는 부분. 여기에 투표 내용도 추가-->
 						<td class="td_subject">
+							<div>
+									<?php
+									echo $list[$i]['icon_reply'];
+									if ($is_category && $list[$i]['ca_name']) {
+									 ?>
+										<a href="<?php echo $list[$i]['ca_name_href'] ?>" class="bo_cate_link"><?php echo $list[$i]['ca_name']; ?></a>
+									<?php } ?>
+
+									<a href="<?php echo $list[$i]['href'] ?>">
+											<?php echo $list[$i]['subject']?>
+											<?php if ($list[$i]['comment_cnt']) { ?><span class="sound_only">댓글</span><?php echo $list[$i]['comment_cnt']; ?><span class="sound_only">개</span><?php } ?>
+									</a>
+
+									<?php
+									// if ($list[$i]['link']['count']) { echo '['.$list[$i]['link']['count']}.']'; }
+									// if ($list[$i]['file']['count']) { echo '<'.$list[$i]['file']['count'].'>'; }
+
+									IF (isset($list[$i]['icon_new'])) echo $list[$i]['icon_new'];
+									IF (isset($list[$i]['icon_hot'])) echo $list[$i]['icon_hot'];
+									IF (isset($list[$i]['icon_file'])) echo $list[$i]['icon_file'];
+									IF (isset($list[$i]['icon_link'])) echo $list[$i]['icon_link'];
+									IF (isset($list[$i]['icon_secret'])) echo $list[$i]['icon_secret'];
+
+									 ?>
+								<!--added by BryanPark 투표 내용 삽입.-->
+							</div>
+							<div class ="vote_list">
+								<div class="vote_list_subject">
+										<?php
+										//해당 wr_id에 맞는 투표들을 뿌려줌.
+											$sql = " select * from {$piree_table['vote_list']} WHERE avl_bo_table='{$bo_table}' 
+													AND avl_wr_id = '{$list[$i]['wr_id']}'";
+											$vote_rows = sql_fetch($sql);
+											echo $vote_rows['avl_title_s'];
+										?>
+								</div>
+								
 								<?php
-								echo $list[$i]['icon_reply'];
-								if ($is_category && $list[$i]['ca_name']) {
-								 ?>
-								<a href="<?php echo $list[$i]['ca_name_href'] ?>" class="bo_cate_link"><?php echo $list[$i]['ca_name']; ?></a>
-								<?php } ?>
-
-								<a href="<?php echo $list[$i]['href'] ?>">
-										<?php echo $list[$i]['subject'] ?>
-										<?php if ($list[$i]['comment_cnt']) { ?><span class="sound_only">댓글</span><?php echo $list[$i]['comment_cnt']; ?><span class="sound_only">개</span><?php } ?>
-								</a>
-
-								<?php
-								// if ($list[$i]['link']['count']) { echo '['.$list[$i]['link']['count']}.']'; }
-								// if ($list[$i]['file']['count']) { echo '<'.$list[$i]['file']['count'].'>'; }
-
-								IF (isset($list[$i]['icon_new'])) echo $list[$i]['icon_new'];
-								IF (isset($list[$i]['icon_hot'])) echo $list[$i]['icon_hot'];
-								IF (isset($list[$i]['icon_file'])) echo $list[$i]['icon_file'];
-								IF (isset($list[$i]['icon_link'])) echo $list[$i]['icon_link'];
-								IF (isset($list[$i]['icon_secret'])) echo $list[$i]['icon_secret'];
-
-								 ?>
+								//최대 20개까지 가능한 투표 보기 항목들중 있는 것들만 뿌려줌.
+								for($x = 1 ; $x<=20; $x++){
+									if($vote_rows['avl_poll_'.$x]){
+										echo "<div class='vote_list_item'>".
+										$vote_rows['avl_poll_'.$x].
+										"</div>";
+									}
+								}
+								?>
+								
+							</div>
 						</td>
 						<td class="td_name sv_use"><?php echo $list[$i]['name'] ?></td>
 						<td class="td_date"><?php echo $list[$i]['datetime2'] ?></td>
