@@ -17,7 +17,6 @@ $board = sql_fetch("select * from g5_board where bo_table = '".$bo_table."' ");
 	<!--<div class="lt_more"><a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?php echo $bo_table ?>"><span class="sound_only"><?php echo $bo_subject ?></span>더보기</a></div>-->
 	</strong>
 	
-
 	<div class="lt_content">
 		<ul>
 		<?php for ($i=0; $i<count($list); $i++) {  ?>
@@ -35,7 +34,6 @@ $board = sql_fetch("select * from g5_board where bo_table = '".$bo_table."' ");
 					echo $list[$i]['comment_cnt'];
 
 				echo "</a>";
-
 				// if ($list[$i]['link']['count']) { echo "[{$list[$i]['link']['count']}]"; }
 				// if ($list[$i]['file']['count']) { echo "<{$list[$i]['file']['count']}>"; }
 

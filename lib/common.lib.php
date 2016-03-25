@@ -292,7 +292,10 @@ function get_file($bo_table, $wr_id)
         $file[$no]['size'] = get_filesize($row['bf_filesize']);
         $file[$no]['datetime'] = $row['bf_datetime'];
         $file[$no]['source'] = addslashes($row['bf_source']);
-        $file[$no]['bf_content'] = $row['bf_content'];
+        $file[$no]['bf_content'] = $row['bf_co
+
+
+        ntent'];
         $file[$no]['content'] = get_text($row['bf_content']);
         //$file[$no]['view'] = view_file_link($row['bf_file'], $file[$no]['content']);
         $file[$no]['view'] = view_file_link($row['bf_file'], $row['bf_width'], $row['bf_height'], $file[$no]['content']);
@@ -646,6 +649,11 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
                     $str .= "$field[$k] = ".((-1)*$s[$i]);
                     break;
                 case "wr_ip" :
+                //added by BryanPark - 투표 검색.
+                //투표 제목으로
+                case "poll_title_s" :
+                //투표 항목으로 
+                case "poll_item" : 
                 case "wr_password" :
                     $str .= "1=0"; // 항상 거짓
                     break;
@@ -1469,9 +1477,9 @@ function sql_query($sql, $error=G5_DISPLAY_SQL_ERROR, $link=null)
 
     // Blind SQL Injection 취약점 해결
     $sql = trim($sql);
-    // union의 사용을 허락하지 않습니다.
+    // union의 사용을 허락하지 않습니다. 사용하도록 함 - by BryanPark
     //$sql = preg_replace("#^select.*from.*union.*#i", "select 1", $sql);
-    $sql = preg_replace("#^select.*from.*[\s\(]+union[\s\)]+.*#i ", "select 1", $sql);
+    //$sql = preg_replace("#^select.*from.*[\s\(]+union[\s\)]+.*#i ", "select 1", $sql);
     // `information_schema` DB로의 접근을 허락하지 않습니다.
     $sql = preg_replace("#^select.*from.*where.*`?information_schema`?.*#i", "select 1", $sql);
 

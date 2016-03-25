@@ -1,5 +1,5 @@
 <?php
-
+//error_reporting(E_ALL); ini_set("display_errors", 1);
 /*
 ===========================================================
 
@@ -78,7 +78,7 @@
 	//=======================================================
 	// 기본_설정_첨부__여부
 	// 0 - 안해
-	$is_get__piree_config = 0;
+	$is_get__piree_config = 1;
 
 
 	//=======================================================
@@ -259,7 +259,8 @@
 
 				<!-- 본문 내용 시작 { -->
 				<div id="bo_v_con"><?php echo get_view_thumbnail($view['content']); ?></div>
-				<?php//echo $view['rich_content']; // {이미지:0} 과 같은 코드를 사용할 경우 ?>
+				<?php
+				//echo $view['rich_content']; // {이미지:0} 과 같은 코드를 사용할 경우 ?>
 				<!-- } 본문 내용 끝 -->
 
 				<?php if ($is_signature) { ?><p><?php echo $signature ?></p><?php } ?>
@@ -301,7 +302,6 @@
 	// 시작 => 게시글에_투표__사용하면
 	IF ($board['bo_arti_vote_use_n'] == 1)
 	{
-
 			//===================================================
 			// 시작 => 투표_번호__있으면
 			IF ($view['wr_pi_atvt_n'] > 0)
