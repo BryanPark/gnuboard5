@@ -31,7 +31,7 @@ ChromePhp::log("보드 변수" . $board['bo_subject'] );
                 <li>
                     <a href="<?php echo $list[$i]['href']; ?>" class="lt_image"><?php echo $img_content; ?></a>
                     <?php
-                    echo "<a href=\"".$list[$i]['href']."\" class=\"lt_tit\">";
+                    echo "<a href=\"".$list[$i]['href']."\" class=\"lt_title\">";
                     if ($list[$i]['is_notice'])
                         echo "<strong>".$list[$i]['subject']."</strong>";
                     else

@@ -1,5 +1,5 @@
 <?php
-
+//error_reporting(E_ALL); ini_set("display_errors", 1);
 /*
 ===========================================================
 
@@ -140,6 +140,20 @@
 	}
 	// 끝 => 투표_번호__있으면
 	//=======================================================
+	
+	//=======================================================
+	// 시작 => 카테고리 by BryanPark
+	/*$is_category = false;
+	$category_option = '';
+	if ($board['bo_use_category']) {
+	    $ca_name = "";
+	    if (isset($write['ca_name']))
+	        $ca_name = $write['ca_name'];
+	    $category_option = get_category_option($bo_table, $ca_name);
+	    $is_category = true;
+	}*/
+	// 끝 => 카테고리 by BryanPark
+	//=======================================================
 
 	#########################################################
 	# 끝 => 투표_항목__DB__값
@@ -202,7 +216,17 @@
 											</div>
 									</td>
 							</tr>
-
+							<!--투표 카테고리 추가 by BryanPark-->
+							<tr>
+									<th scope="row"><label for="avl_ca_name_s">카테고리<strong class="sound_only">필수</strong></label></th>
+									<td>
+											<div class="line_h_2_4">
+													<?php echo get_category_list_select($ARTI_VOTE_vote_category_list_s);?>
+													<br />
+													<?php echo_help ('투표 카테고리를 선택해 주세요.'); ?>
+											</div>
+									</td>
+							</tr>
 							<tr>
 									<th scope="row"><label for="vote_do_level_n">투표 레벨<strong class="sound_only">필수</strong></label></th>
 									<td>

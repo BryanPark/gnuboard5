@@ -513,8 +513,38 @@
 		#######################################################
 		# 끝 => 페이지__이동
 		#######################################################
+		
+
+		#######################################################
+		# 시작 => 카테고리 리스트를__SELECT_형식으로__얻음 By BryanPark
+		#######################################################
+		
+		function get_category_list_select($ARTI_VOTE_vote_category_list_s){
+			global $g5, $board, $is_admin;
+			$str = "<select name='avl_ca_name_s' id='avl_ca_name_s' required>";
+
+			$categories = explode("|", ($is_admin?"공지|":"").$ARTI_VOTE_vote_category_list_s); // 구분자가 | 로 되어 있음
+			
+			for ($i=0; $i<count($categories); $i++) {
+		        $category = trim($categories[$i]);
+		        if (!$category) continue;
+
+		        $str .= "<option value=\"$categories[$i]\"";
+		        if ($category == $avl_ca_name) {
+		            $str .= ' selected="selected"';
+		        }
+		        $str .= ">$categories[$i]</option>\n";
+		    }
+			
+			$str .= "</select>";
 
 
+			return $str;
+		}
+
+		#######################################################
+		# 끝 => 회원권한을__SELECT_형식으로__얻음 By BryanPark
+		#######################################################
 
 		#######################################################
 		# 시작 => 회원권한을__SELECT_형식으로__얻음

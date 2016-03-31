@@ -790,6 +790,10 @@
 						// 등록된_투표_항목_수
 						$ARTI_VOTE_vote_item_t = $prog_conf['pgs_cf_1_n'];
 
+						//=============================================
+						// By BryanPArk 등록된 카테고리들
+						$ARTI_VOTE_vote_category_list_s  = $prog_conf['pgs_cf_1_txt'];
+
 
 						//=============================================
 						// 투표_등록__회원_레벨

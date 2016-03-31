@@ -190,6 +190,9 @@
 			// 투표_마감__날짜_시각
 			$atvt_end_date_s = trim($_POST['atvt_end_date_s']);
 
+			//===================================================
+			// 투표_카테고리
+			$avl_ca_name_s = trim($_POST['avl_ca_name_s']);
 
 			//===================================================
 			// 투표_참여_레벨
@@ -597,7 +600,8 @@
 
 			//===================================================
 			// 저장하는__쿼리문
-			$sql_common	 = "`avl_title_s`			= '".$atvt_title_s."', ";
+			$sql_common  = "`avl_ca_name`			= '".$avl_ca_name_s."',"; //by BryanPark 카테고리도 쿼리에 추가	
+			$sql_common	.= "`avl_title_s`			= '".$atvt_title_s."', ";
 			$sql_common .= "`avl_poll_1`			= '".$vote_title_arr[1]."', ";
 			$sql_common .= "`avl_poll_2`			= '".$vote_title_arr[2]."', ";
 			$sql_common .= "`avl_poll_3`			= '".$vote_title_arr[3]."', ";

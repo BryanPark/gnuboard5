@@ -206,7 +206,16 @@
 											</div>
 									</td>
 							</tr>
-
+							<tr>
+									<th scope="row"><label for="avl_ca_name_s">카테고리<strong class="sound_only">필수</strong></label></th>
+									<td>
+											<div class="line_h_2_4">
+													<?php echo get_category_list_select($ARTI_VOTE_vote_category_list_s);?>
+													<br />
+													<?php echo_help ('투표 카테고리를 선택해 주세요.'); ?>
+											</div>
+									</td>
+							</tr>
 							<tr>
 									<td>
 											<div class="line_h_2_4">

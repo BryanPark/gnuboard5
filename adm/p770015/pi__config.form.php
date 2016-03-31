@@ -94,6 +94,14 @@
 
 
 	//=======================================================
+	// 등록된_투표_항목_수 added by BryanPark
+	$ARTI_VOTE_vote_category_list_s = "";
+	// 분류에 & 나 = 는 사용이 불가하므로 2바이트로 바꾼다.
+	$src_char = array('&', '=');
+	$dst_char = array('＆', '〓');
+	$ARTI_VOTE_vote_category_list_s = str_replace($src_char, $dst_char, $ARTI_VOTE_vote_category_list_s);
+
+	//=======================================================
 	// 투표_등록__회원_레벨
 	$ARTI_VOTE_vote_regi_level_n = 2;
 
@@ -141,6 +149,7 @@
 
 	//=======================================================
 	// PIREE_ARTICLE_VOTE__설정_정보_파일__첨부
+	// $sub_menu == 770015
 	include_once( get__sam_file($sub_menu, '') );
 
 	#########################################################
@@ -250,6 +259,19 @@
 						20이하로 입력해 주세요. 20을 초과 입력하면 기본값 "10"을 저장합니다.
 						<br />
 						예) 10 , 15 , 20
+					</td>
+				</tr>
+				
+				<tr><!--by Bryan Park 카테고리 설정메뉴 추가, 기존 설정 불러오기까지.-->
+					<th scope="row"><label for="vote_category_t">투표 카테고리 설정<strong class="sound_only">필수입력</strong></label></th>
+					<td style="line-height:2.4em;">
+						<input type="text" name="vote_category_t" id="vote_category_t" value="<?php echo $ARTI_VOTE_vote_category_list_s?>" class="frm_input" size="40">
+						<br />
+						분류와 분류 사이는 | 로 구분하세요. (예: 질문|답변) 
+						<br />
+						첫자로 #은 입력하지 마세요. (예: #질문|#답변 [X])
+						<br />
+						분류 당 최대 20byte씩 가능합니다.
 					</td>
 				</tr>
 

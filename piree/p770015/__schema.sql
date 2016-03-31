@@ -9,13 +9,14 @@
 -- Table structure for table `g5__piree_{PIREE_PROGRAM_N}_vote_list`
 -- Table structure for table `g5__piree_{PIREE_PROGRAM_N}_vote_item`
 --
-
+-- `avl_ca_name` has been addded - Bryan Park.
 DROP TABLE IF EXISTS `g5__piree_{PIREE_PROGRAM_N}_vote_list`;
 CREATE TABLE IF NOT EXISTS `g5__piree_{PIREE_PROGRAM_N}_vote_list` (
   `avl_n` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `avl_mem_id` VARCHAR(20) NOT NULL DEFAULT '',
   `avl_bo_table` VARCHAR(20) NOT NULL DEFAULT '',
   `avl_wr_id` INT(11) NOT NULL DEFAULT '0',
+  `avl_ca_name` VARCHAR(20) NOT NULL DEFAULT '',
   `avl_title_s` VARCHAR(255) NOT NULL DEFAULT '',
   `avl_poll_1` VARCHAR(255) NOT NULL DEFAULT '',
   `avl_poll_2` VARCHAR(255) NOT NULL DEFAULT '',
