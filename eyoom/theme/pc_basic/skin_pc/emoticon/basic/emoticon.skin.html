@@ -1,0 +1,44 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/sky-forms/version-2.0.5/css/sky-forms.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen">',0);
+?>
+
+<div class="emoticon-list sky-form">
+	<div class="emoticon-select">
+		<section class="col col-3">
+			<label class="select">
+				<select name="eom" id="emo" onchange="change_emoticon(this.value);" class="form-control">
+					<!--{@ _emo_type}-->
+					<option value="{.value_}" {? _emo == .value_}selected{/}>{.value_}</option>
+					<!--{/}-->
+				</select>
+				<i></i>
+			</label>
+		</section>
+		<div class="clear"></div>
+	</div>
+	<ul class="emoticons">
+		<!--{@ _emoticon}-->
+		<li><a href='javascript:;' onclick="set_emoticon('{.emoticon}');"><img src="{.url}" width="40"></a></li>
+		<!--{/}-->
+	</ul>
+</div>
+
+<style>
+.emoticon-select {padding:10px 0}
+.emoticons li {float:left;list-style-type:none;min-height:65px;margin:5px 16px}
+</style>
+
+<script type="text/javascript" src="../../../plugins/sky-forms/version-2.0.5/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../../plugins/sky-forms/version-2.0.5/js/jquery.form.min.js"></script>
+<script>
+function change_emoticon(emo) {
+	var url = './emoticon.php?emo='+emo;
+	$(location).attr('href',url);
+}
+function set_emoticon(emoticon) {
+	parent.set_emoticon(emoticon);
+	parent.jQuery('.vbox-close, .vbox-overlay').trigger('click');
+}
+</script>
+<!--{# tail_sub}-->

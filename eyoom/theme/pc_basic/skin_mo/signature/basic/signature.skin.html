@@ -1,0 +1,78 @@
+<?php if (!defined('_GNUBOARD_')) exit;?>
+
+<div class="member-signature right">
+	<div class="padding-all-10">
+		<div class="heading heading-e1 margin-bottom-10">
+			<h4 class="heading-sm"><i class="fa fa-info-circle"></i> 글쓴이 명함</h4>
+		</div>
+		<div class="left width-30">
+			<div class="ms-photo">
+				<div class="signature-photo">
+					<!--{? view.mb_photo}-->{view.mb_photo}<!--{:}--><span class="user_icon"><i class="fa fa-user"></i></span><!--{/}-->
+				</div>
+				<div class="signature-follow tooltips" data-placement="top" data-toggle="tooltip" data-original-title="follower">
+					<span class="badge badge-e rounded-2x"><i class="fa fa-users"></i> {=number_format(user.cnt_follower)}</span>
+				</div>
+			</div>
+		</div>
+		<div class="left width-70">
+			<div class="ms-info">
+				<p class="font-size-13">
+					<!--{? lv.gnu_icon}-->
+					<span style='display:inline-block;margin-right:2px;'><img src="{lv.gnu_icon}" align="absmiddle"></span>
+					<!--{/}-->
+					<!--{? lv.eyoom_icon}-->
+					<span style='display:inline-block;margin-right:2px;'><img src="{lv.eyoom_icon}" align="absmiddle"></span>
+					<!--{/}-->
+			        <!--{=eb_nameview('basic', view.mb_id, view.wr_name, view.wr_email, view.wr_homepage)}-->
+				</p>
+		        <p>회원등급 : <!--{? user.mb_level == 10}-->최고관리자<!--{:}-->{lvuser.gnu_name}/{lvuser.name}<!--{/}--></p>
+		        <p>{levelset.gnu_name} : {=number_format(user.mb_point)}</p>
+		    </div>
+		</div>
+		<div class="clear"></div>
+		<div class="ms-service margin-top-10">
+			<div class="member-lv">
+				<div class="left service-in">
+					<span>레벨</span> <span class="counter">{lvuser.level}</span>
+				</div>
+				<div class="right t-right service-in">
+					<span>{levelset.eyoom_name}</span> <span class="counter">{=number_format(user.level_point)}</span>
+				</div>
+				<div class="clear"></div>
+			</div>
+	        <div class="statistics">
+	        	<p class="font-size-11">진행률 <span class="right">{lvuser.ratio}%</span></p>
+	        	<div class="clear"></div>
+				<div class="eb-progress eb-progress-mini eb-progress-danger eb-progress-striped eb-active">
+	                <div class="eb-progress-bar" style="width:{lvuser.ratio}%"></div>
+	            </div>
+	        </div>
+		</div>
+		<div class="margin-top-10">
+			<span class="color-black">- 가입일</span> : {user.mb_datetime}
+			<div class="margin-hr-5"></div>
+			<span class="color-black">- 서명</span> : {user.mb_signature}
+			<div class="margin-hr-5"></div>
+			<span class="color-black">- 자기소개</span> : {user.mb_profile}
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+
+<style>
+.member-signature {display:block;overflow:hidden;position:relative;width:100%;margin-bottom:20px;border:1px solid #ddd}
+.member-signature .margin-hr-5 {height:1px;border-top:1px dotted #ddd;margin:5px 0px;clear:both}
+.member-signature .ms-photo {display:block;overflow:hidden;position:relative;padding:5px 0}
+.member-signature .signature-photo {height:50px;width:50px;padding:3px;-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important;box-shadow:0 0px 0px 1px rgba(0,0,0,.12);background-color:#fff;text-align:center}
+.member-signature .signature-photo img {-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important;background-color:#fff;background-size:cover}
+.member-signature .signature-photo i {color:#84848a;font-size:38px;line-height:46px}
+.member-signature .signature-follow {position:absolute;top:0;left:50px;cursor:pointer}
+.member-signature .ms-info {height:55px;padding:5px 0 5px 12px;border-left:1px solid #ddd}
+.member-signature:hover .ms-info {border-left:1px solid #bf1143}
+.member-signature:hover .ms-info small {display:inline-block}
+.member-signature .ms-service {padding:8px;border:1px solid #e5e5e5;background:#fafafa}
+.member-signature .ms-service .service-in span {font-size:12px;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal;overflow:hidden;padding-top:2px}
+.member-signature .ms-service .counter {display:inline}
+.member-signature .ms-service .statistics {margin-top:5px}
+</style>

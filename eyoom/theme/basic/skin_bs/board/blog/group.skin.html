@@ -1,0 +1,45 @@
+<?php if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
+
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/bootstrap/css/bootstrap.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/basic_bs.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/colors/default.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/custom.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="./style.css" type="text/css" media="screen">',0);
+
+?>
+
+<div class="basic-bs-body">
+<!--{@ list}-->
+	<!--{? .index_%2==0}-->
+	<div class="row margin-bottom-20">
+	<!--{/}-->
+        <div class="col-sm-6 md-margin-bottom-20">
+			<div class="headline">
+				<h4><a href="{C.G5_BBS_URL}/board.php?bo_table={.bo_table}">{.bo_subject}</a></h4>
+			</div>
+			<div class="latest-basic-e1">
+				<ul class="list-unstyled">
+				<!--{@ data}-->
+					<li>
+						<div class="col-xs-10">
+							<i class="fa fa-chevron-circle-right {? ..new}color-red{/}"></i> <a href="{..href}">{..wr_subject}</a> <!--{? ..wr_comment}--><span class="basic-comment">+{=number_format(..wr_comment)}</span><!--{/}-->
+						</div>
+						<div class="col-xs-2">
+							{=number_format(..wr_hit)}
+						</div>
+						<div class="clearfix"></div>
+					</li>
+				<!--{/}-->
+				</ul>
+			</div>
+        </div>
+	<!--{? .index_%2==1 || .index_+1 == .size_}-->
+	</div>
+
+    <div class="clear-line"></div>
+	<!--{/}-->
+<!--{/}-->
+</div>

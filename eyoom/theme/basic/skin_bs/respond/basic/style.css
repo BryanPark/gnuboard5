@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+/* 내글반응 목록 */
+.respond-list .sky-form .radio i, .respond-list .sky-form .checkbox i {
+	top: 0;
+}
+.table-list-eb th {
+	text-align: center;
+}
+.table-list-eb tbody {
+	border-bottom: 1px solid #ddd;
+}
+.table-list-eb td img {
+	-webkit-border-radius: 50% !important;
+	-moz-border-radius: 50% !important;
+	border-radius: 50% !important;
+}
+.table-list-eb .td-date {
+	text-align: center;
+	font-size: 12px;
+}
+.table-list-eb .td-chked, .table-list-eb .td-type, .table-list-eb .td-delete, .table-list-eb .td-member {
+	text-align: center;
+}
+.table-list-eb .td-member img {
+	width: 60px;
+	height: 60px;
+}
+.table-list-eb .td-member i {
+	font-size: 42px;
+	color: #888;
+}
+.table-list-eb .read {
+	color: #74747a;
+}
+.table-list-eb .noread {
+	color: #ff4400;
+}
+.table-list-eb .sky-form .radio i, .table-list-eb .sky-form .checkbox i {
+	margin-top: -3px;
+}

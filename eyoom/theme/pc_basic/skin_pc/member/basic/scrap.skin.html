@@ -1,0 +1,51 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/custom.css" type="text/css" media="screen">',0);
+?>
+
+<div class="scrap">
+	<div class="headline"><h4><i class="fa fa-clipboard"></i> <!--{g5.title}--></h4></div>
+    <div class="tab-e1">
+        <ul class="nav nav-tabs">
+            <li class="active"><a>스크랩</a></li>
+        </ul>
+        <div class="tab-content">
+	        <div class="note margin-bottom-10"><strong>스크랩 목록</strong></div>
+			<div class="table-list-eb">
+		        <table class="eb-table eb-table-hover">
+		            <thead>
+		                <tr>
+				            <th>번호</th>
+				            <th>게시판</th>
+				            <th>제목</th>
+				            <th>보관일시</th>
+				            <th>삭제</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+						<!--{@ list}-->
+				        <tr>
+				            <td>{.num}</td>
+				            <td><a href="{.opener_href}" target="_blank" onclick="opener.document.location.href='{.opener_href}'; return false;">{.bo_subject}</a></td>
+				            <td class="td-width"><a href="{.opener_href_wr_id}" target="_blank" onclick="opener.document.location.href='{.opener_href_wr_id}'; return false;">{.subject}</a></td>
+				            <td>{.ms_datetime}</td>
+				            <td><a href="{.del_href}" onclick="del(this.href); return false;">삭제</a></td>
+				        </tr>
+						<!--{:}-->
+						<tr><td colspan="5" class="t-center">자료가 없습니다.</td></tr>
+						<!--{/}-->
+		            </tbody>
+		        </table>
+			</div>
+		    {=eb_paging('basic')}
+		    <div class="t-center margin-top-20">
+		        <button type="button" onclick="window.close();" class="eb-button eb-button-dark">창닫기</button>
+		    </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.scrap {padding:15px}
+</style>

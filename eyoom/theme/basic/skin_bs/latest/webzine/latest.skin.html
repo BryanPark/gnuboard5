@@ -1,0 +1,87 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+
+add_stylesheet('<link rel="stylesheet" href="./style.css" type="text/css" media="screen">',0);
+
+?>
+<div class="headline">
+	<h4>{title}</h4>
+</div>
+<div class="latest-webzine-e1">
+	<!--{@ loop}-->
+	<div class="row">
+		<div class="col-xs-5">
+			<div class="webzine-img">
+				<!--{? .image}-->
+				<a href="{.href}"><img class="img-responsive" src="{.image}" alt=""></a>
+				<!--{:}-->
+				<a href="{.href}"><img class="img-responsive" src="../../../image/sample/no_image.jpg" alt=""></a>
+				<!--{/}-->
+			</div>
+		</div>
+		<div class="col-xs-7">
+			<h5><a href="{.href}">{.wr_subject}</a></h5>
+			<ul class="list-unstyled">
+			   <li><i class="fa fa-user"></i> {.mb_nick}</li>
+			   <li><i class="fa fa-clock-o"></i> {eb->date_time('Y-m-d H:i',.datetime)}</li>
+			   <li><span class="color-red"><!--{? .wr_comment}--><i class="fa fa-comments"> {.wr_comment}</i><!--{/}--></span></li>
+			   <div class="clearfix"></div>
+			</ul>
+			<!--{? content == 'y'}-->
+			<p>{.wr_content}</p>
+			<!--{/}-->
+		</div>
+	</div>
+	<!--{:}-->
+	<div class="row">
+		<div class="col-xs-5">
+			<div class="webzine-img">
+				<img class="img-responsive" src="../../../image/sample/sample_01.jpg" alt="">
+			</div>
+		</div>
+		<div class="col-xs-7">
+			<h5><a href="#">Curabitur sem urna, consequat ve</a></h5>
+			<ul class="list-unstyled">
+			   <li><i class="fa fa-user"></i> eyoom</li>
+			   <li><i class="fa fa-clock-o"></i> 5일전</li>
+			   <li><span class="color-red"><i class="fa fa-comments"></i> 3</span></li>
+			   <div class="clearfix"></div>
+			</ul>
+			<p>Duis enim nulla, luctus eu, dapibus lacinia, venenatis id, quam.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-5">
+			<div class="webzine-img">
+				<img class="img-responsive" src="../../../image/sample/sample_02.jpg" alt="">
+			</div>
+		</div>
+		<div class="col-xs-7">
+			<h5><a href="#">Curabitur sem urna, consequat ve</a></h5>
+			<ul class="list-unstyled">
+			   <li><i class="fa fa-user"></i> eyoom</li>
+			   <li><i class="fa fa-clock-o"></i> 5일전</li>
+			   <li><span class="color-red"><i class="fa fa-comments"></i> 3</span></li>
+			   <div class="clearfix"></div>
+			</ul>
+			<p>Duis enim nulla, luctus eu, dapibus lacinia, venenatis id, quam.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-5">
+			<div class="webzine-img">
+				<img class="img-responsive" src="../../../image/sample/sample_03.jpg" alt="">
+			</div>
+		</div>
+		<div class="col-xs-7">
+			<h5><a href="#">Curabitur sem urna, consequat ve</a></h5>
+			<ul class="list-unstyled">
+			   <li><i class="fa fa-user"></i> eyoom</li>
+			   <li><i class="fa fa-clock-o"></i> 5일전</li>
+			   <li><span class="color-red"><i class="fa fa-comments"></i> 3</span></li>
+			   <div class="clearfix"></div>
+			</ul>
+			<p>Duis enim nulla, luctus eu, dapibus lacinia, venenatis id, quam.</p>
+		</div>
+	</div>
+	<!--{/}-->
+</div>

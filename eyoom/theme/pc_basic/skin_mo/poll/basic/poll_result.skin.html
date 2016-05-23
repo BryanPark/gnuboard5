@@ -1,0 +1,144 @@
+<?php if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/sky-forms/version-2.0.5/css/sky-forms.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css_mo/style_mo.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css_mo/custom_mo.css" type="text/css" media="screen">',0);
+?>
+
+<div class="poll-result">
+	<div class="headline"><h5><i class="fa fa-tasks"></i> {_po_subject} 결과</h5></div>
+    <h5 class="margin-bottom-5">투표결과</h5>
+	<section class="margin-bottom-10">
+		<div class="service-block-e">
+			<h5 class="t-right color-red">전체 {_nf_total_po_cnt}표</h5>
+			<div class="margin-hr-10"></div>
+			<!--{@ list}-->
+			<div class="result-list">
+				<div class="left">
+					<span><i class="fa fa-circle"></i> {.content}</span>
+				</div>
+				<div class="right">
+					<span class="color-red">{.cnt} 표</span>
+				</div>
+				<div class="clear"></div>
+				<div class="progress-list margin-bottom-15">
+					<div class="t-right">{=number_format(.rate, 1)}%</div>
+					<div class="eb-progress eb-progress-mini eb-progress-success eb-progress-striped eb-active">
+		                <div class="eb-progress-bar" style="width:{=number_format(.rate, 1)}%"></div>
+		            </div>
+				</div>
+			</div>
+			<!--{/}-->
+		</div>
+	</section>
+
+    <!--{? _is_etc}-->
+    <h5 class="margin-bottom-5">기타의견</h5>
+	<section class="margin-bottom-10">
+		<div class="etc-box margin-bottom-10">
+			<!--{@ list2}-->
+	        <article class="etc-list">
+                <div class="left">{.pc_name} 님의 의견</div>
+                <div class="right color-grey"><i class="fa fa-clock-o"></i> {.datetime}</div>
+	            <div class="clear"></div>
+	            <p>- {.idea}</p>
+	            <div class="t-right">
+	                <!--{? .del}-->{.del}<span class="btn-e btn-e-xs btn-e-dark">삭제</span></a><!--{/}-->
+	            </div>
+	        </article>
+			<!--{/}-->
+        </div>
+
+		<!--{? member.mb_level >= po.po_level}-->
+        <form name="fpollresult" action="./poll_etc_update.php" onsubmit="return fpollresult_submit(this);" method="post" autocomplete="off" class="sky-form">
+        <input type="hidden" name="po_id" value="{_po_id}">
+        <input type="hidden" name="w" value="">
+        <input type="hidden" name="skin_dir" value="{_skin_dir}">
+        <!--{? _is_member}--><input type="hidden" name="pc_name" value="<?php echo cut_str($member['mb_nick'],255) ?>"><!--{/}-->
+        <div class="margin-bottom-5"><h5>{_po_etc}</h5></div>
+        <div class="service-block-e">
+	        <!--{? _is_guest}-->
+            <div class="row">
+                <section class="col col-4">
+                    <label for="pc_name" class="label">이름<strong class="sound_only">필수</strong></label>
+	                <label class="input">
+	                    <i class="icon-append fa fa-user"></i>
+	                    <input type="text" name="pc_name" id="pc_name" required size="10">
+	                </label>
+                </section>
+            </div>
+			<div class="row">
+				<div class="margin-hr-10"></div>
+			</div>
+			<!--{/}-->
+            <section>
+                <label for="pc_idea" class="label">의견<strong class="sound_only">필수</strong></label>
+                <label class="input">
+                    <i class="icon-append fa fa-pencil"></i>
+                    <input type="text" id="pc_idea" name="pc_idea" required size="47" maxlength="100">
+                </label>
+            </section>
+			<div class="margin-hr-10"></div>
+            <!--{? _is_guest}-->
+            <section>
+                <label class="label">자동등록방지</label>
+                <div class="vc-captcha">{=captcha_html()}</div>
+            </section>
+			<div class="margin-hr-10"></div>
+            <!--{/}-->
+	        <div class="t-right">
+	            <input type="submit" class="eb-button eb-button-red" value="의견남기기">
+	        </div>
+        </div>
+        </form>
+        <!--{/}-->
+    </section>
+    <!--{/}-->
+
+    <h5 class="margin-bottom-5">다른투표 결과보기</h5>
+    <section class="margin-bottom-10">
+        <ul class="list-unstyled">
+			<!--{@ list3}-->
+            <li><a href="./poll_result.php?po_id={.po_id}&amp;skin_dir={_skin_dir}"><i class="fa fa-circle"></i> [{.date}] {.subject}</a></li>
+            <!--{/}-->
+        </ul>
+    </section>
+
+	<div class="margin-hr-10"></div>
+    <div class="t-center margin-top-15">
+        <button class="eb-button eb-button-dark" type="button" onclick="window.close();">창닫기</button>
+    </div>
+</div>
+
+<style>
+.poll-result {padding:15px}
+.poll-result .margin-hr-10 {height:1px;border-top:1px dotted #ddd;margin:10px 0px;clear:both}
+.poll-result .service-block-e {padding:15px;border:1px solid #eee}
+.poll-result .result-list {margin:0px 0}
+.poll-result .etc-box {border:1px solid #eee;border-bottom:0}
+.poll-result .etc-list {border-bottom:1px solid #eee;padding:10px 15px}
+</style>
+
+<script type="text/javascript" src="../../../plugins/sky-forms/version-2.0.5/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../../plugins/sky-forms/version-2.0.5/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="../../../js_mo/newwin_mo.js"></script>
+<!--[if lt IE 9]>
+	<script src="../../../plugins/sky-forms/version-2.0.5/js/sky-forms-ie8.js"></script>
+<![endif]-->
+<script>
+$(function() {
+    $(".poll_delete").click(function() {
+        if(!confirm("해당 기타의견을 삭제하시겠습니까?"))
+            return false;
+    });
+});
+
+function fpollresult_submit(f) {
+    <!--{? _is_guest}-->
+	chk_captcha_js();
+	<!--{/}-->
+
+    return true;
+}
+</script>
+<!--{#tail_sub}-->

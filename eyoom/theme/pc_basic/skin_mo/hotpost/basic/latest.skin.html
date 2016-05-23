@@ -1,0 +1,38 @@
+<?php if (!defined('_GNUBOARD_')) exit;?>
+
+<div class="hot-post">
+	<div class="headline"><h5>월간베스트</h5></div>
+	<div class="margin-top-20">
+        <table class="eb-table eb-table-hover">
+            <thead>
+                <tr>
+                    <th>랭킹</th>
+                    <th>제목</th>
+                    <th>조회</th>
+                </tr>
+            </thead>
+            <tbody>
+	            <!--{@ loop}-->
+                <tr>
+	                <td class="t-center">
+		                <strong><span class="badge badge-dark">{.key_+1}</span></strong>
+	                </td>
+                    <td class="td-subject">
+	                    <a href="{.href}">
+	                        {.wr_subject}
+	                        <!--{? .wr_comment}-->
+	                        <span class="sound_only">댓글</span><small class="color-red"> +{.wr_comment}</small><span class="sound_only">개</span>
+	                        <!--{/}-->
+	                    </a>
+                    </td>
+                    <td class="t-center color-red">{=number_format(.wr_hit)}</td>
+                </tr>
+                <!--{/}-->
+            </tbody>
+        </table>
+	</div>
+</div>
+
+<style>
+.hot-post .eb-table th {text-align:center}
+</style>

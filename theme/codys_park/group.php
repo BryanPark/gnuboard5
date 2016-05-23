@@ -87,7 +87,6 @@ $search_options = array(
 # 6.     최신 게시물(latest function)을 뿌려준다.
 ############################################################
 if (strcmp($group['gr_id'], 'community') === 0) {
-//  최신글
 	//sql문 지정 -> 해당 board_table에서 테이블 id, 제목, 여분필드를 가져온다.
 	$sql = " select bo_table, bo_subject, bo_1_subj
 				from {$g5[board_table]}
@@ -97,27 +96,25 @@ if (strcmp($group['gr_id'], 'community') === 0) {
 	if (!$is_admin) {
 		$sql .= " and bo_use_cert = '' ";
 	}
-
 	$sql .= " order by bo_order ";
 	$result = sql_query($sql);
 	for ($i = 0; $row = sql_fetch_array($result); $i++) {
 		?>
-		<div class='group community'>
-		<?php
-		if (strcmp($row['bo_1_subj'], 'meeting') == 0) {
-			$options = array(
-				'thumb_width' => 124, // 썸네일 width
-				'thumb_height' => 124, // 썸네일 height
-				'content_length' => 15, // 간단내용 길이
-			);
-			echo latest('theme/gallery', $row['bo_table'], 4, 15, 2, $options);
-			// 이 함수가 바로 최신글을 추출하는 역할을 합니다.
-			// 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
-		} else {
-			echo latest('theme/basic', $row['bo_table'], 5, 26);
-		}?>
-		</div>
-		<?php
+		<div class='group community'><?php
+			if (strcmp($row['bo_1_subj'], 'meeting') == 0) {
+				$options = array(
+					'thumb_width' => 124, // 썸네일 width
+					'thumb_height' => 124, // 썸네일 height
+					'content_length' => 15, // 간단내용 길이
+				);
+				echo latest('theme/gallery', $row['bo_table'], 4, 15, 2, $options);
+				// 이 함수가 바로 최신글을 추출하는 역할을 합니다.
+				// 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
+			} else {
+				echo latest('theme/basic', $row['bo_table'], 5, 26);
+			}
+		?>
+		</div><?php
 	}
 	########################################################################
 	# Added by BryanPark
@@ -128,69 +125,36 @@ if (strcmp($group['gr_id'], 'community') === 0) {
 } else if (strcmp($group['gr_id'], 'polls') === 0) {
 //added by BryanPark 그룹 아이디가 투표일때 -> 전체 투표 게시물들을 뿌려줌
 	?>
-	<div class = "vote_list">
-	<?php
-	//수행시간 측정
-	$start = get_time();
-
+	<div class = "vote_list"><?php
 	//added by BryanPark.
-	$sql ="";
-	$sql2 = "";
-	latest_poll(20,5,5,$search_options,"자동차");
-
-	echo "</div>";
-
-	//$result2 = sql_query($sql2);
-	//print_r($result2);
-	//echo G5_DATA_PATH;
-	//@@ todo -> 테스트 이후 && ($i < 30 ) 이 부분을 파라메터 받아서 최대 출력 갯수
-	//지정하게끔
-	
-	//수행시간 측정.
-	$end = get_time();
-	$time = $end - $start;
-	echo '<br/>'.$time.'초 걸림';
+	latest_poll_group(20,5,5,$search_options,$ARTI_VOTE_vote_category_list_s);
 	?>
-	</div>
-
-	<!-- 게시판 검색 시작 { -->
 	<fieldset id="bo_sch">
-			<legend>투표 검색</legend>
+		<legend>투표 검색</legend>
 
-			<form name="fsearch" method="get">
-			<input type="hidden" name="gr_id" value="polls">
-			<input type="hidden" name="sca" value="<?php echo $sca; ?>">
-			<input type="hidden" name="sop" value="and">
-			<label for="sfl" class="sound_only">검색대상</label>
-			<select name="sfl" id="sfl">
-					<option value="wr_subject"<?php echo get_selected($sfl, 'wr_subject', true); ?>>제목</option>
-					<option value="wr_content"<?php echo get_selected($sfl, 'wr_content'); ?>>내용</option>
-					<option value="wr_subject||wr_content"<?php echo get_selected($sfl, 'wr_subject||wr_content'); ?>>제목+내용</option>
-					<option value="mb_id,1"<?php echo get_selected($sfl, 'mb_id,1'); ?>>회원아이디</option>
-					<option value="mb_id,0"<?php echo get_selected($sfl, 'mb_id,0'); ?>>회원아이디(코)</option>
-					<option value="wr_name,1"<?php echo get_selected($sfl, 'wr_name,1'); ?>>글쓴이</option>
-					<option value="wr_name,0"<?php echo get_selected($sfl, 'wr_name,0'); ?>>글쓴이(코)</option>
-			</select>
-			<label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
-			<input type="text" name="stx" value="<?php echo stripslashes($stx); ?>" required id="stx" class="frm_input required" size="15" maxlength="15">
-			<input type="submit" value="검색" class="btn_submit">
-			</form>
+		<form name="fsearch" method="get">
+		<input type="hidden" name="gr_id" value="polls">
+		<input type="hidden" name="sca" value="<?php echo $sca; ?>">
+		<input type="hidden" name="sop" value="and">
+		<label for="sfl" class="sound_only">검색대상</label>
+		<select name="sfl" id="sfl">
+				<option value="avl_title_s" <?php echo get_selected($sfl, 'avl_title_s', true); ?>>제목</option>
+				<option value="avl_title_s||avl_poll_x" <?php echo get_selected($sfl, 'avl_title_s||avl_poll_x'); ?>>제목+내용</option>
+		</select>
+		<label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
+		<input type="text" name="stx" value="<?php echo stripslashes($stx); ?>" required id="stx" class="frm_input required" size="15" maxlength="15">
+		<input type="submit" value="검색" class="btn_submit">
+		</form>
 	</fieldset>
-	<?php
-
-//[끝]투표게시판 모아보기-->
-} else {
-	?>
-<!-- 메인화면 최신글 끝 -->
-<!-- 그룹별 최신글 포럼형식{ -->
-<div style="float:left; width:100%;">
 <?php
-echo latest_group("theme/web_group2", $group['gr_id'], 4, 22);
-}
+} else {// 그룹별 최신글 포럼형식 
 ?>
-</div>
-<!-- 그룹별 최신글 포럼형식}-->
-<?php
+<div style="float:left; width:100%;"><?php
+echo latest_group("theme/web_group2", $group['gr_id'], 4, 22);
+}//<!-- 그룹별 최신글 포럼형식}-->
+?>
+</div><?php
+
 include_once G5_THEME_PATH . '/tail.php';
 //실행시간 측정함수.
 function get_time() {
