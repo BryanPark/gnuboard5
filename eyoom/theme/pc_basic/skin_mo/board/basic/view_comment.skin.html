@@ -1,0 +1,626 @@
+<?php if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/venobox/venobox.css" type="text/css" media="screen">',0);
+?>
+
+<!--[if lt IE 9]>
+	<link rel="stylesheet" href="../../../plugins/sky-forms/version-2.0.5/css/sky-forms-ie8.css">
+<![endif]-->
+
+<script type="text/javascript" src="../../../plugins/venobox/venobox.min.js"></script>
+<script>
+// 글자수 제한
+var char_min = parseInt({_comment_min}); // 최소
+var char_max = parseInt({_comment_max}); // 최대
+</script>
+
+<style>
+.margin-hr-0 {height:1px;border-top:1px dotted #ddd;margin:0 0 10px;clear:both}
+.margin-hr-10 {height:1px;border-top:1px dotted #ddd;margin:10px 0;clear:both}
+.margin-top-m-1 {margin-top:-1px}
+.view-comment {border-left:1px dotted #e5e5e5;border-right:1px dotted #e5e5e5;background:#fcfcfc}
+.view-comment .eb-comment {overflow:visible;margin-top:0;padding:10px 10px 10px 10px;border-top:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5;border-left:1px dotted #e5e5e5;margin-top:-1px;margin-left:-1px;background:#fff}
+.view-comment .eb-comment .comment-body {overflow:visible}
+.view-comment .eb-comment .comment-body p {color:#777;line-height:1.4}
+.basic-bs .eb-comment .comment-heading {margin:0 0 5px;font-size:13px;position:relative}
+.view-comment .eb-comment .comment-heading a,.view-comment .eb-comment .comment-heading a:hover {color:#555}
+.view-comment .eb-comment .comment-heading strong {padding-right:5px}
+.view-comment .eb-comment .comment-heading small {top:3px;right:0;color:#999;font-size:12px;position:absolute}
+.view-comment .view-comment-photo img {-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important;width:30px;height:30px;margin-bottom:5px}
+.view-comment .view-comment-photo .fa-user {-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important;width:30px;height:30px;background:#eee;color:#84848a;line-height:30px;font-size:16px;text-align:center;margin-bottom:5px}
+.view-comment .view-comment-photo {float:left;margin-right:5px}
+.view-comment .comment-body-pn {padding-left:0px}
+.view-comment .comment-name-w {padding-top:7px;padding-bottom:15px}
+.view-comment .comment-name {font-weight:bold}
+.view-comment .comment-ip {font-size:11px}
+.view-comment .comment-btn a {margin-left:5px}
+.view-comment .comment-btn a.like-btn1 {padding-left:20px;padding-right:20px;margin-left:10px}
+.view-comment .comment-btn a.like-btn2 {padding-left:20px;padding-right:20px}
+.view-comment .syntaxhighlighter {border-top:1px solid #eee;border-bottom:1px solid #eee;padding:10px 0}
+.comment-area .view-comment-write-box {border:1px solid #ddd;margin-top:10px}
+.comment-area .sky-form header {padding:8px 16px}
+.comment-area .sky-form footer {padding:10px 16px}
+.comment-area .sky-form button {margin:0}
+#bo_vc_send_sns li {float:left;margin:0 5px 15px 0px;list-style:none}
+#bo_vc_send_sns li input {margin:5px 5px 15px 5px}
+</style>
+
+<div class="headline"><h4><i class="fa fa-comments"></i> 댓글목록</h4></div>
+<div class="margin-bottom-20"></div>
+
+<div class="comment-area">
+	<!--{* 댓글 시작 *}-->
+	<div class="view-comment">
+
+		<!--{@ cmt_list}-->
+		<h1 style="display:none;">{.wr_name}님 글에 달린 댓글</h1>
+		<div class="clear"></div>
+
+		<div id="c_{.comment_id}" class="eb-comment" style="{? .cmt_depth}margin-left:{.cmt_depth}px;{/}">
+			<!--{? eyoom_board.bo_use_profile_photo}-->
+			<div class="comment-photo">
+				<span class="view-comment-photo"><!--{? .mb_photo}-->{.mb_photo}<!--{:}--><span class="user_icon"><i class="fa fa-user"></i></span><!--{/}--></span>
+			</div>
+			<div class="comment-body">
+			<!--{:}-->
+			<div class="comment-body-pn">
+			<!--{/}-->
+				<div class="comment-heading">
+					<p class="comment-name-w">
+						<!--{? .gnu_icon}-->
+						<span style='display:inline-block;margin-right:2px;'><img src="{.gnu_icon}" align="absmiddle"></span>
+						<!--{/}-->
+						<!--{? .eyoom_icon}-->
+						<span style='display:inline-block;margin-right:2px;'><img src="{.eyoom_icon}" align="absmiddle"></span>
+						<!--{/}-->
+						<span class="comment-name">{=eb_nameview('basic', .mb_id, .wr_name, .wr_email, .wr_homepage)}</span> <!--{? _is_ip_view}--><span class="comment-ip">{.ip}</span><!--{/}-->
+						<span class="right">
+							<!--{? eyoom_board.bo_sel_date_type == '1'}-->
+							<i class="fa fa-clock-o"></i> {eb->date_time('Y.m.d H:i',.datetime)}
+							<!--{: eyoom_board.bo_sel_date_type == '2'}-->
+							<i class="fa fa-clock-o"></i> {eb->date_format('Y.m.d H:i',.datetime)}
+							<!--{/}-->
+						</span>
+					</p>
+				</div>
+
+				<p>
+					<!--{? strstr(.wr_option, 'secret')}--><i class="fa fa-lock color-red"></i> <!--{/}-->
+					<!--{? .imgsrc}-->
+					<img src="{.imgsrc}" class="img-responsive"><br>
+					<!--{/}-->
+					{.comment}
+				</p>
+
+				<div class="margin-bottom-15"></div>
+
+				<div class="comment-btn t-right">
+					<!--{? .is_reply || .is_edit || .is_del}-->
+			            <!--{? .is_reply}--><a href="{.c_reply_href}" onclick="comment_box('{.comment_id}', 'c'); return false;" class="eb-button eb-button-mini eb-button-light">댓글</a><!--{/}-->
+			            <!--{? .is_edit}--><a href="{.c_edit_href}" onclick="comment_box('{.comment_id}', 'cu'); return false;" class="eb-button eb-button-mini eb-button-light">수정</a><!--{/}-->
+			            <!--{? .is_del}--><a href="{.del_link}" onclick="return comment_delete();" class="eb-button eb-button-mini eb-button-light">삭제</a><!--{/}-->
+					<!--{/}-->
+
+					<!--{? .c_good_href || .c_nogood_href}-->
+			            <!--{? .c_good_href}-->
+						<a href="{.c_good_href}" id="goodcmt_button_{.comment_id}" class="goodcmt_button eb-button eb-button-mini eb-button-dark like-btn1" type="button" title="goodcmt"><i class="fa fa-thumbs-up"></i> <strong class="board-cmt-act-good color-orange">{? .good}{.good}{:}0{/}</strong></a>
+						<!--{/}-->
+						<!--{? .c_nogood_href}-->
+			            <a href="{.c_nogood_href}" id="nogoodcmt_button_{.comment_id}" class="nogoodcmt_button eb-button eb-button-mini eb-button-dark like-btn2" type="button" title="nogoodcmt"><i class="fa fa-thumbs-down"></i> <strong class="board-cmt-act-nogood color-grey">{? .nogood}{.nogood}{:}0{/}</strong></a>
+						<!--{/}-->
+					<!--{/}-->
+				</div>
+
+				<span id="edit_{.comment_id}"></span><!--{* 수정 *}-->
+				<span id="reply_{.comment_id}"></span><!--{* 답변 *}-->
+
+				<input type="hidden" value="{=strstr(.wr_option,'secret')}" id="secret_comment_{.comment_id}">
+				<input type="hidden" value="{.anonymous_id}" id="anonymous_id_{.comment_id}">
+				<input type="hidden" value="{.imgname}" id="imgname_{.comment_id}">
+				<textarea id="save_comment_{.comment_id}" style="display:none">{.content1}</textarea>
+
+				<div class="clear"></div>
+			</div>
+		</div>
+		<!--{:}-->
+		<div class="eb-comment margin-bottom-20">
+			<p id="bo_vc_empty" class="t-center">등록된 댓글이 없습니다.</p>
+		</div>
+		<!--{/}-->
+	</div>
+	<!--{* 댓글 끝 *}-->
+
+	<div class="margin-bottom-20"></div>
+
+	<!--{* 댓글 쓰기 시작 *}-->
+	<div id="view-comment-write">
+		<!--{* Comments *}-->
+		<form name="fviewcomment" action="./write_comment_update.php" onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off" class="sky-form view-comment-write-box" enctype="multipart/form-data">
+			<input type="hidden" name="w" value="{? !_w}c{:}{_w}{/}" id="w">
+			<input type="hidden" name="bo_table" value="{_bo_table}">
+			<input type="hidden" name="wr_id" value="{_wr_id}">
+			<input type="hidden" name="comment_id" value="{_c_id}" id="comment_id">
+			<input type="hidden" name="sca" value="{_sca}">
+			<input type="hidden" name="sfl" value="{_sfl}">
+			<input type="hidden" name="stx" value="{_stx}">
+			<input type="hidden" name="spt" value="{_spt}">
+			<input type="hidden" name="page" value="{_page}">
+			<input type="hidden" name="is_good" value="">
+			<input type="hidden" name="board_skin_path" value="{C.EYOOM_CORE_PATH}/board">
+			<input type="hidden" name="wr_1" value="{_wr_1}">
+            <input type="hidden" name="cmt_amt" value="{_cmt_amt}">
+            <input type="hidden" name="wmode" value="{_wmode}">
+
+			<header><i class="fa fa-pencil"></i> 댓글쓰기</header>
+
+			<div class="padding-all-10">
+				<div class="row">
+					<section class="col col-4">
+						<!--<label class="checkbox left"><input type="checkbox" name="wr_secret" value="secret" id="wr_secret"><i></i>비밀글 사용</label>-->
+						<!--{? _is_anonymous}-->
+						<label class="checkbox left margin-left-10"><input type="checkbox" name="anonymous" value="y" id="anonymous"><i></i>익명글 사용</label>
+						<!--{/}-->
+						<div class="clear"></div>
+					</section>
+
+					<!--{? !_is_member}-->
+					<section class="col col-4">
+						<label for="wr_name" class="label">이름<strong class="sound_only"> 필수</strong></label>
+						<label class="input">
+							<i class="icon-append fa fa-user"></i>
+							<input type="text" name="wr_name" value="{=get_cookie('ck_sns_name')}" id="wr_name" required size="5" maxLength="20">
+						</label>
+					</section>
+					<section class="col col-4">
+						<label for="wr_password" class="label">비밀번호<strong class="sound_only"> 필수</strong></label>
+						<label class="input">
+							<i class="icon-append fa fa-lock"></i>
+							<input type="password" name="wr_password" id="wr_password" required size="10" maxLength="20">
+						</label>
+					</section>
+					<!--{/}-->
+				</div>
+
+				<!--{? board.bo_use_sns && (config.cf_facebook_appid || config.cf_twitter_key)}-->
+				<label class="label">SNS 동시등록</label>
+				<div id="bo_vc_send_sns"></div>
+				<div class="clear"></div>
+				<!--{/}-->
+
+				<section>
+					<div id="comment-option">
+						<div class="panel panel-default" style="border:0;margin-bottom:0;box-shadow:none; position:relative;">
+							<!--<a class="eb-button eb-button-mini eb-button-light" data-toggle="collapse" data-parent="#comment-option" href="#collapse-image-cm">이미지첨부</a>
+							<a class="eb-button eb-button-mini eb-button-light" data-toggle="collapse" data-parent="#comment-option" href="#collapse-video-cm">동영상</a>
+							<a class="eb-button eb-button-mini eb-button-light" data-toggle="collapse" data-parent="#comment-option" href="#collapse-sound-cm">사운드클라우드</a>
+							<a class="eb-button eb-button-mini eb-button-light" data-toggle="collapse" data-parent="#comment-option" href="#collapse-code-cm">코드</a>-->
+
+							<div style="height:37px;">
+								<!--{? !_is_member}-->
+								<a href="<?=TW_LOGIN?>?url={_urlencode}"><img src="../../../../../../skin/outlogin/social_login/img/otw.png"></a></a>
+								<a href="<?=FB_LOGIN?>?url={_urlencode}"><img src="../../../../../../skin/outlogin/social_login//img/ofb.png"></a>
+								<a href="<?=GG_LOGIN?>?url={_urlencode}"><img style="width:37px; height:37px;" src="../../../../../../skin/outlogin/social_login/img/ogg.png"></a>
+								<a href="<?=KA_LOGIN?>?url={_urlencode}"><img src="../../../../../../skin/outlogin/social_login/img/oka.png"></a>
+								<a href="<?=NV_LOGIN?>?url={_urlencode}"><img src="../../../../../../skin/outlogin/social_login/img/onv.png"></a>
+								<!--{:}-->
+
+								<!--{? get_session('sl_sns') == 'tw' || get_session('sl_sns') == 'fb' || get_session('sl_sns') == 'gg' || get_session('sl_sns') == 'ka' || get_session('sl_sns') == 'nv'}-->
+								<div style="float:left; width:50px; height:50px; padding-right:15px;">
+									<img style="width:50px; height:50px;" src="{=get_session('sl_picture')}">
+								</div>
+
+								<div style="float:left; height:50px; display:table;">
+									<p style="display:table-cell; vertical-align:middle;">{member['mb_nick']} 님</p>
+								</div>
+								<!--{:}-->
+								<div style="float:left;">
+									<p style="position:absolute; left:0px; bottom:0px;">{member['mb_nick']} 님</p>
+								</div>
+								<!--{/}-->
+
+								<!--{/}-->
+							</div>
+
+							<a class="eb-button eb-button-mini eb-button-dark right emoticon" style="position:absolute; right:0px; bottom:0px;" data-type="iframe" title="이모티콘" href="{C.EYOOM_CORE_URL}/board/emoticon.php">이모티콘</a>
+							<div class="clear"></div>
+							<div id="collapse-image-cm" class="panel-collapse collapse">
+								<div class="eb-con-box margin-top-10">
+									<label for="file" class="input input-file">
+		                                <div class="button bg-color-light"><input type="file" id="file" name="cmt_file[]" value="이미지선택" title="파일첨부 : 용량 {_upload_max_filesize} 이하만 업로드 가능" onchange="this.parentNode.nextSibling.value = this.value">Image</div><input type="text" readonly>
+		                            </label>
+		                            <div id="del_cmtimg"></div>
+								</div>
+							</div>
+							<div id="collapse-video-cm" class="panel-collapse collapse">
+								<div class="eb-con-box margin-top-10">
+									<label class="input input-file">
+										<a href="javascript:;" class="button bg-color-light" id="btn_video" onclick="return false;">확인</a>
+										<input type="text" id="video_url" class="form-control" placeholder="동영상주소">
+									</label>
+								</div>
+							</div>
+							<div id="collapse-sound-cm" class="panel-collapse collapse">
+								<div class="eb-con-box margin-top-10">
+									<div class="row">
+										<div class="col col-12 margin-bottom-10">
+											<label class="input input-file">
+												<a href="javascript:;" class="button bg-color-light" id="btn_scloud" onclick="return false;">확인</a>
+												<input type="text" id="scloud_url" class="form-control" placeholder="사운드클라우드 음원주소">
+											</label>
+										</div>
+										<div class="col col-12 t-right">
+											<a href="https://soundcloud.com/" target="_blank" class="eb-button eb-button-mini eb-button-light"><i class="fa fa-location-arrow"></i> 사운드클라우드 GO</a>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+							</div>
+							<div id="collapse-code-cm" class="panel-collapse collapse">
+								<div class="eb-con-box margin-top-10">
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">HTML</a>
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">PHP</a>
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">CSS</a>
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">JS</a>
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">JAVA</a>
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">XML</a>
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">PYTHON</a>
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">RUBY</a>
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">SASS</a>
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">SCALA</a>
+									<a href="javascript:;" class="ch_code btn-e-xs" onclick="return false;">SQL</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="margin-bottom-10"></div>
+					<label class="textarea textarea-resizable">
+						<!--{? _comment_min || _comment_max}--><strong id="char_cnt"><span id="char_count"></span>글자</strong><!--{/}-->
+						<textarea rows="7" id="wr_content" name="wr_content" maxlength="10000" required title="내용" {? _comment_min || _comment_max}onkeyup="check_byte('wr_content', 'char_count');"{/} onclick="check_member();">{_c_wr_content}</textarea>
+						<!--{? _comment_min || _comment_max}--><script> check_byte('wr_content', 'char_count'); </script><!--{/}-->
+						<script>
+						$("textarea#wr_content[maxlength]").live("keyup change", function() {
+							var str = $(this).val()
+							var mx = parseInt($(this).attr("maxlength"))
+							if (str.length > mx) {
+								$(this).val(str.substr(0, mx));
+								return false;
+							}
+						});
+						</script>
+					</label>
+					<div class="note"><strong>Note:</strong> 댓글은 자신을 나타내는 얼굴입니다. 무분별한 댓글, 욕설, 비방 등을 삼가하여 주세요.</div>
+				</section>
+
+				<!--{? !_is_member}-->
+				<section>
+					<label class="label">자동등록방지</label>
+					<div class="vc-captcha">{_captcha_html}</div>
+				</section>
+				<!--{/}-->
+			</div>
+
+			<footer>
+				<button type="submit" id="btn_submit" class="btn-e pull-right" value="댓글등록">댓글등록</button>
+			</footer>
+		</form>
+		<!--{* End Comments *}-->
+	</div>
+	<!--{* 댓글 쓰기 끝 *}-->
+</div><!--{* end : comment-area *}-->
+
+<script>
+var save_before = '';
+var save_html = document.getElementById('view-comment-write').innerHTML;
+function set_emoticon(emoticon) {
+	var type='emoticon';
+	set_textarea_contents(type,emoticon);
+}
+function set_textarea_contents(type,value) {
+	var type_text = '';
+	var content = '';
+	switch(type) {
+		case 'emoticon': type_text = '이모티콘'; break;
+		case 'video': type_text = '동영상'; break;
+		case 'code': type_text = 'code'; break;
+		case 'sound': type_text = 'soundcloud'; break;
+	}
+	if(type_text != 'code') {
+		content = '{'+type_text+':'+value+'}';
+	} else {
+		content = '{code:'+value+'}\n\n{/code}\n'
+	}
+	var wr_html = $("#wr_content").val();
+	var wr_emo = content;
+	wr_html += wr_emo;
+	$("#wr_content").val(wr_html);
+}
+
+function good_and_write()
+{
+	var f = document.fviewcomment;
+	if (fviewcomment_submit(f)) {
+		f.is_good.value = 1;
+		f.submit();
+	} else {
+		f.is_good.value = 0;
+	}
+}
+
+function fviewcomment_submit(f) {
+	<!--{? !_is_member}-->
+	//alert("로그인후 이용해 주세요.");
+	//return false;
+	<!--{/}-->
+
+	var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
+
+	f.is_good.value = 0;
+
+	<!--{? _is_anonymous}-->
+	var wr_1 = '{_wr_1}';
+	if($("#anonymous").is(':checked')) {
+		wr_1 = wr_1+'|y';
+		f.wr_1.value=wr_1;
+	}
+	<!--{/}-->
+
+	var subject = "";
+	var content = "";
+	$.ajax({
+		url: g5_bbs_url+"/ajax.filter.php",
+		type: "POST",
+		data: {
+			"subject": "",
+			"content": f.wr_content.value
+		},
+		dataType: "json",
+		async: false,
+		cache: false,
+		success: function(data, textStatus) {
+			subject = data.subject;
+			content = data.content;
+		}
+	});
+
+	if (content) {
+		alert("내용에 금지단어('"+content+"')가 포함되어있습니다");
+		f.wr_content.focus();
+		return false;
+	}
+
+	// 양쪽 공백 없애기
+	var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
+	document.getElementById('wr_content').value = document.getElementById('wr_content').value.replace(pattern, "");
+	if (char_min > 0 || char_max > 0)
+	{
+		check_byte('wr_content', 'char_count');
+		var cnt = parseInt(document.getElementById('char_count').innerHTML);
+		if (char_min > 0 && char_min > cnt)
+		{
+			alert("댓글은 "+char_min+"글자 이상 쓰셔야 합니다.");
+			return false;
+		} else if (char_max > 0 && char_max < cnt)
+		{
+			alert("댓글은 "+char_max+"글자 이하로 쓰셔야 합니다.");
+			return false;
+		}
+	}
+	else if (!document.getElementById('wr_content').value)
+	{
+		alert("댓글을 입력하여 주십시오.");
+		return false;
+	}
+
+	if (typeof(f.wr_name) != 'undefined')
+	{
+		f.wr_name.value = f.wr_name.value.replace(pattern, "");
+		if (f.wr_name.value == '')
+		{
+			alert('이름이 입력되지 않았습니다.');
+			f.wr_name.focus();
+			return false;
+		}
+	}
+
+	if (typeof(f.wr_password) != 'undefined')
+	{
+		f.wr_password.value = f.wr_password.value.replace(pattern, "");
+		if (f.wr_password.value == '')
+		{
+			alert('비밀번호가 입력되지 않았습니다.');
+			f.wr_password.focus();
+			return false;
+		}
+	}
+
+	<?php if($is_guest) echo chk_captcha_js();  ?>
+
+	document.getElementById("btn_submit").disabled = "disabled";
+
+	return true;
+}
+
+function comment_box(comment_id, work)
+{
+	var el_id;
+	// 댓글 아이디가 넘어오면 답변, 수정
+	if (comment_id)
+	{
+		if (work == 'c')
+			el_id = 'reply_' + comment_id;
+		else
+			el_id = 'edit_' + comment_id;
+	}
+	else
+		el_id = 'view-comment-write';
+
+	if (save_before != el_id)
+	{
+		if (save_before)
+		{
+			document.getElementById(save_before).style.display = 'none';
+			document.getElementById(save_before).innerHTML = '';
+		}
+
+		document.getElementById(el_id).style.display = '';
+		document.getElementById(el_id).innerHTML = save_html;
+		// 댓글 수정
+		if (work == 'cu')
+		{
+			document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
+			if (typeof char_count != 'undefined')
+				check_byte('wr_content', 'char_count');
+			/*if (document.getElementById('secret_comment_'+comment_id).value)
+				document.getElementById('wr_secret').checked = true;
+			else
+				document.getElementById('wr_secret').checked = false;*/
+			<!--{? _is_anonymous}-->
+			if (document.getElementById('anonymous_id_'+comment_id).value)
+				document.getElementById('anonymous').checked = true;
+			else
+				document.getElementById('anonymous').checked = false;
+			<!--{/}-->
+			var imgname = document.getElementById('imgname_' + comment_id).value;
+			if(imgname) {
+				var delchk_str = '<label class="checkbox"><input type="checkbox" name="del_cmtimg" value="1"><i></i><span class="font-size-12">파일삭제 ('+imgname+')</span></label>';
+				$("#del_cmtimg").html('');
+				$("#del_cmtimg").html(delchk_str);
+			}
+		}
+
+		document.getElementById('comment_id').value = comment_id;
+		document.getElementById('w').value = work;
+
+		$(".emoticon").venobox({border:'3px'});
+
+		//동영상 추가
+		$("#btn_video").click(function(){
+			var v_url = $("#video_url").val();
+			if(!v_url) alert('동영상 주소를 입력해 주세요.');
+			else set_textarea_contents('video',v_url);
+			$("#video_url").val('');
+		});
+
+		//코드 추가
+		$(".ch_code").click(function(){
+			var ch = $(this).text();
+			var val = ch.toLowerCase();
+			set_textarea_contents('code',val);
+		});
+
+		//사운드크라우드 추가
+		$("#btn_scloud").click(function(){
+			var s_url = $("#scloud_url").val();
+			if(!s_url) alert('사운드크라우드 주소를 입력해 주세요.');
+			else set_textarea_contents('sound',s_url);
+			$("#scloud_url").val('');
+		});
+
+		if(save_before)
+			$("#captcha_reload").trigger("click");
+
+		save_before = el_id;
+	}
+}
+
+function comment_delete()
+{
+	return confirm("이 댓글을 삭제하시겠습니까?");
+}
+
+comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 추가 (root님)
+
+<!--{? board.bo_use_sns && (config.cf_facebook_appid || config.cf_twitter_key)}-->
+// sns 등록
+$(function() {
+	$("#bo_vc_send_sns").load(
+		"{C.G5_SNS_URL}/view_comment_write.sns.skin.php?bo_table={_bo_table}",
+		function() {
+			save_html = document.getElementById('view-comment-write').innerHTML;
+		}
+	);
+});
+<!--{/}-->
+</script>
+<script>
+$(function() {
+	// 댓글 추천, 비추천
+	$(".goodcmt_button, .nogoodcmt_button").click(function() {
+		var $tx;
+		if($(this).attr('title') == "goodcmt")
+			$tx = $(".board-cmt-act-good");
+		else
+			$tx = $(".board-cmt-act-nogood");
+
+		excute_goodcmt(this.href, $(this), $tx);
+		return false;
+	});
+});
+
+function excute_goodcmt(href, $el, $tx)
+{
+	$.post(
+		href,
+		{ js: "on" },
+		function(data) {
+			if(data.error) {
+				alert(data.error);
+				return false;
+			}
+
+			if(data.count) {
+				$el.find("strong").text(number_format(String(data.count)));
+				if($tx.attr("id").search("nogood") > -1) {
+					$tx.text("이 글을 비추천하셨습니다.");
+					$tx.fadeIn(200).delay(2500).fadeOut(200);
+				} else {
+					$tx.text("이 글을 추천하셨습니다.");
+					$tx.fadeIn(200).delay(2500).fadeOut(200);
+				}
+			}
+		}, "json"
+	);
+}
+
+$('.accordion dt').on('click', function () {
+    var current_dt = $(this);
+
+    //dd of just clicked dt not active - direct sibling
+    if (!$(this).next('dd').hasClass('active')){
+        //call back function interprets this as selected $('dd')
+
+        //checking if any other sibling dd's active
+        if (current_dt.siblings('dd.active').length) {
+            //find dd with a class of active before sliding up
+            current_dt
+              .siblings('dd.active')
+              .slideUp(function() {
+              	current_dt
+                  .next('dd')
+                  .slideDown()
+                  .addClass('active');
+            	})
+              .removeClass('active')
+              .find('dd.active')
+              	.hide()
+              	.removeClass('active');
+
+         } else {
+            current_dt.next('dd').slideDown().addClass('active');
+         }
+    } else {
+        //dd of just clicked dt is active - close form
+        current_dt.next('dd').slideUp().removeClass('active');
+    }
+});
+
+function check_member(){
+	//회원인지 아닌지 체크
+	<!--{? !_is_member}-->
+	//alert("로그인후 이용해 주세요.");
+	//return false;
+	<!--{/}-->
+}
+</script>
+<!--[if lt IE 9]>
+	<script src="../../../plugins/sky-forms/version-2.0.5/js/sky-forms-ie8.js"></script>
+<![endif]-->

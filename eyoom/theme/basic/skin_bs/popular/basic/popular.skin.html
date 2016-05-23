@@ -1,0 +1,27 @@
+<?php if (!defined('_GNUBOARD_')) exit; 
+
+add_stylesheet('<link rel="stylesheet" href="./style.css" type="text/css" media="screen">',0);
+
+?>
+
+<!-- 인기검색어 시작 -->
+<div class="popular">
+	<div class="headline">
+		<h4><i class="fa fa-search"></i> 인기검색어</h4>
+	</div>
+	
+	<section class="popular-box">
+        <ul class="list-unstyled">
+        	<!--{@ list}-->
+            <li>
+            	<a href="{C.G5_BBS_URL}/search.php?sfl=wr_subject&amp;sop=and&amp;stx={=urlencode(.pp_word)}">
+	            	<span class="label label-light">{.pp_word}</span>
+            	</a>
+            </li>
+			<!--{/}-->
+        </ul>
+	</section>
+</div>
+
+<div class="margin-bottom-30"></div>
+<!-- 인기검색어 끝 -->

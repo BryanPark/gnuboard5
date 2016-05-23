@@ -1,0 +1,54 @@
+<?php if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가 ?>
+
+<div class="margin-bottom-20">
+	<!--{? eyoom.use_gnu_outlogin == 'y'}-->{=outlogin('basic')}<!--{:}-->{=eb_outlogin(eyoom.outlogin_skin)}<!--{/}-->
+</div>
+<!--{? !defined('_INDEX_')}-->
+<!--<div class="headline"><h5>Side Menu</h5></div>-->
+<div class="margin-bottom-20">
+	<ul class="list-group sidebar-nav" id="sidebar-nav">
+		<!--{@ sidemenu}-->
+	    <li class="list-group-item list-toggle {? .active}active{/}">
+			<a {? sidemenu.submenu}data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-{.key_}"{:}href="{.me_link}" target="_{.me_target}"{/}><!--{.me_name}--></a>
+	        <ul id="collapse-{.key_}" class="collapse {? .active}in{/}">
+				<!--{@ submenu}-->
+	            <li class="{? ..active}active{/}">{? ..new}<span class="badge badge-e badge-red">new</span>{/}<a href="{..me_link}" target="_{..me_target}">{? ..active}<i class="fa fa-chevron-circle-right"></i>{:}<i class="fa fa-circle"></i>{/} <!--{..me_name}--></a></li>
+				<!--{/}-->
+	        </ul>
+	    </li>
+		<!--{/}-->
+	</ul>
+</div>
+<!--{/}-->
+
+<!--<h2 class="side_title">커뮤니티</h2>
+<ul class="list-group">
+	<li class="list-group-item dash"><a href="<?=G5_BBS_URL?>/board.php?bo_table=popularity">실시간 인기글</a> | <a href="<?=G5_BBS_URL?>/board.php?bo_table=humor">유머자료</a></li>
+	<li class="list-group-item dash"><a href="<?=G5_BBS_URL?>/board.php?bo_table=humor_video">유머동영상</a> | <a href="<?=G5_BBS_URL?>/board.php?bo_table=sportsgame">스포츠&게임</a></li>
+	<li class="list-group-item dash"><a href="<?=G5_BBS_URL?>/board.php?bo_table=broadcast">TV클립</a> | <a href="<?=G5_BBS_URL?>/board.php?bo_table=user_upload">유저업로드</a></li>
+	<li class="list-group-item dash"><a href="<?=G5_BBS_URL?>/board.php?bo_table=user_broadcast">유저방송</a> | <a href="<?=G5_BBS_URL?>/board.php?bo_table=flash">찰카닥</a> | <a href="<?=G5_BBS_URL?>/board.php?bo_table=flash_game">플래시게임</a></li>
+</ul>-->
+
+<div class="margin-bottom-30"></div>
+
+<?
+global $bo_table;
+if($_GET['bo_table'] != 'flash' && $bo_table != 'flash' && $_GET['bo_table'] != 'starClip' && $bo_table != 'starClip' && $_GET['bo_table'] != 'humor_video' && $bo_table != 'humor_video'){
+?>
+	<div align="center">
+	<!--{@eb_banner(1)}-->{.html}<!--{/}-->
+	</div>
+<?
+}else{
+?>
+	<div align="center"><script type='text/javascript' src='http://ad.ilikesponsorad.com/ad/ad.js?adImpMgrCode=22006&width=160&height=600'></script></div>
+<?
+}
+?>
+
+<!--이슈토론 새글 리스트 가져오기-->
+<!--<h2 class="side_title">이슈토론</h2>
+<ul class="list-group">
+	{latest->latest_issue_list('title=이슈토론 || bo_table=issue || count=6 || cut_subject=20')}
+</ul>-->
+<!--이슈토론 새글 리스트 가져오기 끝-->

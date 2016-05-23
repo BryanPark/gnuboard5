@@ -1,0 +1,53 @@
+<?php if (!defined('_GNUBOARD_')) exit;?>
+
+<div class="hot-post">
+	<div class="headline"><h5>월간베스트</h5></div>
+	<div class="margin-top-20">
+        <table class="eb-table eb-table-hover">
+            <thead>
+                <tr>
+                    <th>랭킹</th>
+                    <th>제목</th>
+                    <!--{? photo == 'y'}-->
+					<th>포토</th>
+					<!--{/}-->
+					<th>글쓴이</th>
+					<th>날짜</th>
+                    <th>조회</th>
+                </tr>
+            </thead>
+            <tbody>
+	            <!--{@ loop}-->
+                <tr>
+	                <td class="t-center">
+		                <strong><span class="badge badge-dark">{.key_+1}</span></strong>
+	                </td>
+                    <td class="td-subject">
+	                    <a href="{.href}">
+	                        {.wr_subject}
+	                        <!--{? .wr_comment}-->
+	                        <span class="sound_only">댓글</span><em> {.wr_comment}</em><span class="sound_only">개</span>
+	                        <!--{/}-->
+	                    </a>
+                    </td>
+					<!--{? photo == 'y'}-->
+                    <td class="post-photo td-width-10">
+                        <!--{? .mb_photo}-->{.mb_photo}<!--{:}--><div class="user_icon"><i class="fa fa-user"></i></div><!--{/}-->
+                    </td>
+					<!--{/}-->
+					<td class="t-center">{.mb_nick}</td>
+					<td class="t-center">{eb->date_time('Y.m.d',.datetime)}</td>
+                    <td class="t-center color-red">{=number_format(.wr_hit)}</td>
+                </tr>
+                <!--{/}-->
+            </tbody>
+        </table>
+	</div>
+</div>
+
+<style>
+.hot-post .eb-table th {text-align:center}
+.hot-post .post-photo {overflow:hidden;text-align:center}
+.hot-post .post-photo img {-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important;width:28px;height:28px}
+.hot-post .post-photo i {-webkit-border-radius:50% !important;-moz-border-radius:50% !important;border-radius:50% !important;width:28px;height:28px;line-height:28px;background:#eee;font-size:16px;color:#84848a;text-align:center}
+</style>

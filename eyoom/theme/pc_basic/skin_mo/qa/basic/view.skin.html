@@ -1,0 +1,175 @@
+<?php if (!defined('_GNUBOARD_')) exit;?>
+
+<article class="qa-view">
+    <div class="margin-bottom-10"></div>
+    <div class="headline">
+        <h5>
+	        <i class="fa fa-question-circle"></i>
+			<span class="color-red">{view.category}</span> - {view.subject}
+        </h5>
+    </div>
+
+    <section class="qa-view-info">
+        <h2>페이지 정보</h2>
+        <div class="left">
+	        <span><i class="fa fa-user"></i> {view.name}</span>
+        </div>
+        <div class="right">
+	        <span><i class="fa fa-clock-o"></i> {view.datetime}</span>
+        </div>
+        <div class="clear"></div>
+    </section>
+
+	<!--{? view.download_count}-->
+    <section class="qa-view-file">
+        <h2>첨부파일</h2>
+        <ul class="list-unstyled">
+		<!--{@ files}-->
+            <li><a href="{.href}"><i class="fa fa-floppy-o"></i> {.download_source}</a></li>
+        <!--{/}-->
+        </ul>
+    </section>
+    <!--{/}-->
+
+	<!--{? view.email || view.hp}-->
+    <section class="qa-view-contact">
+        <h2>연락처정보</h2>
+		<!--{? view.email}-->
+		<div class="contact-email">
+	        <span><i class="fa fa-envelope-o"></i> 이메일 : {view.email}</span>
+		</div>
+        <!--{/}-->
+		<!--{? view.hp}-->
+		<div class="contact-hp">
+	        <span><i class="fa fa-tablet"></i> 휴대폰 : {view.hp}</span>
+		</div>
+        <!--{/}-->
+    </section>
+    <!--{/}-->
+
+    <div class="view-top-btn">
+		<!--{? _prev_href || next_href}-->
+        <ul class="top-btn-left list-unstyled left">
+            <!--{? _prev_href}--><li><a href="{_prev_href}" class="eb-button eb-button-small eb-button-light" type="button">이전글</a></li><!--{/}-->
+            <!--{? _next_href}--><li><a href="{_next_href}" class="eb-button eb-button-small eb-button-light" type="button">다음글</a></li><!--{/}-->
+        </ul>
+        <!--{/}-->
+        <ul class="top-btn-right list-unstyled right">
+            <!--{? _update_href}--><li><a href="{_update_href}" class="eb-button eb-button-small eb-button-light" type="button">수정</a></li><!--{/}-->
+            <!--{? _delete_href}--><li><a href="{_delete_href}" class="eb-button eb-button-small eb-button-dark" type="button" onclick="del(this.href); return false;">삭제</a></li><!--{/}-->
+            <li><a href="{_list_href}" class="eb-button eb-button-small eb-button-light" type="button">목록</a></li>
+            <!--{? _write_href}--><li><a href="{_write_href}" class="eb-button eb-button-small eb-button-red" type="button"><i class="fa fa-pencil"></i> 글쓰기</a></li><!--{/}-->
+        </ul>
+        <div class="clear"></div>
+    </div>
+
+    <section class="qa-view-atc">
+        <h2 class="qa-view-atc-title">본문</h2>
+		<!--{? view.img_count}-->
+			<div class="board-view-img margin-bottom-15 t-center">
+			<!--{@ thumbs}-->{.value_}<!--{/}-->
+			</div>
+		<!--{/}-->
+        <div class="qa-view-con"><!--{=get_view_thumbnail(view.content, qaconfig.qa_image_width)}--></div>
+		<!--{? view.qa_type}-->
+        <div class="qa-view-addq"><a href="{_rewrite_href}" class="eb-button eb-button-small eb-button-dark">추가질문</a></div>
+        <!--{/}-->
+    </section>
+
+	<!--{? !view.qa_type}-->
+		<!--{? view.qa_status && answer.qa_id}-->
+		{# answer_mo}
+		<!--{:}-->
+		{# answerform_mo}
+		<!--{/}-->
+	<!--{/}-->
+
+	<!--{? view.rel_count}-->
+    <section class="qa-view-rel">
+        <div class="headline"><h4><i class="fa fa-retweet"></i> 연관질문</h4></div>
+		<div class="table-list-eb margin-bottom-20">
+	        <table class="eb-table">
+	            <tbody>
+					<!--{@ rel_list}-->
+		            <tr>
+		                <td class="bg-color-light2">
+		                    <a href="{.view_href}">
+		                        {.subject}
+		                    </a>
+		                </td>
+		            </tr>
+		            <tr>
+			            <td class="font-size-11 color-grey">
+				            [{.category}]&nbsp;&nbsp;<span class="{? .qa_status}txt_done{:}txt_rdy{/}">{? .qa_status}답변완료{:}답변대기{/}</span>&nbsp;&nbsp;{.date}
+				        </td>
+		            </tr>
+		            <!--{/}-->
+	            </tbody>
+	        </table>
+        </div>
+    </section>
+    <!--{/}-->
+
+    <div class="view-top-btn">
+		<!--{? _prev_href || next_href}-->
+        <ul class="top-btn-left list-unstyled left">
+            <!--{? _prev_href}--><li><a href="{_prev_href}" class="eb-button eb-button-small eb-button-light" type="button">이전글</a></li><!--{/}-->
+            <!--{? _next_href}--><li><a href="{_next_href}" class="eb-button eb-button-small eb-button-light" type="button">다음글</a></li><!--{/}-->
+        </ul>
+        <!--{/}-->
+
+        <ul class="top-btn-right list-unstyled right">
+            <!--{? _update_href}--><li><a href="{_update_href}" class="eb-button eb-button-small eb-button-light" type="button">수정</a></li><!--{/}-->
+            <!--{? _delete_href}--><li><a href="{_delete_href}" class="eb-button eb-button-small eb-button-dark" type="button" onclick="del(this.href); return false;">삭제</a></li><!--{/}-->
+            <li><a href="{_list_href}" class="eb-button eb-button-small eb-button-light" type="button">목록</a></li>
+            <!--{? _write_href}--><li><a href="{_write_href}" class="eb-button eb-button-small eb-button-red" type="button"><i class="fa fa-pencil"></i> 글쓰기</a></li><!--{/}-->
+        </ul>
+        <div class="clear"></div>
+    </div>
+</article>
+
+<style>
+.qa-view {margin-bottom:20px;padding-bottom:20px}
+.qa-view-info {padding:10px;border:1px solid #eee;color:#555;background:#fafafa}
+.qa-view-info h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
+.qa-view-file {border-left:1px solid #eee;border-right:1px solid #eee}
+.qa-view-file h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
+.qa-view-file ul {margin-bottom:0}
+.qa-view-file li {padding:7px 10px;border-bottom:1px solid #eee;background:#fff;font-size:12px}
+.qa-view-file span {padding:0 5px;color:#888}
+.qa-view-file a {color:#000;word-wrap:break-word}
+.qa-view-file i {width:20px;text-align:center;color:#888}
+.qa-view-contact {border-left:1px solid #eee;border-right:1px solid #eee}
+.qa-view-contact h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
+.qa-view-contact .contact-email {padding:7px 10px;border-bottom:1px solid #eee}
+.qa-view-contact .contact-hp {padding:7px 10px;border-bottom:1px solid #eee}
+.qa-view-contact i {width:20px;text-align:center;color:#888}
+.view-top-btn {margin:0 0 10px;padding:10px 0;zoom:1}
+.view-top-btn:after {display:block;visibility:hidden;clear:both;content:""}
+.view-top-btn h2 {position:absolute;font-size:0;line-height:0;overflow:hidden}
+.view-top-btn .top-btn-left li {float:left;margin-right:5px}
+.view-top-btn .top-btn-right li {float:left;margin-left:5px;margin-bottom:5px}
+.qa-view-atc {min-height:200px;height:auto !important;height:200px}
+.qa-view-atc-title {position:absolute;font-size:0;line-height:0;overflow:hidden}
+.qa-view-img {margin:0 0 10px;width:100%;overflow:hidden;zoom:1}
+.qa-view-img:after {display:block;visibility:hidden;clear:both;content:""}
+.qa-view-img img {max-width:100%;height:auto}
+.qa-view-con {margin-bottom:30px;width:100%;line-height:1.5;word-break:break-all;overflow:hidden}
+.qa-view-con a {color:#000;text-decoration:underline}
+.qa-view-con img {max-width:100%;height:auto}
+.qa-view-addq {margin:0 0 30px;text-align:right}
+.qa-view-rel table {border-top:1px solid #e5e5e5}
+</style>
+
+<script src="../../../../../../js/viewimageresize.js"></script>
+<script>
+$(function() {
+    $("a.view_image").click(function() {
+        window.open(this.href, "large_image", "location=yes,links=no,toolbar=no,top=10,left=10,width=10,height=10,resizable=yes,scrollbars=no,status=no");
+        return false;
+    });
+
+    // 이미지 리사이즈
+    $(".board-view-atc").viewimageresize();
+});
+</script>

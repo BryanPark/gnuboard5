@@ -1,0 +1,34 @@
+<?php if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가 ?>
+
+<div class="ebm-sidebar-mb-in">
+	<div class="margin-bottom-30"></div>
+	
+	<div class="margin-bottom-20">
+		<!--{* 아웃로그인 *}-->
+		{=eb_outlogin(eyoom.outlogin_skin)}
+	</div>
+	<div class="margin-bottom-20">
+		<!--{* 투표 *}-->
+		<!--{? eyoom.use_gnu_poll == 'y'}-->{=poll('basic')}<!--{:}-->{=eb_poll(eyoom.poll_skin)}<!--{/}-->
+	</div>
+	
+	<div  class="margin-bottom-20">
+		<!--{* 인기검색어 *}-->
+		<!--{? eyoom.use_gnu_popular == 'y'}-->{=popular('basic')}<!--{:}-->{=eb_popular(eyoom.popular_skin)}<!--{/}-->
+	</div>
+	
+	<div class="t-right">
+		<!--{* ----- 소셜링크 영역 시작 ----- *}-->
+    	<div class="eb-social-icon">
+            <ul>
+                <li class="social-facebook"><a target="_blank" href="#">Facebook</a></li>
+                <li class="social-twitter"><a target="_blank" href="#">Twitter</a></li>
+                <li class="social-google"><a target="_blank" href="#">Google Plus</a></li>
+                <li class="social-tumblr"><a target="_blank" href="#">Tumblr</a></li>
+                <li class="social-instagram"><a target="_blank" href="#">Instagram</a></li>
+            </ul>
+    	</div>
+    	<!--{* ----- 소셜링크 영역 끝 ----- *}-->
+	</div>
+	<div class="margin-bottom-20"></div>
+</div>

@@ -1,0 +1,60 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+
+add_stylesheet('<link rel="stylesheet" href="./style.css" type="text/css" media="screen">',0);
+
+?>
+<div class="headline">
+	<h4><a href="#">{title}</a></h4>
+</div>
+<div id="eCarousel-1" class="latest-slider-e1 carousel slide carousel-e1">
+	<div class="carousel-inner">
+	<!--{@ loop}-->
+		<div class="item {? .index_ == 0}active{/}">
+			<div class="slider-img">
+				<!--{? .image}-->
+				<a href="{.href}"><img class="img-responsive" src="{.image}" alt=""></a>
+				<!--{:}-->
+				<a href="{.href}"><img class="img-responsive" src="../../../image/sample/no_image.jpg" alt=""></a>
+				<!--{/}-->
+			</div>
+			<div class="carousel-caption">
+				<p><a href="{.href}"><span class="color-white">{.wr_subject}</span></a></p>
+			</div>
+		</div>
+	<!--{:}-->
+		<div class="item active">
+			<div class="slider-img">
+				<img class="img-responsive" src="../../../image/sample/sample_01.jpg" alt="">
+			</div>
+			<div class="carousel-caption">
+				<p>Donec nonummy mugna quis risus</p>
+			</div>
+		</div>
+		<div class="item">
+			<div class="slider-img">
+				<img class="img-responsive" src="../../../image/sample/sample_02.jpg" alt="">
+			</div>
+			<div class="carousel-caption">
+				<p>Phasellus tempor vehicula justo</p>
+			</div>
+		</div>
+		<div class="item">
+			<div class="slider-img">
+				<img class="img-responsive" src="../../../image/sample/sample_03.jpg" alt="">
+			</div>
+			<div class="carousel-caption">
+				<p>Aliquam lacinia metus ut elit</p>
+			</div>
+		</div>
+	<!--{/}-->
+	</div>
+
+	<div class="carousel-arrow">
+		<a class="left carousel-control" href="#eCarousel-1" data-slide="prev">
+			<i class="fa fa-angle-left"></i>
+		</a>
+		<a class="right carousel-control" href="#eCarousel-1" data-slide="next">
+			<i class="fa fa-angle-right"></i>
+		</a>
+	</div>
+</div>

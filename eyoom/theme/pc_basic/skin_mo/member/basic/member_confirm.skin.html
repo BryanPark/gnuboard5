@@ -1,0 +1,59 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/sky-forms/version-2.0.5/css/sky-forms.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css_mo/style_mo.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css_mo/custom_mo.css" type="text/css" media="screen">',0);
+?>
+
+<div class="password-confirm">
+	<div class="headline"><h5><i class="fa fa-unlock"></i> {g5.title}</h5></div>
+    <div>
+        <h5><strong>비밀번호를 한번 더 입력해주세요.</strong></h5>
+        <div class="eb-alert eb-alert-warning margin-bottom-10"><strong>Note:</strong><!--{? _url == 'member_leave.php'}--> 비밀번호를 입력하시면 회원탈퇴가 완료됩니다.<!--{:}--> 회원님의 정보를 안전하게 보호하기 위해 비밀번호를 한번 더 확인합니다.<!--{/}--></div>
+	    <form name="fmemberconfirm" action="{_url}" onsubmit="return fmemberconfirm_submit(this);" method="post" class="sky-form">
+	    <input type="hidden" name="mb_id" value="{member.mb_id}">
+	    <input type="hidden" name="w" value="u">
+    	<h4>회원아이디: <span class="color-red">{member.mb_id}</span></h4>
+		<div class="margin-hr-10"></div>
+        <section>
+			<label for="confirm_mb_password" class="label">비밀번호<strong class="sound_only">필수</strong></label>
+	        <label class="input">
+	        	<i class="icon-prepend fa fa-lock"></i>
+	        	<i class="icon-append fa fa-question-circle"></i>
+	        	<input type="password" name="mb_password" id="confirm_mb_password" required size="15" maxLength="20">
+	        	<b class="tooltip tooltip-top-right">비밀번호 입력</b>
+	        </label>
+        </section>
+        <div class="margin-bottom-20"></div>
+		<div class="margin-hr-10"></div>
+	    <div class="t-center margin-bottom-20 margin-top-20">
+	    	<input type="submit" value="확인" id="btn_submit" class="btn-e btn-e-red">
+	    </div>
+	    </form>
+        <div class="margin-bottom-20"></div>
+        <div class="t-center">
+        	<a href="{C.G5_URL}" class="eb-button eb-button-dark">메인으로 돌아가기</a>
+        </div>
+    </div>
+
+</div>
+
+<style>
+.margin-hr-10 {height:1px;border-top:1px dotted #ddd;margin:10px 0}
+.password-confirm {padding:15px}
+</style>
+
+<script type="text/javascript" src="../../../plugins/sky-forms/version-2.0.5/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../../plugins/sky-forms/version-2.0.5/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="../../../js_mo/newwin_mo.js"></script>
+<!--[if lt IE 9]>
+	<script src="../../../plugins/sky-forms/version-2.0.5/js/sky-forms-ie8.js"></script>
+<![endif]-->
+<script>
+function fmemberconfirm_submit(f)
+{
+    document.getElementById("btn_submit").disabled = true;
+
+    return true;
+}
+</script>

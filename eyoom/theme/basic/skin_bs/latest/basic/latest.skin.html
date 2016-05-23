@@ -1,0 +1,87 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+
+add_stylesheet('<link rel="stylesheet" href="./style.css" type="text/css" media="screen">',0);
+
+?>
+<div class="headline">            
+	<h4>{title}</h4>
+</div>
+<div class="latest-basic-e1">
+	<ul class="list-unstyled">
+	<!--{@ loop}-->
+		<li>
+			<div class="col-xs-10">
+				<i class="fa fa-chevron-circle-right {? .new}color-red{/}"></i> <a href="{.href}">{.wr_subject}</a> {? .wr_comment}<span class="basic-comment">+{=number_format(.wr_comment)}</span>{/}
+			</div>
+			<div class="col-xs-2">
+				{=number_format(.wr_hit)}
+			</div>
+			<div class="clearfix"></div>
+		</li>
+	<!--{:}-->
+		<li>
+			<div class="col-xs-10">
+				<i class="fa fa-chevron-circle-right color-red"></i> <a href="#">At vero eos et accusamus et iusto odio dignissimos ducimus qui.</a>
+			</div>
+			<div class="col-xs-2">
+				24
+			</div>
+			<div class="clearfix"></div>
+		</li>
+		<li>
+			<div class="col-xs-10">
+				<i class="fa fa-chevron-circle-right color-red"></i> <a href="#">Similique sunt in culpa qui officia deserunt mollitia animi.</a>
+			</div>
+			<div class="col-xs-2">
+				8
+			</div>
+			<div class="clearfix"></div>
+		</li>
+		<li>
+			<div class="col-xs-10">
+				<i class="fa fa-chevron-circle-right color-red"></i> <a href="#">Atque corrupti quos dolores et quas molestias excepturi sint.</a>
+			</div>
+			<div class="col-xs-2">
+				17
+			</div>
+			<div class="clearfix"></div>
+		</li>
+		<li>
+			<div class="col-xs-10">
+				<i class="fa fa-chevron-circle-right"></i> <a href="#">Dignissimos ducimus qui blanditiis praesentium voluptatum dele.</a>
+			</div>
+			<div class="col-xs-2">
+				2
+			</div>
+			<div class="clearfix"></div>
+		</li>
+		<li>
+			<div class="col-xs-10">
+				<i class="fa fa-chevron-circle-right"></i> <a href="#">Quos dolores et quas molestias excepturi sint occaecati.</a>
+			</div>
+			<div class="col-xs-2">
+				14
+			</div>
+			<div class="clearfix"></div>
+		</li>
+		<li>
+			<div class="col-xs-10">
+				<i class="fa fa-chevron-circle-right"></i> <a href="#">Culpa qui officia deserunt mollitia animi, id estcati.</a>
+			</div>
+			<div class="col-xs-2">
+				38
+			</div>
+			<div class="clearfix"></div>
+		</li>
+		<li>
+			<div class="col-xs-10">
+				<i class="fa fa-chevron-circle-right"></i> <a href="#">Et accusamus et iusto odio dignissimos ducimus qui blanditiis.</a>
+			</div>
+			<div class="col-xs-2">
+				8
+			</div>
+			<div class="clearfix"></div>
+		</li>
+	<!--{/}-->
+	</ul>
+</div>

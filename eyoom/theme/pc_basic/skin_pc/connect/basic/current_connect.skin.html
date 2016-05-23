@@ -1,0 +1,30 @@
+<?php if (!defined('_GNUBOARD_')) exit;?>
+
+<div class="table-list-eb margin-bottom-20">
+    <table class="eb-table eb-table-hover">
+        <thead>
+            <tr>
+		        <th>번호</th>
+		        <th>이름</th>
+		        <th>위치</th>
+            </tr>
+        </thead>
+        <tbody>
+	    	<!--{@ list}-->
+	        <tr>
+	            <td>{.num}</td>
+	            <td><!--{? .mb_id}-->{=eb_nameview('basic', .mb_id, .mb_nick, .mb_email, .mb_homepage)}<!--{:}-->{.name}<!--{/}--></td>
+	            <td class="td-width">
+					<!--{? .lo_url && _is_admin=='super'}-->
+					<a href="{.lo_url}">{.lo_location}</a>
+					<!--{:}-->
+					{.lo_location}
+					<!--{/}-->
+				</td>
+	        </tr>
+			<!--{:}-->
+			<tr><td colspan="3" class="t-center">현재 접속자가 없습니다.</td></tr>
+			<!--{/}-->
+        </tbody>
+    </table>
+</div>

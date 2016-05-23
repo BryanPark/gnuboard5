@@ -1,0 +1,54 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/custom.css" type="text/css" media="screen">',0);
+?>
+
+<div class="memo-view">
+	<div class="headline"><h4><i class="fa fa-envelope-o"></i> {g5.title}</h4></div>
+    <div class="tab-e1">
+        <ul class="nav nav-tabs">
+            <li {? _kind == 'recv'}class="active"{/}><a href="./memo.php?kind=recv">받은쪽지</a></li>
+            <li {? _kind == 'send'}class="active"{/}><a href="./memo.php?kind=send">보낸쪽지</a></li>
+            <li><a href="./memo_form.php">쪽지쓰기</a></li>
+        </ul>
+        <div class="tab-content">
+	        <div class="heading heading-e2"><h4><strong>쪽지 내용</strong></h4></div>
+	        <div class="content-box margin-bottom-10">
+		        <div class="left">
+	                <span><i class="fa fa-user"></i> {_kind_str}사람: </span>
+	                <strong>{=eb_nameview('basic', mb.mb_id, mb.mb_nick, mb.mb_email, mb.mb_homepage)}</strong>
+		        </div>
+		        <div class="right">
+	                <span><i class="fa fa-clock-o"></i> {_kind_date}시간: </span>
+	                <strong>{memo.me_send_datetime}</strong>
+		        </div>
+		        <div class="clear"></div>
+		        <div class="margin-hr-10"></div>
+		        <p>
+		            {=conv_content(memo.me_memo, 0)}
+		        </p>
+	        </div>
+        </div>
+    </div>
+    <div class="t-center">
+		<!--{? _prev_link}-->
+        <a href="{_prev_link}" class="eb-button eb-button-light">이전쪽지</a>
+        <!--{/}-->
+		<!--{? _next_link}-->
+        <a href="{_next_link}" class="eb-button eb-button-light">다음쪽지</a>
+        <!--{/}-->
+		<!--{? _kind == 'recv'}-->
+		<a href="./memo_form.php?me_recv_mb_id={mb.mb_id}&amp;me_id={memo.me_id}" class="eb-button eb-button-red">답장</a>
+		<!--{/}-->
+        <a href="./memo.php?kind={_kind}" class="eb-button eb-button-light">목록보기</a>
+        <button type="button" onclick="window.close();" class="eb-button eb-button-dark">창닫기</button>
+    </div>
+</div>
+
+<style>
+.margin-hr-10 {height:1px;border-top:1px dotted #ddd;margin:10px 0}
+.memo-view {padding:15px}
+.memo-view .content-box {border:1px solid #e5e5e5;padding:10px}
+</style>
+<!--{# tail_sub}-->

@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+/*Statistics List*/
+.statistics-list li:first-child {
+	border-top: none !important;
+}
+
+.statistics-list li {
+	color: #555;
+	font-size: 11px;
+	padding: 6px 0px;
+	display: block;
+	border-top: solid 1px #eee;
+}
+
+.statistics-list li a {
+	color: #555;
+	font-size: 11px;
+	display: block;
+}
+
+.statistics-list li b {
+	color: #555;
+	float: right;
+}

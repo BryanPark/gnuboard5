@@ -12,19 +12,73 @@ if (!defined('_GNUBOARD_')) {exit;}
 # 
 ####################################################
 #
+/*
+function select_ca_bar($ARTI_VOTE_vote_category_list_s, $search_options){
+	global $gr_id;
+	$category_href = G5_BBS_URL.'/group.php?gr_id='.$gr_id;
+	$category_option .= '<nav id = gr_cate>';
+	$category_option .= '<ul id = gr_cate_ul>';
+	$category_option .= '<li><a href="'.$category_href.'"';
+	if ($search_options['sca']=='')
+		$category_option .= ' id="gr_cate_on"';
+	$category_option .= '>전체</a></li>';
+
+	$categories = get_category_list($ARTI_VOTE_vote_category_list_s); // 구분자가 , 로 되어 있음
+	foreach ($categories as $ca) {
+		$category_option .= '<li><a href="'.($category_href."&amp;sca=".urlencode($ca)).'"';
+		$category_msg = '';
+		if ($ca==$search_options['sca']) { // 현재 선택된 카테고리라면
+			$category_option .= ' id="gr_cate_on"';
+			$category_msg = '<span class="sound_only">열린 분류 </span>';
+		}
+		$category_option .= '>'.$category_msg.$ca.'</a></li>';
+	}
+	$category_option .='</ul></nav>';
+	echo $category_option;
+}
+
+function latest_poll_group($max_title_s,$max_row, $max_date ,$search_options, $ARTI_VOTE_vote_category_list_s){
+	#category_list는 DB:g5__piree_program_sam / pgs_cf_1_txt에 위치한다 "A|B|C" 와 같이 '|'로 구분되는 문자열 형태로.
+	select_ca_bar($ARTI_VOTE_vote_category_list_s,$search_options);
+
+	if($search_options['sca']!=''){ //sca가 있으면 이렇게 하구 없으면 저렇게.
+		latest_poll($max_title_s,$max_row, $max_date ,$search_options, $search_options['sca']);
+	}else{
+		$categories = get_category_list($ARTI_VOTE_vote_category_list_s);
+		foreach($categories as $category){
+			latest_poll($max_title_s,$max_row, $max_date ,$search_options, $category);
+		}
+	}
+}
+
 function latest_poll($max_title_s,$max_row, $max_date ,$search_options, $category){
 	#@todo query를 받아야한다.
 	echo "<div class = 'vote_list'>";
-	$sql ="";
-	get_poll_sql($search_options, $sql,$category);
+	$sql = get_poll_sql($search_options,$category);
 	$result = sql_query($sql);
-	//echo "<div><b>[{$row_ca_count['ca_name']}]</b></br>";
+	echo "<b>[$category]</b><br/>";
+
+	//@todo 최신글이 없으면 없다고 표시 후 탈출 
+	if(sql_num_rows($result)==0){echo "게시물이 없습니다";}
+
 	for ($i = 0; ($row = sql_fetch_array($result))&&($i<$max_row) ; $i++) {
+
+		//글이 있으면 진행
+		$options = explode("||",$search_options['sfl']);
+		$is_stx  = ($search_options['stx']!='')?1:0;
+
+		if(in_array("avl_title_s",$options)&&$is_stx){ 
+		//검색어가 있으면 검색어에 해당하는 문자를 bold red 처리한다.
+			$vo_title = search_font($search_options['stx'], $row['avl_title_s']);
+		}else{
+			$vo_title = $row['avl_title_s'];
+		}
+
 		echo "
 		<div class='vote_list item'>
-			<div class vote_list item title>
+			<div class=vote_title>
 			<a href='".G5_BBS_URL."/board.php?bo_table={$row['avl_bo_table']}&wr_id={$row['avl_wr_id']}'>
-				{$row['avl_title_s']}
+				<li>{$vo_title}</li>
 			</a>
 			</div>";
 
@@ -43,24 +97,54 @@ function latest_poll($max_title_s,$max_row, $max_date ,$search_options, $categor
 					</img>";
 				}
 				//@todo 검색된 스트링을 붉은색으로 바꿔야함
-				//
+				if(in_array("avl_poll_x",$options)&&$is_stx){ 
+				//검색어가 있으면 검색어에 해당하는 문자를 bold red 처리한다.
+					$vo_item = search_font($search_options['stx'], $row['avl_poll_' . $x]);
+				}else{
+					$vo_item = $row['avl_poll_' . $x];
+				}
 				echo
-					$row['avl_poll_' . $x] .
+					$vo_item.
 					"</div>";
 			}
 		}
 		echo "</div>";
 	}
-	
+	echo "</div>";
 }
-function get_poll_sql($s_arr, &$sql, $category){//@todo 카피 수정
+function get_poll_sql($s_arr, $category){
+
+	$options = explode("||",$s_arr['sfl']);
 
 	$sql = " select * from g5__piree_770015_vote_list";
 	$sql_stx = "";
 	$sql_cat = "";
+	//echo "s_arr".$s_arr['stx'];
 	if($s_arr['stx']!= ''){
-		$sql_stx .= " and INSTR(LOWER(avl_title_s), LOWER(".$s_arr['stx'].")";
+		$sql_stx .= " and (";
+		foreach($options as $opt){
+			switch ($opt)
+			{
+				case 'avl_title_s':
+					$sql_stx .= " INSTR( LOWER(avl_title_s), LOWER('{$s_arr[stx]}') )";
+					break;
+				case 'avl_poll_x':
+					for($i = 1 ; $i <= 20 ; $i++ ){
+						$sql_stx .= " OR 
+						INSTR( LOWER(avl_poll_{$i}), LOWER('{$s_arr[stx]}') )";
+					}
+					break;
+				default:
+			}
+		}
+		$sql_stx .= ")"; //여러 검색 조건을 묶기 위해서.
+		/*if($s_arr['sfl']==""){
+			$sql_stx .= " and 
+			(
+			INSTR( LOWER(avl_title_s), LOWER('{$s_arr[stx]}') )";
+		}*/
 	}
+
 	if($category != '' && $category!=null){
 		$sql_cat .= " and avl_ca_name = '{$category}'";
 	}
@@ -69,71 +153,6 @@ function get_poll_sql($s_arr, &$sql, $category){//@todo 카피 수정
 	$sql .= $sql_cat;
 
 	return $sql;
-	/*$sql = " select distinct avl_bo_table from g5__piree_770015_vote_list";
-	$result = sql_query($sql);
-	
-	$sql = "select * from (";
-	$sql_ca_count = "select ca_name,count(*) as count from(";
-	$sql_stx = ""; // 검색어 있을시 검색문.
-	if ($stx != '') {
-		$sql_stx .= " and INSTR(LOWER(avl_title_s), LOWER(".$s_arr['stx']).")";
-	}
-	while ($rowss = sql_fetch_array($result)) {
-		//print_r($rowss); @todo 카피 수정
-		$sql .= " select a.*,b.ca_name from `g5__piree_770015_vote_list`";
-		$sql .= " as a left join";
-		$sql .= " `g5_write_{$rowss['avl_bo_table']}` as b on (a.avl_wr_id= b.wr_id)";
-		$sql .= " where ca_name is not null and ca_name !=''";
-		$sql .= $sql_stx;
-		$sql .= " union all ";
-
-		$sql_ca_count .= " select a.*,b.ca_name from `g5__piree_770015_vote_list`";
-		$sql_ca_count .= " as a left join";
-		$sql_ca_count .= " `g5_write_{$rowss['avl_bo_table']}` as b on (a.avl_wr_id= b.wr_id)";
-		$sql_ca_count .= " where ca_name is not null and ca_name !=''";
-		$sql_ca_count .= $sql_stx;
-		$sql_ca_count .= " union all ";
-	}
-	$sql = substr($sql, 0, -10); //맨마지막에 붙는 union all 삭제.
-	$sql .= ")";
-	$sql_ca_count = substr($sql_ca_count, 0, -10);
-	$sql_ca_count .= ")";
-	$sql_ca_count .= " as t group by ca_name order by ca_name, avl_n desc";
-	$sql .= " as t order by ca_name, avl_n desc";
-	$sql2 = $sql_ca_count;
-	*/
 }
 
 
-
-/*
-function get_poll_list(){
-	$sql;
-	$sql2;
-
-	get_poll_query();
-}
-
-function get_poll_query(){
-	#######################################
-	# 여기서 해야 할 일
-	# sql문 생성하건 받아오건 하고.
-	# 일단 기존의 list 형태로 처리하는 방법은
-	# 쿼리 실행하고 패치 한것을 파라미터로 받아서 
-	# 그래 패치 받는데 루프 돌면서 한행, 한행, 한행 받는다.
-	# 그 받는 와중에 list에 넣는데 조금씩 변조해서 넣고
-	# 그 변조된 행들을 받아 넣은 list를 반환한다.
-	# 그러면 형식에 맞게 잘 정리된 테이블 배열이 완성되어 반환 되는 것인데.
-	# 
-	# 1. sql문을 잘 준비한다. => get_sql_poll();
-	# 2. sql문을 실행하고 패치 받아서 변조해서 저장하는 루틴을 만든다.
-	# 3. 2를 전체 쿼리 결과에 대해서 실행 할 수 있게 - 반복하는 루틴을 만든다.
-	# 4. 3이 끝나면 완성된 list가 나오고 이걸 반환한다. 
-	######################################### 
-	
-
-
-
-}
-
-?>
