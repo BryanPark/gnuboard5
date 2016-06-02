@@ -1,0 +1,287 @@
+/*------------------------------------
+ * eyoom
+ * 이윰빌더
+------------------------------------*/
+
+/*------------------------------------
+	Basic Bs
+------------------------------------*/
+.basic-bs-wrap {
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	background: #fff;
+}
+
+.basic-bs .basic-bs-main {
+	background: #fff;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	min-height: 800px;
+}
+
+.basic-bs .left-main {
+	border-right: 1px solid #ddd;
+}
+
+.basic-bs .right-main {
+	border-left: 1px solid #ddd;
+}
+
+.basic-bs .basic-bs-side {
+	margin-top: 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	box-shadow: 0 0 0 1px #ddd;
+	background: #f8f8f8;
+}
+
+.basic-bs .basic-bs-body {
+	padding: 0px;
+	background: #fff;
+}
+
+.basic-bs .list-group i {
+	margin-right: 5px;
+}
+
+@media (max-width: 991px) {
+	.basic-bs .basic-bs-main {
+		min-height: 100px;
+	}
+	.basic-bs .left-main {
+		border-right: 0;
+	}
+	.basic-bs .right-main {
+		border-left: 0;
+	}
+	.basic-bs-side {
+		border-top: 1px solid #ddd;
+		margin-top: 0;
+		padding-top: 20px;
+	}
+}
+
+@media (max-width: 767px) {
+	.basic-bs-wrap {
+		border-left: 0;
+		border-right: 0;
+	}
+}
+
+/*Scrollbar*/
+.contentHolder {
+	padding: 0;
+	height: 320px;
+	margin: 0px auto;
+	overflow: hidden;
+	position: relative;
+	background: #fff;
+}
+
+@media (max-width: 767px) {
+	.contentHolder {
+		height: auto;
+	}
+}
+
+.contentMobile {
+	padding: 0;
+	height: auto;
+	margin: 0px auto;
+	overflow: hidden;
+	position: relative;
+	background: #fff;
+}
+
+.spacer {
+  	text-align: center
+}
+
+/*Panel Title Box*/
+.basic-bs .panel-basic-bs {
+	border: 1px solid #eee;
+	margin-bottom: 0;
+	box-shadow: none;
+}
+.basic-bs .panel-basic-bs.no-bg {
+	background: inherit;
+}
+
+.basic-bs .panel-heading {
+	padding: 7px 15px;
+}
+
+.basic-bs .panel-title {
+	font-size: 16px;
+}
+
+.basic-bs .panel-heading-e1 {
+	color: #555555;
+	border-bottom: solid 3px #f7f7f7;
+}
+
+.basic-bs .panel-title {
+	font-size: 16px;
+}
+
+/*Media*/
+.basic-bs .media.media-v2 {
+	overflow: visible;
+	margin-top: 0;
+	padding: 15px 0 10px 0;
+	border-top: 1px solid #eee;
+}
+
+.basic-bs .media.media-v2:first-child {
+	border-top: none;
+}
+
+.basic-bs .media.media-v2 .media.media-v2 {
+	margin-top: 20px;
+	padding-bottom: 0;
+}
+
+.basic-bs .media.media-v2 img.media-object {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+}
+
+/*Media Body*/
+.basic-bs .media.media-v2 .media-body {
+	overflow: visible;
+}
+
+.basic-bs .media.media-v2 .media-body p {
+	color: #777;
+	line-height: 1.4;
+}
+
+/*Media Heading*/
+.basic-bs .media.media-v2 .media-heading {
+	margin: 0 0 5px;
+	font-size: 13px;
+	position: relative;
+}
+
+.basic-bs .media.media-v2 .media-heading a,
+.basic-bs .media.media-v2 .media-heading a:hover {
+	color: #555;
+}
+
+.basic-bs .media.media-v2 .media-heading strong {
+	padding-right: 5px;
+}
+
+.basic-bs .media.media-v2 .media-heading small {
+	top: 3px;
+	right: 0;
+	color: #999;
+	font-size: 12px;
+	position: absolute;
+}
+
+/*Expand List*/
+.basic-bs i.expand-list {
+	color: #777;
+	padding: 5px;
+	min-width: 20px;
+	font-size: 12px;
+	text-align: center;
+	display: inline-block;
+	border: 1px solid #777;
+}
+
+.basic-bs i.expand-list:hover {
+	color: #999;
+	border-color: #999;
+}
+
+/*Table*/
+.basic-bs .table {
+	background: #fff;
+}
+
+.basic-bs .table > thead > tr > th,
+.basic-bs .table > tbody > tr > th,
+.basic-bs .table > tfoot > tr > th,
+.basic-bs .table > thead > tr > td,
+.basic-bs .table > tbody > tr > td,
+.basic-bs .table > tfoot > tr > td {
+	padding: 11px;
+}
+
+/*Side Accordion
+------------------------------------*/
+.panel-default {
+	box-shadow: none;
+}
+
+.panel-default .panel-basic-bs {
+	border: 0;
+	border-top: solid 1px #fdbdbe;
+}
+
+.panel-default .panel-heading {
+	padding: 0px;
+	border-bottom: 0;
+}
+.panel-default .panel-heading .fa-sort {
+	padding-top: 5px;
+}
+
+@media screen and (max-width: 767px) {
+	.basic-bs .timeline-v2 > li .cbp_tmlabel:after {
+		border-bottom-color: #fff;
+		border-right-color: transparent;
+	}
+}
+
+@media screen (min-width: 768px) and (max-width: 992px) {
+	.basic-bs .timeline-v2 > li .cbp_tmlabel:after {
+		border-bottom-color: #fff;
+		border-right-color: transparent;
+	}
+}
+
+/*Basic Bs Edit*/
+.basic-bs .basic-bs-edit {
+	padding: 20px;
+	background: #fff;
+}
+
+.basic-bs .basic-bs-edit h2 {
+	font-weight: 200;
+}
+
+.basic-bs .basic-bs-edit dt {
+	text-align: inherit;
+}
+
+.basic-bs .basic-bs-edit hr {
+	margin: 17px 0 15px;
+}
+
+/*Tab*/
+.basic-bs .tab-content {
+	padding: 0;
+}
+
+/*Sky Form*/
+.basic-bs .sky-form {
+	border: none;
+}
+
+.basic-bs .sky-form .toggle-change i {
+	left: 180px;
+}
+
+.basic-bs .input-group-btn .btn {
+	font-size: 14px;
+}
+
+/*SyntaxHighlighter*/
+.board-view-con .syntaxhighlighter {
+	border: 1px solid #ddd;
+	padding: 10px 0;
+}

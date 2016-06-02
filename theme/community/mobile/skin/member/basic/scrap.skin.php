@@ -22,6 +22,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
     <?php echo get_paging($config['cf_mobile_pages'], $page, $total_page, "?$qstr&amp;page="); ?>
 
     <div class="win_btn">
-        <button type="button" onclick="window.close();">창닫기</button>
+        <button type="button" onclick="close_click();">뒤로가기</button>
     </div>
 </div>
+
+<script>
+	function close_click(){
+		window.close();
+		window.android.setMessage("close");
+	}
+</script>

@@ -1,0 +1,98 @@
+@charset "utf-8";
+
+/* 설문조사 스킨 */
+.poll .headline span {
+	padding-top: 3px;
+}
+.poll .poll-box {
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 10px;
+	margin-top: -10px;
+}
+.poll .margin-hr-5 {
+	height: 1px;
+	border-top: 1px dotted #ddd;
+	margin: 5px 0;	
+}
+.poll .margin-top-1 {
+	margin-top: -1px;
+}
+.poll .sky-form .radio {
+	font-size: 13px;	
+}
+
+/* 설문조사 결과 (새창) */
+.poll-result {
+	padding: 15px;
+}
+.poll-result .margin-hr-10 {
+	height: 1px;
+	border-top: 1px dotted #ddd;
+	margin: 10px 0px;
+	clear: both;
+}
+.poll-result .service-block-e {
+	padding: 15px;
+	border: 1px solid #eee;
+}
+.poll-result .result-list {
+	margin: 10px 0;
+}
+.poll-result .progress-list {
+	padding: 0 15px;
+}
+.poll-result .etc-box {
+	border: 1px solid #eee;
+	border-bottom: 0;
+}
+.poll-result .etc-list {
+	border-bottom: 1px solid #eee;
+	padding: 10px 15px;
+}
+.poll-result .tab-e1 .tab-content img {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.poll-result .table-responsive {
+	overflow-y: auto;
+}
+
+
+#poll_result {}
+#poll_result section {margin:0 20px 20px;padding:15px;border:1px solid #dde4e9;background:#fff}
+#poll_result .tbl_wrap {margin:0}
+#poll_result h2 {margin:0;padding:20px 0}
+#poll_result a {}
+#poll_result .sv_member,
+#poll_result .sv_guest {font-weight:bold}
+#poll_result_list {margin:0 auto 20px}
+#poll_result_list h2 {text-align:center}
+#poll_result_list dl,
+#poll_result_list dt,
+#poll_result_list dd {margin:0;padding:0}
+#poll_result_list dl {padding-bottom:30px}
+#poll_result_list dt {margin-right:5%;color:#e8180d;text-align:right}
+#poll_result_list ol {margin:0;padding-left:30px}
+#poll_result_list li {margin-top:10px}
+#poll_result_list p {position:relative;margin:0;padding:5px 0}
+#poll_result_list p strong {position:absolute;top:5px;right:5%;padding-right:80px;width:100px;text-align:right}
+#poll_result_list p span {position:absolute;top:5px;right:5%;width:80px;color:#68999c;text-align:right}
+.poll_result_graph {position:relative;margin-right:5%;height:5px;background:#eee}
+.poll_result_graph span {position:absolute;top:0;left:0;height:5px;background:#565e60;font-size:0.1em}
+#poll_result_cmt {}
+#poll_result_cmt h2 {text-align:center}
+#poll_result_cmt h3 {margin:0 0 10px}
+#poll_result_cmt article {margin:0 0 15px;border-bottom:1px solid #eee}
+#poll_result_cmt h1 {position:absolute;margin:0;padding:0;border:0;font-size:0;text-indent:-9999em;line-height:0;overflow:hidden}
+.poll_datetime {display:inline-block;margin-left:10px}
+#poll_result_cmt p {padding:3px 0}
+#poll_result_cmt fieldset {margin-bottom:0;text-align:left}
+#poll_result_cmt fieldset p {margin:0 0 15px;padding:3px 0 0px;text-align:left}
+#poll_result_cmt footer {text-align:right}
+#poll_result_wcmt {margin:0 0 10px}
+.poll_cmt_del a {display:inline-block;padding-bottom:10px}
+#poll_result_oth {margin:0 auto 20px;width:93%}
+#poll_result_oth h2 {padding:0 0 10px}
+#poll_result_oth ul {margin:0;padding:0;list-style:none}
+#poll_result_oth a {display:block;padding:10px 0;border-bottom:1px solid #eee}

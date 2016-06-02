@@ -21,7 +21,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 
     <div class="win_btn">
         <input type="submit" class="btn_submit" value="확인">
-        <button type="button" onclick="window.close();">창닫기</button>
+        <button type="button" onclick="close_click();">창닫기</button>
     </div>
     </form>
 </div>
@@ -43,4 +43,9 @@ $(function() {
     var left = sw / 2 - cw / 2;
     moveTo(left, top);
 });
+
+function close_click(){
+		window.close();
+		window.android.setMessage("close");
+	}
 </script>

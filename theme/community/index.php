@@ -10,9 +10,6 @@ if (G5_IS_MOBILE) {
 include_once(G5_THEME_PATH.'/head.php');
 
 add_javascript('<script src="'.G5_THEME_JS_URL.'/unslider.min.js"></script>', 10);
-add_javascript('<script src="'.G5_THEME_JS_URL.'/tabslide.js"></script>', 10);
-add_stylesheet('<link rel="stylesheet" href="'.G5_THEME_JS_URL.'/tabslide.css">', 0);
-
 ?>
 
 
@@ -54,55 +51,51 @@ $(function() {
     });
 </script>
 
-<div id="tabslide_container"> <!--container for tabslider-->
-	<ul class ="tabs">
-		<li class="active" rel="tab1">최신 게시글</li>
-		<li rel="tab2">자유게시판</li>
-		<li rel="tab3">자유게시판2</li>
-	</ul>
-	<div class = "tab_container">
-		<!-- 최신게시글 -->
-		<div id="tab1" class="new_latest lt_pc tab_content">
-			<strong class="lt_title"><a href="<?php echo G5_BBS_URL ?>/new.php">최신 게시글</a></strong>
-			<?php
-			// new_latest('스킨', '출력라인', '글자수', 'is_comment', cache_minute)
-			echo new_latest('theme/new_latest', 6, 25, false, 5);
-			?>
-			<div class="lt_more"><a href="<?php echo G5_BBS_URL ?>/new.php"><span class="sound_only">최신게시글</span>더보기</a></div>
-		</div>
-		<!-- 최신게시글-->
 
-
-		<div id="tab2" class="lt_pc full_size tab_content">
-			<?php
-			// 이 함수가 바로 최신글을 추출하는 역할을 합니다.
-			// 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
-			// 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
-			echo latest('theme/basic', 'free_board', 6, 25);
-			?>
-		</div>
-		<div id="tab3" class="lt_pc full_size tab_content">
-			<?php
-			// 이 함수가 바로 최신글을 추출하는 역할을 합니다.
-			// 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
-			// 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
-			echo latest('theme/basic', 'free_board2', 6, 25);
-			?>
-		</div>
-		<!--
-		<div class="lt_pc">
-			<?php
-			// 이 함수가 바로 최신글을 추출하는 역할을 합니다.
-			// 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
-			// 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
-			//echo latest('theme/basic', 'gallery2', 6, 25);
-			?>
-		</div>
-		-->
-	</div>
+<!-- 최신게시글 {-->
+<div class="new_latest">
+    <strong class="lt_title"><a href="<?php echo G5_BBS_URL ?>/new.php">최신 게시글</a></strong>
+    <?php
+    // new_latest('스킨', '출력라인', '글자수', 'is_comment', cache_minute)
+    echo new_latest('theme/new_latest', 6, 6, false, 5);
+    ?>
+    <div class="lt_more"><a href="<?php echo G5_BBS_URL ?>/new.php"><span class="sound_only">최신게시글</span>더보기</a></div>
 </div>
+<!-- 최신게시글 }-->
 
 
+<div class="lt_pc lt_ml">
+    <?php
+    // 이 함수가 바로 최신글을 추출하는 역할을 합니다.
+    // 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
+    // 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
+    echo latest('theme/basic', 'free', 6, 25);
+    ?>
+</div>
+<div class="lt_pc">
+    <?php
+    // 이 함수가 바로 최신글을 추출하는 역할을 합니다.
+    // 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
+    // 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
+    echo latest('theme/basic', 'free', 6, 25);
+    ?>
+</div>
+<div class="lt_pc lt_ml">
+    <?php
+    // 이 함수가 바로 최신글을 추출하는 역할을 합니다.
+    // 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
+    // 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
+    echo latest('theme/basic', 'free', 6, 25);
+    ?>
+</div>
+<div class="lt_pc">
+    <?php
+    // 이 함수가 바로 최신글을 추출하는 역할을 합니다.
+    // 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);
+    // 테마의 스킨을 사용하려면 theme/basic 과 같이 지정
+    echo latest('theme/basic', 'free', 6, 25);
+    ?>
+</div>
 
 <div>
     <?php
@@ -114,7 +107,7 @@ $(function() {
             'thumb_height'   => 149,  // 썸네일 height
             'content_length' => 40   // 간단내용 길이
     );
-    echo latest('theme/gallery', 'gallery1', 4, 25, 1, $options);
+    echo latest('theme/gallery', 'gallery', 4, 25, 1, $options);
     ?>
 </div>
 

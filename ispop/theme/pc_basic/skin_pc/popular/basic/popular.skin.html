@@ -1,0 +1,24 @@
+<?php if (!defined('_GNUBOARD_')) exit;?>
+
+<div class="popular">
+	<div class="headline">
+		<h5><i class="fa fa-search"></i> 인기검색어</h5>
+	</div>
+	<section class="popular-box">
+        <ul class="list-unstyled">
+        	<!--{@ list}-->
+            <li>
+            	<a href="{C.G5_BBS_URL}/search.php?sfl=wr_subject&amp;sop=and&amp;stx={=urlencode(.pp_word)}">
+	            	<span class="label label-light">{.pp_word}</span>
+            	</a>
+            </li>
+			<!--{/}-->
+        </ul>
+	</section>
+</div>
+<div class="margin-bottom-20"></div>
+
+<style>
+.popular .popular-box {display:block;overflow:hidden;border:1px solid#ddd;background:#fff;padding:10px 10px 5px}
+.popular li {float:left;margin:0 1px 5px}
+</style>

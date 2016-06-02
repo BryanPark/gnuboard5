@@ -1,0 +1,215 @@
+@charset "utf-8";
+
+/* 멤버스킨 공통 */
+.margin-hr-10 {
+	height: 1px;
+	border-top: 1px dotted #ddd;
+	margin: 10px 0;
+}
+.member-skin .member-box {
+	border: 1px solid #ddd;
+	margin-bottom: 30px;
+}
+.member-skin .sky-form header {
+	padding: 10px 20px;
+	background: #FAFAFA;
+}
+.member-skin .sky-form footer {
+	padding: 10px 20px;
+	text-align: right;
+}
+.member-skin .sky-form fieldset {
+	padding: 0px;
+}
+.member-skin .member-agree {
+	padding: 15px;
+}
+.member-skin .contentHolder {
+	height: 178px;
+}
+.member-skin .fregister-agree label {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+/* 회원가입 입력 */
+.register-form .register-box {
+	border: 1px solid #ddd;
+}
+.register-form .sky-form header {
+	padding: 10px 20px;
+	background: #FAFAFA;
+}
+.register-form .sky-form footer {
+	padding: 10px 20px;
+}
+.register-form .border-top {
+	border-top: 1px solid #ddd;
+}
+.register-form .register-hr {
+	height: 1px;
+	border-top: 1px dotted #ddd;
+	margin: 10px 0;
+}
+
+/* 이메일인증 변경 */
+.register-email {
+	padding: 15px;
+}
+.register-email .tab-e1 .tab-content img {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* 아이디/비밀번호 찾기 */
+.find-info {
+	padding: 15px;
+}
+.find-info .tab-e1 .tab-content img {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* 로그인 */
+.member-login {
+	width: 380px;
+	padding: 20px;
+	margin: 40px auto 20px;
+	background: #fff;
+	border-top: solid 2px #e33334;
+}
+.member-login .sky-form {
+	border: 0;
+}
+.member-login .sky-form fieldset {
+	padding: 0;
+}
+.member-login h2, .member-login p, .member-login p a {
+	color: #777;
+}
+.member-login-header {
+	padding-bottom: 5px;
+	margin-bottom: 30px;
+	border-bottom: solid 1px #eee;
+}
+.member-login-header h2 {
+	font-size: 20px;
+	padding-bottom: 15px;
+	text-align: center;
+	margin-bottom: 15px;
+}
+.main-comeback {
+	text-align: center;
+	margin-top: 0;
+}
+.main-comeback a {
+	color: #fff;
+}
+.member-login-notmb {
+	width: 380px;
+	padding: 20px;
+	margin: 0px auto 20px;
+	background: #fff;
+}
+.member-login-notmb .sky-form {
+	border: 0;
+}
+.member-login-notmb .panel {
+	padding: 10px;
+	border: 1px solid #eee;
+	box-shadow: none;
+	margin-bottom: 10px;
+}
+.member-login-notmb .contentHolder {
+	height: 120px;
+}
+.member-login-order {
+	width: 380px;
+	padding: 20px;
+	margin: 0px auto 20px;
+	background: #fff;
+}
+.member-login-order .sky-form {
+	border: 0;
+}
+.member-login-order .btn {
+	font-size: 14px;
+}
+
+/*For Mobile Devices*/
+@media (max-width: 500px) { 
+	.member-login {
+		width: 280px;
+	}
+	.member-login-notmb {
+		width: 280px;
+	}
+	.member-login-order {
+		width: 280px;
+	}
+}
+
+/* 쪽지 */
+.memo-list {
+	padding: 15px;
+}
+.memo-view {
+	padding: 15px;
+}
+.memo-view .content-box {
+	border: 1px solid #eee;
+	padding: 10px;
+}
+.memo-write {
+	padding: 15px;
+}
+.memo-write .tab-e1 .tab-content img {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.memo-list .table-responsive {
+	overflow-y: auto;
+}
+
+/* 포인트 */
+.point {
+	padding: 15px;
+}
+
+/* 스크랩 */
+.scrap {
+	padding: 15px;
+}
+
+/* 회원 비밀번호 확인 */
+.member-confirm {
+	padding: 15px;
+}
+
+/* 비밀글 비밀번호 확인 */
+.password-confirm {
+	padding: 15px;
+}
+
+/* 폼메일 */
+.formmail {
+	padding: 15px;
+}
+.formmail .tab-e1 .tab-content img {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* 자기소개 */
+.member-profile {
+	padding: 15px;
+}
+.member-profile .tab-e1 .tab-content img {
+	margin-top: 0;
+	margin-bottom: 15;
+}
+.member-profile .member-profile-box {
+	border: 1px solid #ddd;
+	margin-bottom: 10px;
+	padding: 10px 10px 0px;
+}

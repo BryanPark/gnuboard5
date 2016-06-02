@@ -8,10 +8,11 @@ include_once(G5_LIB_PATH.'/poll.lib.php');
 include_once(G5_LIB_PATH.'/visit.lib.php');
 include_once(G5_LIB_PATH.'/connect.lib.php');
 include_once(G5_LIB_PATH.'/popular.lib.php');
+add_javascript('<script src="'.G5_THEME_JS_URL.'/hammer.min.js"></script>', 10);
+add_javascript('<script src="'.G5_THEME_JS_URL.'/jquery.hammer.js"></script>', 10);
 ?>
-
 <header id="hd">
-    <h1 id="hd_h1"><?php echo $g5['title'] ?></h1>
+    <h1 id="hd_h1">webapp.ispop</h1>
 
     <div class="to_content"><a href="#container">본문 바로가기</a></div>
 
@@ -111,7 +112,7 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
             <input type="hidden" name="sfl" value="wr_subject||wr_content">
             <input type="hidden" name="sop" value="and">
             <input type="text" name="stx" id="sch_stx" placeholder=" 검색어(필수)" required class="required" maxlength="20">
-            <input type="submit" value="검색" id="sch_submit">
+            <input type="submit" id="sch_submit" value="검색">
             </form>
 
             <script>
@@ -143,11 +144,11 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
             </script>
         </div>
         <ul id="hd_nb">
-            <li><a href="">메뉴1</a></li>
-            <li><a href="">메뉴2</a></li>
-            <li><a href="">메뉴3</a></li>
-            <li><a href="">메뉴4</a></li>
-            <li><a href="">메뉴5</a></li>
+            <li><a href="<?php echo G5_BBS_URL ?>/new.php">최신 게시글</a></li>
+            <li><a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=issue">핫 이슈</a></li>
+            <li><a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=temp_01">임시 게시판</a></li>
+            <li><a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=gallery">사진 갤러리</a></li>
+            <li><a href="http://www.ispop.kr">ispop</a></li>
         </ul>
     </div>      
 </header>
@@ -155,6 +156,7 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
 <script>
 //사이드 메뉴
 var $btn_side = $("#btn_side"),
+	$side_close = $("#side_close"),
     $side_menu = $("#side_menu"),
     $side_wr = $("#side_menu .side_wr"),
     side_obj = { my : {} },
@@ -177,25 +179,6 @@ function iscroll_loaded() {
         side_obj.my = new IScroll('#isroll_wrap', { bounceTime : 400, mouseWheel: true, click: true, hScroll:false });
     }
 }
-
-$btn_side.on("click", function() {
-    if (!$(this).data('toggle_enable')) {
-        $(this).data('toggle_enable', true);
-        $side_menu.show();
-        $side_wr.animate({"right": "0px"}, 200, function(){
-            iscroll_loaded();
-            height_update($(this));
-        });
-    } else {
-        remove_side_data();
-    }
-});
-
-$(document).on("click", ".side_close", function(e){
-    if ( !$(e.target).closest("#btn_side").length && $btn_side.data('toggle_enable') ){
-        remove_side_data();
-    }
-})
 
 function height_update(target){
     var side_wr_height = target.height();
@@ -242,7 +225,47 @@ $(function (){
         }
     });
 });
+$(document).ready(function(){
+	$btn_side.on("click", function() {
+	    $btn_side.data('toggle_enable', true);
+        $side_menu.show();
+        $side_wr.animate({"right": "0px"}, 200, function(){
+            iscroll_loaded();
+            height_update($(this));
+        });
+	
+});
+$("body").hammer().on("swipeleft",function(){
+	if(!$("#index_slider").data('slider')){
+		$btn_side.data('toggle_enable', true);
+		$side_menu.show();
+		$side_wr.animate({"right": "0px"}, 200, function(){
+		iscroll_loaded();
+		height_update($(this));
+		});
+	}
+	$("#index_slider").data('slider',false);
+	
+});
+
+$("body").hammer().on("swiperight",function(){
+	if(true){
+		remove_side_data();
+	}else{
+
+	}
+});
+
+
+
+$(document).on("click", ".side_close", function(e){
+    if ( !$(e.target).closest("#btn_side").length && $btn_side.data('toggle_enable') ){
+        remove_side_data();
+    }
+})
+});
 </script>
+
 
 
 <hr>

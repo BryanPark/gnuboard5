@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+/*Hot Post*/
+.hot-post .post-photo {
+	overflow: hidden;
+	text-align: center;
+}
+
+.hot-post .post-photo img {
+	-webkit-border-radius: 50% !important;
+	-moz-border-radius: 50% !important;
+	border-radius: 50% !important;
+	width: 35px;
+	height: 35px;
+}
+
+.hot-post .post-photo i {
+	-webkit-border-radius: 50% !important;
+	-moz-border-radius: 50% !important;
+	border-radius: 50% !important;
+	width: 35px;
+	height: 35px;
+	font-size: 24px;
+	line-height: 35px;
+	text-align: center;
+	background: #eee;
+	color: #aaa;
+}
+
+.hot-post .post-photo span {
+	font-size: 12px;
+	letter-spacing: -1px;		
+}
+
+.hot-post .margin-hr-5 {
+	height: 1px;
+	border-top: 1px dotted #ddd;
+	margin: 5px 0;
+}
+
+.hot-post small {
+	color: #999;
+	font-size: 11px;
+	font-style: normal !important;
+}
+.hot-post .hot-ranking {
+	text-align: center;
+}

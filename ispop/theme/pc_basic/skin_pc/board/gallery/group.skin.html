@@ -1,0 +1,47 @@
+<?php if (!defined('_GNUBOARD_')) exit;?>
+
+<div class="basic-bs-body">
+<!--{@ list}-->
+	<!--{? .index_%2==0}-->
+	<div class="row margin-bottom-20">
+	<!--{/}-->
+        <div class="{? .index_%2==0}left{:}right{/}" style="width:350px;">
+			<div class="headline">
+				<h4><a href="{C.G5_BBS_URL}/board.php?bo_table={.bo_table}">{.bo_subject}</a></h4>
+			</div>
+			<div class="ebp-basic">
+				<ul>
+				<!--{@ data}-->
+					<li>
+						<div class="basic-subj left ellipsis">
+							<i class="fa fa-file-text-o {? .new}color-red{/}"></i> <a href="{..href}">{..wr_subject}</a> {? ..wr_comment}<span class="color-red font-size-11">+{=number_format(..wr_comment)}</span>{/}
+						</div>
+						<div class="basic-view right t-right font-size-11 color-grey">
+							{=number_format(..wr_hit)}
+						</div>
+						<div class="clear"></div>
+					</li>
+				<!--{:}-->
+				<p class="t-center">게시물이 없습니다.</p>
+				<!--{/}-->
+				</ul>
+			</div>
+        </div>
+	<!--{? .index_%2==1 || .index_+1 == .size_}-->
+	</div>
+	<div class="margin-bottom-15"></div>
+    <div class="clear-line"></div>
+	<!--{/}-->
+<!--{/}-->
+</div>
+
+<style>
+.ebp-basic {display:block;overflow:hidden}
+.ebp-basic ul {list-style:none;margin:0;padding:0}
+.ebp-basic li {padding:4px 0;border-bottom:1px dotted #ddd}
+.ebp-basic li i {padding-left:2px;padding-right:3px;color:#a4a4aa}
+.ebp-basic li i.color-red {color:#bf1143}
+.ebp-basic li:last-child {border-bottom:0}
+.ebp-basic .basic-subj {width:80%}
+.ebp-basic .basic-view {width:20%}
+</style>

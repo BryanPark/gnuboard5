@@ -78,7 +78,7 @@
 			//===================================================
 			// 기본_설정_첨부__여부
 			// 0 - 안해
-			$is_get__piree_config = 0;
+			$is_get__piree_config = 1;
 
 
 			//===================================================
@@ -117,6 +117,8 @@
 	//=======================================================
 	// 투표_마감__분
 	$atvt_end_date_i = date("i");
+
+	$atvt_end_date_s = date("Y-m-d H:i",strtotime("+7 days")); //기본 시간은 +7일로 설정.
 
 	#########################################################
 	# 끝 => 투표_항목__기본값
@@ -193,12 +195,7 @@
 	{
 
 ?>
-			<div id="vote_write_form" style="display:none;">
 
-					<div class="tbl_frm01 tbl_wrap">
-
-							<table>
-							<tbody>
 							<tr>
 									<th scope="row"><label for="atvt_title_s">투표 제목<strong class="sound_only">필수</strong></label></th>
 									<td><input type="text" name="atvt_title_s" id="atvt_title_s" value="<?php echo $atvt_title_s ?>" class="frm_input" style="width:450px;" maxlength="255"></td>
@@ -337,16 +334,6 @@
 					// 끝 => 반복문
 					//===============================================
 
-?>
-
-							</tbody>
-							</table>
-
-					</div>
-
-</div>
-
-<?php
 
 	}
 	// 끝 => 등록된_투표_항목_수__있으면

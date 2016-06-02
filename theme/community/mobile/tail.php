@@ -18,7 +18,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
             <a href="<?php echo G5_BBS_URL; ?>/content.php?co_id=provision">서비스이용약관</a>
             Copyright &copy; <b>소유하신 도메인.</b> All rights reserved.<a href="#hd" id="ft_totop">상단으로</a>
         </div>
-        <address>TEL. 00-000-0000 FAX. 00-000-0000 서울 강남구 강남대로 1<br />대표:홍길동 사업자등록번호:000-00-00000 개인정보관리책임자:홍길동</address>
+        <address>TEL. 010-6305-1111 FAX. 051-123-4567<br />주소:서울 강남구 강남대로 1 대표:아무개<br />사업자등록번호:000-00-00000 개인정보관리책임자:아무개</address>
 </div>
 
 <?php

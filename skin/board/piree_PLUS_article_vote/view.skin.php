@@ -331,6 +331,7 @@
 					//===============================================
 					// 게시글에_투표__파일
 					include_once( get__sam_file($piree_menu_n, 'vote_view.php') );
+					//echo $piree_menu_n;
 
 			}
 			// 끝 => 투표_번호__있으면

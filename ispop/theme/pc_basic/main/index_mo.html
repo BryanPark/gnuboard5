@@ -1,0 +1,43 @@
+<?php if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가 ?>
+
+<!--{* -----------------------------------------------------
+	최신글 추출옵션에서 title=게시판명, bo_table=게시파id 를 설정합니다.
+------------------------------------------------------ *}-->
+
+<!--{* ----- ebm_image_slider 최신글 영역 시작 ----- *}-->
+<div class="eb-con-box margin-bottom-20">
+	{latest->latest_eyoom('ebm_basic', 'title=실시간 인기글 || bo_table=popularity || count=6 || cut_subject=50')}
+</div>
+<!--{* ----- ebm_image_slider 최신글 영역 끝 ----- *}-->
+
+<!--{* ----- ebm_np_basic 새글 새댓글 최신글 영역 시작 ----- *}-->
+<!--<div class="eb-con-box margin-bottom-20">
+	{latest->latest_newpost('ebm_np_basic','count=6||cut_subject=23||cut_content=23')}
+</div>-->
+<!--{* ----- ebm_np_basic 새글 새댓글 최신글 영역 끝 ----- *}-->
+
+<!--{* ----- ebm_basic 최신글 영역 시작 ----- *}-->
+<div class="eb-con-box margin-bottom-20">
+	{latest->latest_eyoom('ebm_basic', 'title=유머자료 || bo_table=humor || count=6 || cut_subject=50')}
+</div>
+
+<div class="eb-con-box margin-bottom-20">
+	{latest->latest_eyoom('ebm_basic', 'title=유머동영상 || bo_table=humor_video || count=6 || cut_subject=50')}
+</div>
+
+<div class="eb-con-box margin-bottom-20">
+	{latest->latest_eyoom('ebm_basic', 'title=TV클립 || bo_table=broadcast || count=6 || cut_subject=50')}
+</div>
+
+<div class="eb-con-box margin-bottom-20">
+	{latest->latest_eyoom('ebm_basic', 'title=연예클립 || bo_table=starClip || count=6 || cut_subject=50')}
+</div>
+
+<div class="eb-con-box margin-bottom-20">
+	{latest->latest_eyoom('ebm_basic', 'title=스포츠&게임 || bo_table=sportsgame || count=6 || cut_subject=50')}
+</div>
+
+<div class="eb-con-box margin-bottom-20">
+	{latest->latest_eyoom('ebm_basic', 'title=시크릿존 || bo_table=flash || count=6 || cut_subject=50')}
+</div>
+<!--{* ----- ebm_basic 최신글 영역 끝 ----- *}-->

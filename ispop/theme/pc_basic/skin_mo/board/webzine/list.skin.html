@@ -1,0 +1,403 @@
+<?php if (!defined('_GNUBOARD_')) exit;?>
+
+<div class="board-list">
+    <!--{* 게시판 카테고리 시작 *}-->
+    <!--{?_is_category}-->
+	<script>
+	// 카테고리 이동
+	function category_view(sca) {
+		if(sca)	var url = "{_category_href}&sca="+sca;
+		else var url = "{_category_href}";
+		$(location).attr('href',url);
+		return false;
+	}
+	</script>
+    <div class="sky-form">
+	    <section class="left width-50">
+        	<h5 class="margin-top-5 ellipsis"><span class="color-red">{board.bo_subject}</span> 분류</h5>
+	    </section>
+		<section class="right width-50">
+            <label class="select">
+				<select name="ca_name" id="ca_name" required class="form-control" onchange="return category_view(this.value);">
+					<option value="">전체 ({_ca_total})</option>
+					<!--{@ _bocate}-->
+					<option value="{.ca_sca}" {? _decode_sca == .ca_name}selected{/}>{.ca_name} ({.ca_count})</option>
+					<!--{/}-->
+				</select>
+                <i></i>
+            </label>
+        </section>
+        <div class="clear"></div>
+    </div>
+    <div class="margin-hr-0"></div>
+    <!--{/}-->
+    <!--{* 게시판 카테고리 끝 *}-->
+
+    <!--{* 게시판 페이지 정보 및 버튼 시작 *}-->
+    <div class="board-info margin-bottom-10">
+        <div class="left margin-top-5">
+            <span><i class="fa fa-th-list"></i> Total {=number_format(_total_count)}건</span> {_page} 페이지
+        </div>
+		<!--{? _write_href}-->
+		<div class="right">
+	        <!--{?_admin_href}--><a href="{_admin_href}" class="eb-button eb-button-small eb-button-red" type="button"><i class="fa fa-cog"></i> 관리자</a>&nbsp;<!--{/}-->
+	        <!--{?_eyoom_href}--><a href="{_eyoom_href}" class="eb-button eb-button-small eb-button-red" type="button"><i class="fa fa-cogs"></i> 이윰설정</a>&nbsp;<!--{/}-->
+	        <!--{?_write_href}--><a href="{_write_href}" class="eb-button eb-button-small eb-button-dark" type="button"><i class="fa fa-pencil"></i> 글쓰기</a><!--{/}-->
+		</div>
+        <!--{/}-->
+        <div class="clear"></div>
+    </div>
+    <!--{* 게시판 페이지 정보 및 버튼 끝 *}-->
+    
+	<!--{? eyoom_board.bo_use_infinite_scroll == '1'}-->
+    <div class="left">
+        <!--{? _is_checkbox}-->
+        <ul class="list-unstyled board-btn-adm left">
+            <li><button class="eb-button eb-button-small eb-button-red" type="submit" name="btn_submit" value="선택삭제" onclick="document.pressed=this.value">선택삭제</button></li>
+            <li><button class="eb-button eb-button-small eb-button-red" type="submit" name="btn_submit" value="선택복사" onclick="document.pressed=this.value">선택복사</button></li>
+            <li><button class="eb-button eb-button-small eb-button-red" type="submit" name="btn_submit" value="선택이동" onclick="document.pressed=this.value">선택이동</button></li>
+        </ul>
+        <!--{/}-->
+        <span class="left">
+        	<!--{?_rss_href}--><a href="{_rss_href}" class="eb-button eb-button-small eb-button-yellow" type="button"><i class="fa fa-rss"></i></a><!--{/}-->
+			<a href="#" class="eb-button eb-button-small eb-button-dark" data-toggle="modal" data-target=".search-modal"><i class="fa fa-search"></i></a>
+        </span>
+    </div>
+    <div class="clear"></div>
+    <div class="margin-bottom-10"></div>
+    <!--{/}-->
+
+	<!--{? _is_admin}-->
+    <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post" class="sky-form">
+    <input type="hidden" name="bo_table" value="{_bo_table}">
+    <input type="hidden" name="sfl" value="{_sfl}">
+    <input type="hidden" name="stx" value="{_stx}">
+    <input type="hidden" name="spt" value="{_spt}">
+    <input type="hidden" name="sca" value="{_sca}">
+    <input type="hidden" name="page" value="{_page}">
+    <input type="hidden" name="sw" value="">
+	<!--{/}-->
+    <div class="board-gallery">
+        <!--{? _is_checkbox}-->
+        <section>
+            <label class="left" for="chkall">현재 페이지 게시물 전체선택</label>
+            <label class="checkbox left margin-left-10">
+            	<input type="checkbox" id="chkall" onclick="if (this.checked) all_checked(true); else all_checked(false);"><i></i>
+            </label>
+        </section>
+        <div class="margin-bottom-10"></div>
+        <div class="clear"></div>
+        <!--{/}-->
+        <div class="gallery-boxes">
+	    <!--{@ list}-->
+			<!--{? .is_notice}-->
+			<div class="gallery-boxes-in">
+				<div class="gallery-boxes-in2">
+					<div class="gallery-boxes-notice">
+						<p class="margin-bottom-10"><span class="badge badge-e badge-red">알림장</span></p>
+						<div class="margin-hr-10"></div>
+						<p><a href="{.href}" {? wmode}onclick="eb_modal(this.href); return false;"{/}><strong>{.subject}</strong></a></p>
+						<div class="margin-hr-10"></div>
+						<p class="t-right">
+							<i class="fa fa-clock-o"></i> {eb->date_time('Y.m.d',.wr_datetime)}
+			                <!--{? .wr_comment}-->
+			                &nbsp;&nbsp;&nbsp;<i class="fa fa-comments"></i> <span class="color-red">{=number_format(.wr_comment)}</span>
+			                <!--{/}-->
+						</p>
+					</div>
+				</div>
+			</div>
+			<!--{:}-->
+            <div id="list-item-{.wr_id}" class="gallery-boxes-in">
+	            <div class="gallery-boxes-in2">
+		            <div class="gallery-boxes-img">
+		                <a href="{.href}" {? wmode}onclick="eb_modal(this.href); return false;"{/}>
+	                    	<!--{?.icon_new}-->
+							<div class="ribbon">
+	                            <div class="ribbon-bg-yellow">new</div>
+	                        </div>
+	                        <!--{/}-->
+							<!--{? .img_content && !preg_match('/no image/',.img_content)}-->
+							{.img_content}
+							<!--{:}-->
+							<div class="gallery-boxes-noimg">No Image</div>
+							<!--{/}-->
+			                <!--{? _is_checkbox}-->
+			                <div class="check-box">
+								<section>
+					                <label for="chk_wr_id_{.key_}" class="sound_only">{.subject}</label>
+					                <label class="checkbox">
+					                	<input type="checkbox" name="chk_wr_id[]" value="{.wr_id}" id="chk_wr_id_{.key_}"><i></i>
+					                </label>
+								</section>
+			                </div>
+			                <!--{/}-->
+		                </a>
+		            </div>
+	                <div class="gallery-boxes-description">
+	                    <h5 class="ellipsis">
+							<!--{? _wr_id == .wr_id}-->
+							<strong><span class="color-red">열람중 -&nbsp;</span> <a href="{.href}" {? wmode}onclick="eb_modal(this.href); return false;"{/}>{.subject}</a></strong>
+							<!--{:}-->
+			                <a href="{.href}" {? wmode}onclick="eb_modal(this.href); return false;"{/}>{.subject}</a>
+			                <!--{/}-->
+	                    </h5>
+	                    <div class="margin-bottom-5"></div>
+	                    <ul class="list-unstyled gallery-boxes-info">
+			                <li>{=eb_nameview('basic', .mb_id, .wr_name, .email, .homepage)}</li>
+							<!--{? eyoom_board.bo_sel_date_type == '1'}-->
+							<li><i class="fa fa-clock-o"></i> {eb->date_time('Y.m.d',.wr_datetime)}</li>
+							<!--{: eyoom_board.bo_sel_date_type == '2'}-->
+							<li><i class="fa fa-clock-o"></i> {eb->date_format('Y.m.d',.wr_datetime)}</li>
+							<!--{/}-->
+		                    <!--{? .wr_comment}-->
+		                    <li><i class="fa fa-comments"></i> <span class="color-red">{=number_format(.wr_comment)}</span></li>
+		                    <!--{/}-->
+							<!--{? _is_category && .ca_name}-->
+			                <li><i class="fa fa-tags"></i> <a href="{.ca_name_href}">{.ca_name}</a></li>
+			                <!--{/}-->
+			                <li><i class="fa fa-eye"></i> {=number_format(.wr_hit)}</li>
+				            <!--{?_is_good}--><li><i class="fa fa-thumbs-up"></i> {=number_format(.wr_good)}</li><!--{/}-->
+				            <!--{?_is_nogood}--><li><i class="fa fa-thumbs-down"></i> {=number_format(.wr_nogood)}</li><!--{/}-->
+	                    </ul>
+	                    <div class="clear"></div>
+	                    <div class="margin-bottom-5"></div>
+	                    <p class="color-grey">
+		                    {.content}
+		                </p>
+	                </div>
+	            </div>
+            </div>
+            <!--{/}-->
+        <!--{/}-->
+        </div>
+    </div>
+
+    <div class="board-footer">
+	    <div class="left">
+	        <!--{? _is_checkbox}-->
+	        <ul class="list-unstyled board-btn-adm left">
+	            <li><button class="eb-button eb-button-small eb-button-red" type="submit" name="btn_submit" value="선택삭제" onclick="document.pressed=this.value">선택삭제</button></li>
+	            <li><button class="eb-button eb-button-small eb-button-red" type="submit" name="btn_submit" value="선택복사" onclick="document.pressed=this.value">선택복사</button></li>
+	            <li><button class="eb-button eb-button-small eb-button-red" type="submit" name="btn_submit" value="선택이동" onclick="document.pressed=this.value">선택이동</button></li>
+	        </ul>
+	        <!--{/}-->
+	        <span class="left">
+	        	<!--{?_rss_href}--><a href="{_rss_href}" class="eb-button eb-button-small eb-button-yellow" type="button"><i class="fa fa-rss"></i></a><!--{/}-->
+				<a href="#" class="eb-button eb-button-small eb-button-dark" data-toggle="modal" data-target=".search-modal"><i class="fa fa-search"></i></a>
+	        </span>
+	    </div>
+	    <div class="right">
+	        <!--{? _list_href || _write_href}-->
+	        <ul class="list-unstyled board-btn-user">
+	            <!--{? _write_href}--><li><a href="{_write_href}" class="eb-button eb-button-small eb-button-dark" type="button"><i class="fa fa-pencil"></i> 글쓰기</a></li><!--{/}-->
+	        </ul>
+	        <!--{/}-->
+	    </div>
+	    <div class="clear"></div>
+	</div>
+    <!--{? _is_admin}--></form><!--{/}-->
+</div>
+
+<!--{?_is_checkbox}-->
+<noscript>
+<p>자바스크립트를 사용하지 않는 경우<br>별도의 확인 절차 없이 바로 선택삭제 처리하므로 주의하시기 바랍니다.</p>
+</noscript>
+<!--{/}-->
+
+<!--{* 페이지 버튼 *}-->
+<!--{? eyoom_board.bo_use_infinite_scroll != '1'}-->
+{=eb_paging('basic')}
+<!--{:}-->
+<div id="infinite_pagination">
+    <a class="next" href="{C.G5_BBS_URL}/board.php?bo_table={_bo_table}&page={page+1}"></a>
+</div>
+<!--{/}-->
+<div class="margin-bottom-20"></div>
+
+<style>
+.margin-hr-0 {height:1px;border-top:1px dotted #ddd;margin:0 0 10px;clear:both}
+.margin-hr-10 {height:1px;border-top:1px dotted #ddd;margin:10px 0;clear:both}
+.board-list .sky-form .radio i,.board-list .sky-form .checkbox i {top:0}
+.board-list .bo_current {color:#bf1143}
+.board-btn-adm li {float:left;margin-right:5px}
+.board-gallery {padding-bottom:20px}
+.board-gallery .gallery-boxes-in {background:#fff;width:100%}
+.board-gallery .gallery-boxes-in2 {padding:10px 0}
+.board-gallery .gallery-boxes-notice {padding:10px;border:solid 1px #ddd;background:#f8f8f8}
+.board-gallery .gallery-boxes-notice:hover {background:#f8f8f8;border:solid 1px #bbb;box-shadow:none}
+.board-gallery .gallery-boxes-img {position:relative;display:block;max-height:500px;overflow:hidden}
+.board-gallery .gallery-boxes-img img {box-shadow:0 1px 0 #e5e5e5}
+.board-gallery .gallery-boxes-img .check-box{position:absolute;top:8px;right:0}
+.board-gallery .gallery-boxes-img .gallery-boxes-noimg {background:#000;text-align:center;min-height:146px;line-height:146px;font-size:14px;font-weight:bold;color:#74747a}
+.board-gallery .gallery-boxes-description {position:relative;display:block;border:solid 1px #e5e5e5;border-top:0;padding:10px;}
+.board-gallery .gallery-boxes-description h5 a {color:#333}
+.board-gallery .gallery-boxes-description h5 a:hover {color:#bf1143}
+.board-gallery .gallery-boxes-description .check-box {position:relative;display:block;height:17px;margin-top:5px}
+.board-gallery ul.gallery-boxes-info {padding:3px 0}
+.board-gallery ul.gallery-boxes-info li {font-size:11px;float:left;margin-right:5px;}
+.board-gallery ul.gallery-boxes-info li,.board-gallery ul.gallery-boxes-news li a {color:#888}
+.board-gallery .ribbon {position:absolute;top:-1px;left:-1px;overflow:hidden;width:100px;height:100px}
+.board-gallery .ribbon:after,.board-webzine .ribbon:before {position:absolute;z-index:-1;top:2px;left:77px;width:10px;height:10px;content:"";transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-webkit-transform:rotate(-45deg);background-color:rgba(0,0,0,.3)}
+.board-gallery .ribbon:before {top:79px;left:0}
+.board-gallery .ribbon>div {position:relative;z-index:100;top:15px;left:-30px;width:120px;padding:7px 0;transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-webkit-transform:rotate(-45deg);text-align:center;color:#fff}
+.board-gallery .ribbon-bg-yellow {color:#fff;background:#ff9501}
+#infscr-loading {text-align:center;z-index:100;position:absolute;left:50%;bottom:0;width:200px;margin-left:-100px;padding:10px;background:#000;opacity:0.6;color:#fff}
+@media (max-width: 768px) {
+	.modal-dialog {
+	  width: auto;
+	  margin: 3px;
+	}
+}
+</style>
+
+<script type="text/javascript" src="../../../plugins/masonry/jquery.masonry.min.js"></script>
+<!--{? wmode }-->
+<script type="text/javascript" src="../../../plugins/infinite-scroll/jquery.infinitescroll.min.js"></script>
+<!--{/}-->
+<script>
+$(document).ready(function(){
+    var $container = $('.gallery-boxes');
+
+	<!--{? wmode }-->
+	$container.imagesLoaded(function(){
+		$container.masonry({
+			itemSelector : '.gallery-boxes-in'
+		});
+	});
+
+	$container.infinitescroll({
+		navSelector  : "#infinite_pagination",
+		nextSelector : "#infinite_pagination .next",
+		itemSelector : ".gallery-boxes-in",
+		loading: {
+			finishedMsg: 'END',
+			img: '../../../image/loading.gif'
+		}
+	},
+
+	function( newElements ) {
+		var $newElems = $( newElements ).css({ opacity: 0 });
+		$newElems.imagesLoaded(function(){
+			$newElems.animate({ opacity: 1 });
+			$container.masonry( 'appended', $newElems, true );
+		});
+	});
+	<!--{:}-->
+    var gutter = 0;
+    var min_width = 200;
+    $container.imagesLoaded( function(){
+        $container.masonry({
+            itemSelector : '.gallery-boxes-in',
+            gutterWidth: gutter,
+            isAnimated: true,
+              columnWidth: function( containerWidth ) {
+                var box_width = (((containerWidth - 2*gutter)/3) | 0) ;
+
+                if (box_width < min_width) {
+                    box_width = (((containerWidth - gutter)/2) | 0);
+                }
+
+                if (box_width < min_width) {
+                    box_width = containerWidth;
+                }
+
+                $('.gallery-boxes-in').width(box_width);
+
+                return box_width;
+              }
+        });
+    });
+	<!--{/}-->
+});
+
+<!--{? wmode }-->
+function eb_modal(href) {
+	$('.view-iframe-modal').modal('show').on('hidden.bs.modal', function () {
+		$("#view-iframe").attr("src", "");
+	});
+	$('.view-iframe-modal').modal('show').on('shown.bs.modal', function () {
+		$("#view-iframe").attr("src", href);
+		$('#view-iframe').height(parseInt($(window).height() * 0.7));
+	});
+	return false;
+}
+$(document).ready(function () {
+    $(window).resize(function () {
+        $('#view-iframe').height(parseInt($(window).height() * 0.7));
+    });
+    window.closeModal = function(wr_id){
+        $('.view-iframe-modal').modal('hide');
+        if(wr_id) {
+            var w_id = wr_id.split('|');
+            for(var i=0;i<w_id.length;i++) {
+                $("#list-item-"+w_id[i]).hide();
+            }
+        }
+    };
+});
+<!--{/}-->
+</script>
+<!--{?_is_checkbox}-->
+<script>
+function all_checked(sw) {
+    var f = document.fboardlist;
+
+    for (var i=0; i<f.length; i++) {
+        if (f.elements[i].name == "chk_wr_id[]")
+            f.elements[i].checked = sw;
+    }
+}
+
+function fboardlist_submit(f) {
+    var chk_count = 0;
+
+    for (var i=0; i<f.length; i++) {
+        if (f.elements[i].name == "chk_wr_id[]" && f.elements[i].checked)
+            chk_count++;
+    }
+
+    if (!chk_count) {
+        alert(document.pressed + "할 게시물을 하나 이상 선택하세요.");
+        return false;
+    }
+
+    if(document.pressed == "선택복사") {
+        select_copy("copy");
+        return;
+    }
+
+    if(document.pressed == "선택이동") {
+        select_copy("move");
+        return;
+    }
+
+    if(document.pressed == "선택삭제") {
+        if (!confirm("선택한 게시물을 정말 삭제하시겠습니까?\n\n한번 삭제한 자료는 복구할 수 없습니다\n\n답변글이 있는 게시글을 선택하신 경우\n답변글도 선택하셔야 게시글이 삭제됩니다."))
+            return false;
+
+        f.removeAttribute("target");
+        f.action = "./board_list_update.php";
+    }
+
+    return true;
+}
+
+// 선택한 게시물 복사 및 이동
+function select_copy(sw) {
+    var f = document.fboardlist;
+
+    if (sw == "copy")
+        str = "복사";
+    else
+        str = "이동";
+
+    var sub_win = window.open("", "move", "left=50, top=50, width=500, height=550, scrollbars=1");
+
+    f.sw.value = sw;
+    f.target = "move";
+    f.action = "./move.php";
+    f.submit();
+}
+</script>
+<!--{/}-->

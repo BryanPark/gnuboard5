@@ -201,6 +201,46 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
             </td>
         </tr>
 
+		<tr>
+            <th scope="row"><label for="reg_mb_mailling">전체 Push</label></th>
+            <td>
+                <input type="checkbox" name="mb_1" value="1" id="reg_mb_1" <?php echo ($w=='' || $member['mb_1'])?'checked':''; ?> onclick = allCheck(this.checked)>
+                전체 Push를 받겠습니다.
+            </td>
+        </tr>
+
+		<tr>
+            <th scope="row"><label for="reg_mb_mailling">공지사항 Push</label></th>
+            <td>
+                <input type="checkbox" name="mb_2" value="1" id="reg_mb_2" <?php echo ($w=='' || $member['mb_2'])?'checked':''; ?>>
+                공지사항에 대한 Push를 받겠습니다.
+            </td>
+        </tr>
+
+		<tr>
+            <th scope="row"><label for="reg_mb_mailling">이벤트 Push</label></th>
+            <td>
+                <input type="checkbox" name="mb_3" value="1" id="reg_mb_3" <?php echo ($w=='' || $member['mb_3'])?'checked':''; ?>>
+                이벤트 정보 Push를 받겠습니다.
+            </td>
+        </tr>
+
+		<tr>
+            <th scope="row"><label for="reg_mb_mailling">쪽지 Push</label></th>
+            <td>
+                <input type="checkbox" name="mb_4" value="1" id="reg_mb_4" <?php echo ($w=='' || $member['mb_4'])?'checked':''; ?>>
+                쪽지 도착시 Push를 받겠습니다.
+            </td>
+        </tr>
+
+		<tr>
+            <th scope="row"><label for="reg_mb_mailling">댓글 Push</label></th>
+            <td>
+                <input type="checkbox" name="mb_5" value="1" id="reg_mb_5" <?php echo ($w=='' || $member['mb_5'])?'checked':''; ?>>
+                댓글이 달렸을 경우 Push를 받겠습니다.
+            </td>
+        </tr>
+
         <?php if ($config['cf_use_hp']) { ?>
         <tr>
             <th scope="row"><label for="reg_mb_sms">SMS 수신여부</label></th>
@@ -437,5 +477,16 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 
         return true;
     }
+	function allCheck(bool){
+		var obj1 = document.getElementsByName("mb_2");
+		var obj2 = document.getElementsByName("mb_3");
+		var obj3 = document.getElementsByName("mb_4");
+		var obj4 = document.getElementsByName("mb_5");
+		
+		obj1[0].checked = bool;
+		obj2[0].checked = bool;
+		obj3[0].checked = bool;
+		obj4[0].checked = bool;
+	}
     </script>
 </div>

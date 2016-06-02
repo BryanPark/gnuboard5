@@ -21,8 +21,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
                 <input type="checkbox" id="auto_login" name="auto_login" value="1">
                 <label for="auto_login" id="auto_login_label">자동로그인</label>
             </div>
-            <input type="submit" id="ol_submit" value="로그인">
-            <a href="<?php echo G5_BBS_URL ?>/password_lost.php" id="ol_password_lost">정보찾기</a>
+			<input type="submit" id="ol_submit" value="로그인">
+			<a href="<?php echo G5_BBS_URL ?>/password_lost.php" id="ol_password_lost">정보찾기</a>
         </fieldset>
         </form>
     </div>
@@ -61,6 +61,8 @@ $("#auto_login").click(function(){
 
 function fhead_submit(f)
 {
+	// 안드로이드로 로그인이 시작되었다는걸 보내줌.
+	window.android.setMessage("login_start");
     return true;
 }
 </script>

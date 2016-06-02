@@ -1,0 +1,53 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css_mo/style_mo.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css_mo/custom_mo.css" type="text/css" media="screen">',0);
+?>
+
+<div class="scrap">
+	<div class="headline"><h5><i class="fa fa-clipboard"></i> {g5.title}</h5></div>
+    <div class="tab-e1">
+        <ul class="nav nav-tabs">
+            <li class="active"><a>스크랩</a></li>
+        </ul>
+        <div class="tab-content">
+	        <div class="note margin-bottom-10"><strong>스크랩 목록</strong></div>
+			<div class="table-list-eb">
+		        <table class="eb-table eb-table-hover">
+		            <thead>
+		                <tr>
+				            <th>번호</th>
+				            <th>제목</th>
+				            <th><i class="fa fa-times"></i></th>
+		                </tr>
+		            </thead>
+		            <tbody>
+						<!--{@ list}-->
+				        <tr>
+				            <td rowspan="2">{.num}</td>
+				            <td class="bg-color-light2"><a href="{.opener_href_wr_id}" target="_blank" onclick="opener.document.location.href='{.opener_href_wr_id}'; return false;">{.subject}</a></td>
+				            <td class="bg-color-light2"><a href="{.del_href}" onclick="del(this.href); return false;"><i class="fa fa-times"></i></a></td>
+				        </tr>
+				        <tr>
+					        <td colspan="2" class="font-size-11 color-grey">
+						        <a href="{.opener_href}" target="_blank" onclick="opener.document.location.href='{.opener_href}'; return false;">{.bo_subject}</a>&nbsp;&nbsp;
+						        {.ms_datetime}
+					        </td>
+				        </tr>
+						<!--{:}-->
+						<tr><td colspan="5" class="t-center">자료가 없습니다.</td></tr>
+						<!--{/}-->
+		            </tbody>
+		        </table>
+			</div>
+		    {=eb_paging('basic')}
+		    <div class="t-center margin-top-20">
+		        <button type="button" onclick="window.close();" class="eb-button eb-button-dark">창닫기</button>
+		    </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.scrap {padding:15px}
+</style>

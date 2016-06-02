@@ -1,0 +1,65 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/sky-forms/version-2.0.5/css/sky-forms.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css_mo/style_mo.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css_mo/custom_mo.css" type="text/css" media="screen">',0);
+?>
+
+<div class="register-email">
+	<div class="eb-alert eb-alert-danger margin-bottom-20"><i class="fa fa-exclamation-triangle"></i> 메일인증을 받지 못한 경우 회원정보의 메일주소를 변경 할 수 있습니다.</div>
+    <div class="tab-e1">
+        <ul class="nav nav-tabs">
+            <li class="active"><a>이메일 입력</a></li>
+        </ul>
+        <div class="tab-content">
+			<!-- 이메일인증 변경 시작 -->
+			<form method="post" name="fregister_email" action="{C.G5_HTTPS_BBS_URL}/register_email_update.php" onsubmit="return fregister_email_submit(this);" class="sky-form">
+			<input type="hidden" name="mb_id" value="{_mb_id}">
+            <section>
+		        <label for="reg_mb_email" class="label">E-mail<strong class="sound_only">필수</strong></label>
+		        <label class="input">
+		        	<i class="icon-append fa fa-envelope-o"></i>
+		        	<input type="text" name="mb_email" id="reg_mb_email" required size="50" maxlength="100" value="{mb.mb_email}">
+		        </label>
+            </section>
+			<div class="margin-hr-10"></div>
+            <section>
+                <label class="label">자동등록방지</label>
+                <div class="vc-captcha"><!--{=captcha_html()}--></div>
+            </section>
+		    <div class="t-center margin-bottom-20">
+		        <input type="submit" id="btn_submit" value="인증메일변경" class="eb-button eb-button-red">
+		        <button type="button" onclick="window.close();" class="eb-button eb-button-dark">창닫기</button>
+		    </div>
+		    </form>
+			<!-- 이메일인증 변경 끝 -->
+	        <div class="margin-bottom-20"></div>
+	        <div class="t-center">
+	        	<a href="{C.G5_URL}" class="eb-button eb-button-dark">메인으로 돌아가기</a>
+	        </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+.margin-hr-10 {height:1px;border-top:1px dotted #ddd;margin:10px 0}
+.register-email {padding:15px}
+</style>
+
+<script type="text/javascript" src="../../../plugins/sky-forms/version-2.0.5/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../../plugins/sky-forms/version-2.0.5/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="../../../js_mo/newwin_mo.js"></script>
+<!--[if lt IE 9]>
+	<script src="../../../plugins/sky-forms/version-2.0.5/js/sky-forms-ie8.js"></script>
+<![endif]-->
+<script>
+<script>
+function fregister_email_submit(f)
+{
+    <?php echo chk_captcha_js();  ?>
+
+    return true;
+}
+</script>
+<!--{# tail_sub}-->

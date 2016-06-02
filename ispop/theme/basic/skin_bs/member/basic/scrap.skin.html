@@ -1,0 +1,62 @@
+<?php if (!defined('_GNUBOARD_')) exit; 
+
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/bootstrap/css/bootstrap.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/basic_bs.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/colors/default.css" id="style_color" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/custom.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="./style.css" type="text/css" media="screen">',0);
+
+?>
+
+<div class="scrap">
+	
+	<div class="headline"><h4><i class="fa fa-copy"></i> <!--{g5.title}--></h4></div>
+
+    <div class="tab-e1">
+        <ul class="nav nav-tabs">
+            <li class="active"><a>스크랩</a></li>
+        </ul>                
+        <div class="tab-content">
+	        <div class="note margin-bottom-10"><strong>스크랩 목록</strong></div>
+			<!-- 스크랩목록 시작 -->
+			<div class="table-list-eb">
+			    <div class="table-responsive">
+			        <table class="table table-hover sky-form">
+			            <thead>
+			                <tr>
+					            <th>번호</th>
+					            <th>게시판</th>
+					            <th>제목</th>
+					            <th>보관일시</th>
+					            <th>삭제</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+							<!--{@ list}-->
+					        <tr>
+					            <td>{.num}</td>
+					            <td><a href="{.opener_href}" target="_blank" onclick="opener.document.location.href='{.opener_href}'; return false;">{.bo_subject}</a></td>
+					            <td class="td-width"><a href="{.opener_href_wr_id}" target="_blank" onclick="opener.document.location.href='{.opener_href_wr_id}'; return false;">{.subject}</a></td>
+					            <td>{.ms_datetime}</td>
+					            <td><a href="{.del_href}" onclick="del(this.href); return false;">삭제</a></td>
+					        </tr>
+							<!--{:}-->
+							<tr><td colspan="5">자료가 없습니다.</td></tr>
+							<!--{/}-->							
+			            </tbody>
+			        </table>
+			    </div>    
+			</div>			
+			<!-- 스크랩목록 끝 -->
+			
+		    <!--{=eb_paging('basic')}-->
+		
+		    <div class="text-center">
+		        <button type="button" onclick="window.close();" class="btn-e btn-e-dark">창닫기</button>
+		    </div>			
+        </div>
+    </div>
+    
+</div>

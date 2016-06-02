@@ -16,7 +16,7 @@ include_once(G5_THEME_LIB_PATH.'/new_lastest.lib.php');
 
 <!-- 상단 시작 { -->
 <div id="hd">
-    <h1 id="hd_h1"><?php echo $g5['title'] ?></h1>
+    <h1 id="hd_h1">webapp.ispop</h1>
 
     <div id="skip_to_container"><a href="#container">본문 바로가기</a></div>
 
@@ -147,7 +147,6 @@ include_once(G5_THEME_LIB_PATH.'/new_lastest.lib.php');
     </nav>
 </div>
 <!-- } 상단 끝 -->
-
 <hr>
 
 <!-- 콘텐츠 시작 { -->
@@ -158,13 +157,13 @@ include_once(G5_THEME_LIB_PATH.'/new_lastest.lib.php');
     <!-- 사이드메뉴 {-->
     <div id="aside_ct">
         <div class="short_cut">
-            <!--<ul>
+            <ul>
                 <li class="f_short_cut"><strong><a href="#">메뉴 1</a></strong></li>
                 <li><strong><a href="#">메뉴 2</a></strong></li>
                 <li><strong><a href="#">메뉴 3</a></strong></li>
-            </ul>-->
+            </ul>
         </div>
-		<div class="aside_lt">
+        <div class="aside_lt">
             <?php
             // 이 함수가 바로 최신글을 추출하는 역할을 합니다.
             // 사용방법 : latest(스킨, 게시판아이디, 출력라인, 글자수);

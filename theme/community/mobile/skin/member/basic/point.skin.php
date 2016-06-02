@@ -77,5 +77,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 
     <?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, $_SERVER['SCRIPT_NAME'].'?'.$qstr.'&amp;page='); ?>
 
-    <div class="win_btn"><button type="button" onclick="javascript:window.close();">창닫기</button></div>
+    <div class="win_btn">
+        <button type="button" onclick="close_click();">뒤로가기</button>
+    </div>
 </div>
+
+<script>
+	function close_click(){
+		window.close();
+		window.android.setMessage("close");
+	}
+</script>
