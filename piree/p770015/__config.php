@@ -272,7 +272,26 @@
 		# 끝 => 투표_등록_가능__여부
 		#######################################################
 
+		#######################################################
+		# 시작 => 해당 투표 게시물에 이미 사용자가 투표 했는지. // added by BryanPark 2016-06-02
+		#######################################################
+		function get__is_already_voted($mb_id, $bo_table, $wr_id) {
+			global $piree_table;//전역변수.
 
+			if( $mb_id && $mb_id!='' ){ //$mb_id가 있고, 빈 스트링도 아닐 경우.
+				#id로 체크.
+				$sql = "SELECT count(*) FROM `".$piree_table['vote_result']."` WHERE avr_bo_table='".$bo_table."' AND avr_wr_id='".$wr_id."' and avr_mem_id = '".$mb_id."'";
+			}else{ // mb_id가 없다 -> 비회원 -> ip로 투표여부 체크
+				$sql = "SELECT count(*) FROM `".$piree_table['vote_result']."` WHERE avr_bo_table='".$bo_table."' AND avr_wr_id='".$wr_id."' and avr_ip_s = '".$ip."'";
+			}
+			
+			$row = sql_fetch($sql);
+			return $row['count(*)'];
+		}
+
+		#######################################################
+		# 끝 => 해당 투표 게시물에 이미 사용자가 투표 했는지.
+		#######################################################
 
 		#######################################################
 		# 시작 => 이미지_폴더_배열_가져오기

@@ -239,13 +239,29 @@
 
 			//===================================================
 			// 시작 => 투표_가능__하면
+			//added by BryanPark
+			## 맴버일 경우에는 $bo_table, $wr_id, $member 변수를 줘서 result에서 검색해서
+			## 투표 여부를 확인하고 이미 투표한 사람인 경우 결과보기를 disable 함.
+			## $is_possible_vote == 1 이다 => 투표 가능한 레벨의 회원. 즉 비회원 및 저레벨은 해당 X 
+			#아래의 버튼을 $voted_or_not이 값이 있으면 ''로 하고
+			#투표 안했으면 투표할수 있는거니까 클릭시 실행해야할 자바스크립트 관련 attr을 삽입시킨다.
 			IF ($is_possible_vote == 1)
 			{
+				$voted_or_not = get__is_already_voted($member['mb_id'],$bo_table, $wr_id);
+				IF(!$voted_or_not){ // 투표 이미 하지 않았어야만 투표하기 버튼 출력.
 ?>
 					<div class="btn_confirm">
-							<a href="javascript:;" onClick="go__vote_view_page('<?php echo $bo_table; ?>', '<?php echo $wr_id; ?>', 'do_form');" class="btn_cancel">투표하기</a>
+						<a href="javascript:;" onClick='go__vote_view_page("<?=$bo_table?>","<?=$wr_id?>","do_form");' class="btn_cancel"  >투표하기</a>
 					</div>
 <?php
+				}else{
+?>
+					<div class="btn_confirm">
+						<a href="javascript:;" onClick='getElementById("err_msg").style.display="";' class="btn_cancel"  >투표하기</a>
+						<b style="display:none; border: 1px solid cccccc;" id="err_msg">이미 투표하셨습니다</b>
+					</div>
+<?php
+				}
 			}
 			// 끝 => 투표_가능__하면
 			//===================================================
