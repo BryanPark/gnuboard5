@@ -1,8 +1,0 @@
-@charset "utf-8";
-
-.emoticons li {
-	float:left;
-	list-style-type:none;
-	min-height:65px;
-	margin:5px 16px;
-}
