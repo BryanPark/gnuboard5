@@ -122,7 +122,7 @@
 		
 		*/
 
-
+/*
 		// 이윰레벨 설정파일
 		$levelset_config_file = G5_DATA_PATH."/eyoom.levelset.php";
 		if(@file_exists($levelset_config_file)) {
@@ -134,7 +134,7 @@
 		if(@file_exists($levelinfo_config_file)) {
 			@include_once($levelinfo_config_file);
 		}
-
+*/
 		/*  //2016-05-23 회원레벨정보기능만 가져오기 위해서
 
 		// 기본테마가 아니라면 테마 정보 가져오기
@@ -159,7 +159,7 @@
 		}
 		*/
 		// 이윰 common 파일
-		@include_once(EYOOM_PATH.'/common.php');
+		//@include_once(EYOOM_PATH.'/common.php');
 			
 		/* //2016-05-23 회원레벨정보기능만 가져오기 위해서
 		
@@ -212,7 +212,7 @@
 				unset($default['de_shop_layout_use']);
 			}
 		}
-	*/} /*else {
+	}*/ /*else {
 		// 이윰 설정파일이 없으면 설치하기
 		header("location:".EYOOM_URL."/install/");
 		exit;
