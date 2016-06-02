@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+/* 최근게시물 스킨 (new) */
+.table-list-eb .table-responsive {
+	overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+	.table-list-eb .table-responsive {
+		overflow-y: visible;
+	}
+}

@@ -1,0 +1,84 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+
+add_stylesheet('<link rel="stylesheet" href="./style.css" type="text/css" media="screen">',0);
+
+?>
+              
+<div class="panel-group acc-v1" id="accordion-1">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-One">
+                    <i class="fa fa-file-text-o"></i> 새로 등록된 글
+                    <i class="fa fa-sort pull-right"></i>
+                </a>
+            </h4>
+        </div>
+        <div id="collapse-One" class="panel-collapse collapse in">
+            <!--New Post-->
+            <div class="panel panel-basic-bs">
+                <ul {? !C.G5_IS_MOBILE}id="scrollbar"{/} class="list-unstyled{? !C.G5_IS_MOBILE} contentHolder{:} contentMobile{/} margin-bottom-20">
+				<!--{@ write}-->
+                    <li class="new-post">
+						<a href="{.href}">
+							<!--{? photo == 'y'}-->
+							<div class="post-photo"><!--{? .mb_photo}-->{.mb_photo}<!--{:}--><span class="user_icon"><i class="fa fa-user"></i></span><!--{/}--></div>
+							<!--{/}-->
+							<div class="overflow-h">
+								<span class="post-subject">
+									 {.wr_subject}
+								</span>
+								<div class="margin-hr-5"></div>
+								<!--{? content == 'y'}-->
+								<span>
+									<p>{.wr_content}</p>
+								</span>
+								<!--{/}-->
+								<small><strong class="color-black"><i class="fa fa-user"></i> {.mb_nick}</strong></small>
+								<small><i class="fa fa-clock-o"></i> {eb->date_time('Y-m-d H:i',.datetime)}</small>
+								<small><!--{? .wr_comment}--><i class="fa fa-comments color-red"> {.wr_comment}</i><!--{/}--></small>
+								<small><i class="fa fa-eye"></i> {=number_format(.wr_hit)}</small>
+							</div>
+						</a>
+                    </li>
+				<!--{/}-->
+                </ul>
+            </div>
+            <!--End New Post-->
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Two">
+                    <i class="fa fa-comments-o"></i> 새로 등록된 댓글
+                    <i class="fa fa-sort pull-right"></i>
+                </a>
+            </h4>
+        </div>
+        <div id="collapse-Two" class="panel-collapse collapse">
+            <!--New Post-->
+            <div class="panel panel-basic-bs">
+                <ul {? !C.G5_IS_MOBILE}id="scrollbar"{/} class="list-unstyled{? !C.G5_IS_MOBILE} contentHolder{:} contentMobile{/} margin-bottom-20">
+				<!--{@ comment}-->
+                    <li class="new-post">
+						<a href="{.href}">
+							<!--{? photo == 'y'}-->
+							<div class="post-photo"><!--{? .mb_photo}-->{.mb_photo}<!--{:}--><span class="user_icon"><i class="fa fa-user"></i></span><!--{/}--></div>
+							<!--{/}-->
+							<div class="overflow-h">
+								<span>{.wr_subject}</span>
+								<div class="margin-hr-5"></div>
+								<small><strong class="color-dark"><i class="fa fa-user"></i> {.mb_nick}</strong></small>
+								<small><i class="fa fa-clock-o"></i> {eb->date_time('Y-m-d H:i',.datetime)}</small>
+							</div>
+						</a>
+                    </li>
+				<!--{/}-->
+                </ul>
+            </div>
+            <!--End New Post-->
+        </div>
+    </div>
+</div>

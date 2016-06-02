@@ -1,0 +1,23 @@
+<?php if (!defined('_GNUBOARD_')) exit;?>
+
+<!--{? C.G5_IS_MOBILE && config.cf_kakao_js_apikey}-->
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="../../../../../../js/kakaolink.js"></script>
+<script>
+    // 사용할 앱의 Javascript 키를 설정해 주세요.
+    Kakao.init("{config.cf_kakao_js_apikey}");
+</script>
+<!--{/}-->
+
+<div class="eb-social-icon margin-bottom-20">
+	<ul class="board-view-sns">
+		<li class="social-facebook" data-placement="top" data-toggle="tooltip" title="페이스북"><a href="{_facebook_url}" target="_blank">Facebook</a></li>
+        <li class="social-twitter" data-placement="top" data-toggle="tooltip" title="트위터"><a href="{_twitter_url}" target="_blank">Twitter</a></li>
+        <li class="social-google" data-placement="top" data-toggle="tooltip" title="구글+"><a href="{_gplus_url}" target="_blank">Google Plus</a></li>
+	    <!--{? C.G5_IS_MOBILE && config.cf_kakao_js_apikey}-->
+	    <li class="social-kakao" data-placement="top" data-toggle="tooltip" title="카카오톡"><a href="javascript:kakaolink_send('{_sns_msg}', '{_longurl}');">카카오톡</a></li>
+		<!--{/}-->
+	    <li class="social-kakaostory" data-placement="top" data-toggle="tooltip" title="카카오스토리"><a href="{_kakaostory_url}" target="_blank">카카오스토리</a></li>
+	    <li class="social-band" data-placement="top" data-toggle="tooltip" title="밴드"><a href="{_band_url}" target="_blank">밴드</a></li>
+	</ul>
+</div>

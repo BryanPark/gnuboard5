@@ -138,6 +138,8 @@ function get_poll_sql($s_arr, $category){
 			}
 		}
 		$sql_stx .= ")"; //여러 검색 조건을 묶기 위해서.
+
+		/*
 		if($s_arr['sfl']==""){
 			$sql_stx .= " and 
 			(
@@ -154,5 +156,5 @@ function get_poll_sql($s_arr, $category){
 
 	return $sql;
 }
-
+*/
 

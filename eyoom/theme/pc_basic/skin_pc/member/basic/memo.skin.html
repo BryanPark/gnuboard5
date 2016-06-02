@@ -1,0 +1,54 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/custom.css" type="text/css" media="screen">',0);
+?>
+
+<div class="memo-list">
+	<div class="headline"><h4><i class="fa fa-envelope-o"></i> {g5.title}</h4></div>
+    <div class="tab-e1">
+        <ul class="nav nav-tabs">
+            <li {? _kind == 'recv'}class="active"{/}><a href="./memo.php?kind=recv">받은쪽지</a></li>
+            <li {? _kind == 'send'}class="active"{/}><a href="./memo.php?kind=send">보낸쪽지</a></li>
+            <li><a href="./memo_form.php">쪽지쓰기</a></li>
+        </ul>
+        <div class="tab-content">
+	        <div class="eb-alert margin-bottom-10"><strong>전체 {_kind_title}쪽지:</strong> {_total_count}통</div>
+			<div class="table-list-eb">
+		        <table class="eb-table eb-table-hover">
+		            <thead>
+		                <tr>
+				            <th><!--{? _kind == 'recv'}-->보낸사람{:}받는사람<!--{/}--></th>
+				            <th>내용</th>
+				            <th>보낸시간</th>
+				            <th>읽은시간</th>
+				            <th>관리</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+						<!--{@ list}-->
+				        <tr>
+				            <td>{=eb_nameview('basic', .mb_id, .mb_nick, .mb_email, .mb_homepage)}</td>
+				            <td><a href="{.view_href}" class="eb-button eb-button-mini {? .read_datetime == '아직 읽지 않음'}eb-button-red color-white{/}">쪽지 보기</a></td>
+				            <td><a href="{.view_href}">{.send_datetime}</a></td>
+				            <td><a href="{.view_href}">{.read_datetime}</a></td>
+				            <td><a href="{.del_href}" onclick="del(this.href); return false;">삭제</a></td>
+				        </tr>
+				        <!--{:}-->
+				        <tr><td colspan="5" class="t-center">자료가 없습니다.</td></tr>
+						<!--{/}-->
+		            </tbody>
+		        </table>
+			</div>
+        </div>
+    </div>
+    <div class="eb-alert eb-alert-warning margin-bottom-10"><strong>Note:</strong> 쪽지 보관일수는 최장 <strong><!--{config.cf_memo_del}--></strong>일 입니다.</div>
+    <div class="t-center">
+        <button type="eb-button eb-button-dark" onclick="window.close();" class="btn-e btn-e-dark">창닫기</button>
+    </div>
+</div>
+
+<style>
+.memo-list {padding:15px}
+</style>
+<!--{# tail_sub}-->

@@ -1,0 +1,50 @@
+<?php if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가 ?>
+
+<!--{? !_wmode}-->
+				</div><!--//end content-->
+				<!--{? (defined('_INDEX_') && eyoom.use_main_side_layout == 'y') || (!defined('_INDEX_') && eyoom.use_sub_side_layout == 'y')}-->
+				<!--{? eyoom.pos_side_layout == 'right'}-->
+				<div class="side-right">
+					{# side_pc}
+				</div>
+				<!--{/}-->
+				<!--{/}-->
+				<div class="clear"></div>
+			</div><!--//end container-->
+		</div><!--//end eb-body-->
+
+		<div class="copyright">
+			<div class="container">
+				<p class="t-center"><br/>Copyright &copy; {config.cf_title}. All Rights Reserved.<br/></p>
+			</div>
+		</div>
+
+	</div><!--//end wide-layout or boxed-layout-->
+</div><!--//end wrapper-->
+<!--{/}-->
+
+<script type="text/javascript" src="../js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/back-to-top.js"></script>
+<script type="text/javascript" src="../plugins/sky-forms/version-2.0.5/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../plugins/sky-forms/version-2.0.5/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="../plugins/counter/waypoints.min.js"></script>
+<script type="text/javascript" src="../plugins/counter/jquery.counterup.min.js"></script>
+<script type="text/javascript" src="../plugins/owl.carousel/owl-carousel/owl.carousel.min.js"></script>
+<script type="text/javascript" src="../js/jquery.bootstrap-hover-dropdown.min.js"></script>
+<script type="text/javascript" src="../js/jquery.sticky.min.js"></script>
+<script type="text/javascript" src="../js/app.js"></script>
+<script>
+    jQuery(document).ready(function() {
+        App.init();
+        App.initCounter();
+        App.initNavfix();
+        App.initTooltip();
+    });
+</script>
+<!--[if lt IE 9]>
+	<script src="../js/respond.js"></script>
+	<script src="../js/html5shiv.js"></script>
+	<script src="../plugins/sky-forms/version-2.0.5/js/sky-forms-ie8.js"></script>
+<![endif]-->
+<!--{# tail_sub}-->

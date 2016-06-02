@@ -1,0 +1,51 @@
+<?php if (!defined('_GNUBOARD_')) exit;?>
+
+<div class="ebm-notice">
+	<div class="owl-slider-2">
+	<!--{@ loop}-->
+		<div class="item">
+			<div class="notice-subj left ellipsis">
+				<span class="label label-e">알림</span> <a href="{.href}">{.wr_subject}</a>
+			</div>
+			<!--{? .wr_comment}-->
+			<div class="notice-comment right">
+				<span class="color-red font-size-11">+{=number_format(.wr_comment)}&nbsp;</span>
+			</div>
+			<!--{:}-->
+			<div class="notice-comment right">
+				<span class="color-red font-size-11">-&nbsp;</span>
+			</div>
+			<!--{/}-->
+			<div class="clear"></div>
+		</div>
+	<!--{:}-->
+		<div class="item">
+			<div class="notice-subj left ellipsis">
+				<span class="label label-e">알림</span> <a href="#">게시물이 없습니다.</a>
+			</div>
+			<div class="notice-comment right">
+				<span class="color-red font-size-11">-&nbsp;</span>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	<!--{/}-->
+	</div>
+</div>
+
+<style>
+.ebm-notice {display:block;overflow:hidden}
+.ebm-notice .notice-subj {width:83%}
+.ebm-notice .notice-comment {width:17%;text-align:right}
+</style>
+
+<script>
+$(document).ready(function() {
+	$(".owl-slider-2").owlCarousel({
+		autoPlay : 5000,
+		items : [1],
+		itemsDesktop : [1199,1],
+		itemsMobile : [768,1],
+		pagination: false
+	});
+});
+</script>

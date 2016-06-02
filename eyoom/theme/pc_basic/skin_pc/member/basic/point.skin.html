@@ -1,0 +1,72 @@
+<?php if (!defined('_GNUBOARD_')) exit;
+add_stylesheet('<link rel="stylesheet" href="../../../plugins/font-awesome/css/font-awesome.min.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/style.css" type="text/css" media="screen">',0);
+add_stylesheet('<link rel="stylesheet" href="../../../css/custom.css" type="text/css" media="screen">',0);
+?>
+
+<div class="point">
+	<div class="headline"><h4><i class="fa fa-gift"></i> {g5.title}</h4></div>
+    <div class="tab-e1">
+        <ul class="nav nav-tabs">
+            <li class="active"><a>{levelset.gnu_name}</a></li>
+        </ul>
+        <div class="tab-content">
+	        <div class="note margin-bottom-10"><strong>{levelset.gnu_name} 사용내역 목록</strong></div>
+			<!-- {levelset.gnu_name}목록 시작 -->
+			<div class="table-list-eb">
+		        <table class="eb-table eb-table-hover eb-table-bordered">
+		            <thead>
+		                <tr>
+				            <th>일시</th>
+				            <th>내용</th>
+				            <th>만료일</th>
+				            <th>지급{levelset.gnu_name}</th>
+				            <th>사용{levelset.gnu_name}</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+				        <!--{@ list}-->
+				        <tr>
+				            <td>{=substr(.po_datetime,0,16)}</td>
+				            <td>{.po_content}</td>
+				            <td>
+							<!--{? .po_expired == 1}-->
+								만료 {=substr(str_replace('-','',.po_expire_date),2)}
+							<!--{:}-->
+								<!--{? .po_expire_date == '9999-12-31'}&nbsp;{:}{.po_expire_date}{/}-->
+							<!--{/}-->
+				            </td>
+				            <td>{.point1}</td>
+				            <td>{.point2}</td>
+				        </tr>
+						<!--{:}-->
+						<tr><td colspan="5">자료가 없습니다.</td></tr>
+						<!--{/}-->
+		            </tbody>
+			        <tfoot>
+				        <tr>
+				            <th colspan="3">소계</th>
+				            <td>{_sum_point1}</td>
+				            <td>{_sum_point2}</td>
+				        </tr>
+				        <tr>
+				            <th colspan="3">보유{levelset.gnu_name}</th>
+				            <td colspan="2">{=number_format(member.mb_point)}</td>
+				        </tr>
+			        </tfoot>
+		        </table>
+			</div>
+			<!-- {levelset.gnu_name}목록 끝 -->
+			<div class="margin-bottom-20">
+		    	{=eb_paging('basic')}
+			</div>
+		    <div class="t-center">
+		        <button type="button" onclick="window.close();" class="eb-button eb-button-dark">창닫기</button>
+		    </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.point {padding:15px}
+</style>
