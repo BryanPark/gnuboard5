@@ -248,7 +248,8 @@
 			IF ($is_possible_vote == 1)
 			{
 				$voted_or_not = get__is_already_voted($member['mb_id'],$bo_table, $wr_id);
-				IF(!$voted_or_not){ // 투표 이미 하지 않았어야만 투표하기 버튼 출력.
+				$revotable = get__is_revotable($bo_table, $wr_id);
+				IF(!$voted_or_not || $revotable){ // 투표 이미 하지 않았어야만 투표하기 버튼 출력.
 ?>
 					<div class="btn_confirm">
 						<a href="javascript:;" onClick='go__vote_view_page("<?=$bo_table?>","<?=$wr_id?>","do_form");' class="btn_cancel"  >투표하기</a>

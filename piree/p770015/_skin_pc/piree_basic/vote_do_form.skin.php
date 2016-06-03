@@ -161,7 +161,6 @@
 											// 시작 => 반복문
 											FOR ($i=1; $i<=$ARTI_VOTE_vote_item_t; $i++)
 											{
-
 													//===============================
 													// 시작 => 투표항목__또는__이미지__있으면
 													IF ($avl_poll_arr[$i] || $avl_image_arr[$i])
@@ -196,7 +195,8 @@
 															//===========================
 
 ?>
-															<tr class="vote_item">
+															<tr>
+															
 																	<td>
 																	<?php
 
@@ -224,11 +224,11 @@
 																	<?php IF ($avl_image_t > 0) { ?><td><?php IF ($image_in_u) { ?><img src="<?php echo $image_in_u; ?>" border="0" width="110" height="110" align="absmiddle"><?php } ?></td><?php } ?>
 																	<td><label for="atvt_vote_<?php echo $i; ?>"><?php echo $avl_poll_arr[$i]; ?></label></td>
 															</tr>
+															
 <?php
 													}
 													// 끝 => 투표항목__또는__이미지__있으면
 													//===============================
-
 											}
 											// 끝 => 반복문
 											//===================================

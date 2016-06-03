@@ -262,13 +262,13 @@ text-overflow: ellipsis;white-space:nowrap;}
 .vote_view_button { display:block; float:center; width:100px;  margin:0 auto;  text-align:center;
     border: none;
     color: black;
+	padding:5px;
     text-align: center;
     text-decoration: none;
     font-family: "Segoe UI",Arial,sans-serif;
-    font-size: 16px;}
+    font-size: 12px;
+	font-weight:bold;
+	}
 
-.vote_item :hover{
-	border: 1px solid blue;
-}
 
 #wr_use_arti_vote_n {}
