@@ -282,6 +282,7 @@
 				#id로 체크.
 				$sql = "SELECT count(*) FROM `".$piree_table['vote_result']."` WHERE avr_bo_table='".$bo_table."' AND avr_wr_id='".$wr_id."' and avr_mem_id = '".$mb_id."'";
 			}else{ // mb_id가 없다 -> 비회원 -> ip로 투표여부 체크
+				$ip= isset($_SERVER['HTTP_X_FORWARDED_FOR']) ?  $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
 				$sql = "SELECT count(*) FROM `".$piree_table['vote_result']."` WHERE avr_bo_table='".$bo_table."' AND avr_wr_id='".$wr_id."' and avr_ip_s = '".$ip."'";
 			}
 			

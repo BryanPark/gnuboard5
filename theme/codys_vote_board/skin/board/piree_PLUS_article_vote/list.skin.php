@@ -81,7 +81,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 		echo '<div class="list_wrapper">';
 		for ($i=0; $i<count($list); $i++) {
 		?>
-		<div class="list_item_wrapper">
+		<div class="list_item_wrapper">	
 			<!--<div class="title_wrapper">-->
 				<!--Added by BryanPark td_subject가 제목을 받아서 출력하는 부분. 여기에 투표 내용도 추가-->
 				<div class="td_subject">
@@ -153,13 +153,12 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 				</div><!-- end of <div class="vote_info">-->
 				<button type="button" class="vote_view_button" onclick="javascript:location.href= '<?=$list[$i]['href'] ?>'">투표하기</button>
 				<?}?>
-				
+			<!-- end of <a class="list_item_link"> -->	
 			<!--</div>--><!--end of <div class="title_wrapper"> -->
 			<!-- 추천 비추천 사용.
 			<?php if ($is_good) { ?><div class="td_num"><?php echo $list[$i]['wr_good'] ?></div><?php } ?>
 			<?php if ($is_nogood) { ?><div class="td_num"><?php echo $list[$i]['wr_nogood'] ?></div><?php } ?>-->
-			</div><!--end of <div class="list_item_wrapper"> -->
-		
+		</div><!--end of <div class="list_item_wrapper"> -->
 		<?php 
 		} //end of for ($i=0; $i<count($list); $i++) {
 		echo '</div><!--end of <div class="list_wrapper">-->';
