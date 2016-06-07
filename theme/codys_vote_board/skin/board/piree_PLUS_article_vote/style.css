@@ -270,5 +270,8 @@ text-overflow: ellipsis;white-space:nowrap;}
 	font-weight:bold;
 	}
 
+.vote_item{}
 
-#wr_use_arti_vote_n {}
+.emp{background-color:#0099CC;} /*투표 실행화면 각 항목에 hover시*/
+
+.emp_clicked{background-color:#0099CC;} /*투표 실행화면 각 항목에 hover시*/

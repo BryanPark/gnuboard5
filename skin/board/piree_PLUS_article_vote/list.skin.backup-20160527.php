@@ -1,5 +1,4 @@
 <?php
-header("Content-Type: text/html; charset=UTF-8");
 error_reporting(E_ALL); 
 ini_set("display_errors", 1);
 IF (!defined('_GNUBOARD_')) exit; // 개별_페이지__접근_불가
@@ -77,102 +76,135 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 		<input type="hidden" name="page" value="<?php echo $page ?>">
 		<input type="hidden" name="sw" value="">
 
-		<?php
-		echo '<div class="list_wrapper">';
-		for ($i=0; $i<count($list); $i++) {
-		?>
-		<div class="list_item_wrapper">	
-			<!--<div class="title_wrapper">-->
-				<!--Added by BryanPark td_subject가 제목을 받아서 출력하는 부분. 여기에 투표 내용도 추가-->
-				<div class="td_subject">
-					<div class="head_number <?php if ($list[$i]['is_notice']) echo "bo_notice"; ?>">
-						<div class="td_num"><!-- 글 번호 또는 '공지' 출력하는 부분-->
+		<div class="tbl_head01 tbl_wrap">
+				<table>
+				<caption><?php echo $board['bo_subject'] ?> 목록</caption>
+				<thead>
+				<tr>
+						<th scope="col">번호</th>
+						<?php if ($is_checkbox) { ?>
+						<th scope="col">
+								<label for="chkall" class="sound_only">현재 페이지 게시물 전체</label>
+								<input type="checkbox" id="chkall" onclick="if (this.checked) all_checked(true); else all_checked(false);">
+						</th>
+						<?php }?>
+						<th scope="col">제목</th>
+						<th scope="col">글쓴이</th>
+						<th scope="col"><?php echo subject_sort_link('wr_datetime', $qstr2, 1) ?>날짜</a></th>
+						<th scope="col"><?php echo subject_sort_link('wr_hit', $qstr2, 1) ?>조회</a></th>
+						<?php if ($is_good) { ?><th scope="col"><?php echo subject_sort_link('wr_good', $qstr2, 1) ?>추천</a></th><?php } ?>
+						<?php if ($is_nogood) { ?><th scope="col"><?php echo subject_sort_link('wr_nogood', $qstr2, 1) ?>비추천</a></th><?php } ?>
+				</tr>
+				</thead>
+				<tbody>
+
+				<?php
+				FOR ($i=0; $i<count($list); $i++) {
+				 ?>
+				<tr class="<?php if ($list[$i]['is_notice']) echo "bo_notice"; ?>">
+						<td class="td_num">
 						<?php
 						if ($list[$i]['is_notice']) // 공지사항
-								echo '<strong>[공지] </strong>';
+								echo '<strong>공지</strong>';
 						else if ($wr_id == $list[$i]['wr_id'])
 								echo "<span class=\"bo_current\">열람중</span>";
 						else
-								//echo trim($list[$i]['num']);
-						?>
-						</div>
-					</div>
-					<?php 
-					if ($is_checkbox) { ?>
-					<div class="td_chk">
-						<label for="chk_wr_id_<?php echo $i ?>" class="sound_only"><?php echo $list[$i]['subject'] ?></label>
-						<input type="checkbox" name="chk_wr_id[]" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id_<?php echo $i ?>">
-					</div>
-					<?php } 
-					if ($is_category && $list[$i]['ca_name']) { // 카테고리 출력부분?>
-						<div class="td_category">
-							<a href="<?php echo trim($list[$i]['ca_name_href']); ?>" class="bo_cate_link"><?php echo trim($list[$i]['ca_name']); ?>
-							</a>
-						</div>
-					<?php }?>
-					<?php
-					##### 해당 게시물의 투표 제목, 항목 등 가져오기.
-					$sql = " select * from {$piree_table['vote_list']} WHERE avl_bo_table='{$bo_table}' AND avl_wr_id = '{$list[$i]['wr_id']}'";
-					$vote_rows = sql_fetch($sql);
-					?>
-					<div class="title_text">
-						<a href="<?=$list[$i]['href'] ?>">
-							<?php //제목과 아이콘 출력부분.
-							if(!$vote_rows) { //투표가 없으면 게시물 제목 출력
-								echo mb_substr($list[$i]['subject'],0,20,'UTF-8'); // 제목 출력.
-							}else{//투표 제목, 아이콘과 투표 숫자.
-								echo mb_substr($vote_rows['avl_title_s'],0,20,'UTF-8'); //그냥 substr쓰면 깨진다.
-							}
-							?>
-						</a>
-					</div><!-- end of <div class="title_text"> -->
-					<div class='list_item_icons'><?php
-						if ($list[$i]['comment_cnt']) {//댓글 아이콘과 댓글 숫자.
-							echo '<img src="http://gboard.codys.co.kr/gnuboard5/theme/codys_vote_board/skin/board/piree_PLUS_article_vote/img/icon_comments.gif" alt="댓글"><!--only works in vote_skin-->';
-							echo $list[$i]['comment_cnt']; 
-						}
-						IF (isset($list[$i]['icon_reply'])) echo $list[$i]['icon_reply'];
-						IF (isset($list[$i]['icon_new'])) echo $list[$i]['icon_new'];
-						IF (isset($list[$i]['icon_hot'])) echo $list[$i]['icon_hot'];
-						IF (isset($list[$i]['icon_file'])) echo $list[$i]['icon_file'];
-						IF (isset($list[$i]['icon_link'])) echo $list[$i]['icon_link'];
-						IF (isset($list[$i]['icon_secret'])) echo $list[$i]['icon_secret'];
-						?>
-					</div>
-				</div> <!-- end of <div class="td_subject"> -->
-				<?php
-				if($vote_rows){ ?>
-				<div class="vote_info">
-					<div class="time_limit">
-						<img src="http://gboard.codys.co.kr/gnuboard5/theme/codys_vote_board/skin/board/piree_PLUS_article_vote/img/icon_clock.gif" alt="시간"><!--only works in vote_skin--> <b><?=date('Y-m-d',$vote_rows['avl_regi_time_n']);?>~<?=date('Y-m-d',$vote_rows['avl_end_time_n']);?></b>
-					</div>
-					<div class="vote_count">
-						<img src="http://gboard.codys.co.kr/gnuboard5/theme/codys_vote_board/skin/board/piree_PLUS_article_vote/img/icon_vote.gif" alt="투표수"><!--only works in vote_skin-->
-						<b><?=$vote_rows['avl_vote_all_t']?></b>
-					</div>
-				</div><!-- end of <div class="vote_info">-->
-				<button type="button" class="vote_view_button" onclick="javascript:location.href= '<?=$list[$i]['href'] ?>'">투표하기</button>
-				<?}?>
-			<!-- end of <a class="list_item_link"> -->	
-			<!--</div>--><!--end of <div class="title_wrapper"> -->
-			<!-- 추천 비추천 사용.
-			<?php if ($is_good) { ?><div class="td_num"><?php echo $list[$i]['wr_good'] ?></div><?php } ?>
-			<?php if ($is_nogood) { ?><div class="td_num"><?php echo $list[$i]['wr_nogood'] ?></div><?php } ?>-->
-		</div><!--end of <div class="list_item_wrapper"> -->
-		<?php 
-		} //end of for ($i=0; $i<count($list); $i++) {
-		echo '</div><!--end of <div class="list_wrapper">-->';
-		?>
-		
-		<?php 
-		if (count($list) == 0) { 
-			echo '<div><div colspan="'.$colspan.'" class="empty_table">게시물이 없습니다.</div></div>'; 
-		} 
-		?>
+								echo trim($list[$i]['num']);
+						 ?>
+						</td>
+						<?php if ($is_checkbox) { ?>
+						<td class="td_chk">
+								<label for="chk_wr_id_<?php echo $i ?>" class="sound_only"><?php echo $list[$i]['subject'] ?></label>
+								<input type="checkbox" name="chk_wr_id[]" value="<?php echo $list[$i]['wr_id'] ?>" id="chk_wr_id_<?php echo $i ?>">
+						</td>
+						<?php } ?>
+						<!--Added by BryanPark td_subject가 제목을 받아서 출력하는 부분. 여기에 투표 내용도 추가-->
+						<td class="td_subject">
+							<?php
+							##### 해당 게시물의 투표 제목, 항목 등 가져오기.
+							$sql = " select * from {$piree_table['vote_list']} WHERE avl_bo_table='{$bo_table}' 
+									AND avl_wr_id = '{$list[$i]['wr_id']}'";
+							$vote_rows = sql_fetch($sql);
 
 
+							if (!$vote_rows){//투표없는거는 게시물자체만 출력.?>
+								<?php
+								echo $list[$i]['icon_reply'];
+								if ($is_category && $list[$i]['ca_name']) {
+								?>
+									<a href="<?php echo trim($list[$i]['ca_name_href']); ?>" class="bo_cate_link"><?php echo trim($list[$i]['ca_name']); ?></a>
+								<?php } ?>
 
-		
+								<a href="<?php echo $list[$i]['href'] ?>">
+										<?php echo $list[$i]['subject']?>
+										<?php if ($list[$i]['comment_cnt']) { ?>
+										<?php } ?>
+										
+									<?php //아이콘 새글, 파일첨부 등 출력.
+									// if ($list[$i]['link']['count']) { echo '['.$list[$i]['link']['count']}.']'; }
+									// if ($list[$i]['file']['count']) { echo '<'.$list[$i]['file']['count'].'>'; }
+
+									IF (isset($list[$i]['icon_new'])) echo $list[$i]['icon_new'];
+									IF (isset($list[$i]['icon_hot'])) echo $list[$i]['icon_hot'];
+									IF (isset($list[$i]['icon_file'])) echo $list[$i]['icon_file'];
+									IF (isset($list[$i]['icon_link'])) echo $list[$i]['icon_link'];
+									IF (isset($list[$i]['icon_secret'])) echo $list[$i]['icon_secret'];
+									?>
+								</a>
+							<?}else{ //투표 게시물 제목과 정보 출력..?>
+
+									<?php
+									if ($is_category && $list[$i]['ca_name']) {
+									?>
+									<div class="category" style="float:left;vertical-align:center;">
+										<a href="<?php echo $list[$i]['ca_name_href'] ?>" class="bo_cate_link"><?php echo trim($list[$i]['ca_name']); ?></a>
+									</div>
+									<?php }?>
+									<div style="display:inline-block; float:left">
+										<a href="<?php echo $list[$i]['href'] ?>">
+											<?=trim($vote_rows['avl_title_s']);?>
+											<br/>
+											<img src="http://gboard.codys.co.kr/gnuboard5/theme/codys_vote_board/skin/board/piree_PLUS_article_vote/img/icon_clock.gif" alt="시간"><!--only works in vote_skin--> <b><?=date('Y-m-d',$vote_rows['avl_regi_time_n']);?>~<?=date('Y-m-d',$vote_rows['avl_end_time_n']);?></b>
+										</a>
+									</div>
+									
+								<?php
+								/*
+									//최대 20개까지 가능한 투표 보기 항목들중 있는 것들만 뿌려줌.
+									for($x = 1 ; $x<=20; $x++){
+										if($vote_rows['avl_poll_'.$x]){
+											echo "<div class='vote_list_item'>".
+											$vote_rows['avl_poll_'.$x].
+											"</div>";
+										}
+									}
+								*/
+								?>
+							<div class="comment_icon" style="float:left">
+								<?} // 공통적으로 댓글 있을시에 댓글 아이콘 삽입.
+								if ($list[$i]['comment_cnt']) {//댓글 아이콘 삽입.
+									echo '<img src="http://gboard.codys.co.kr/gnuboard5/theme/codys_vote_board/skin/board/piree_PLUS_article_vote/img/icon_comments.gif" alt="댓글"><!--only works in vote_skin-->';
+									echo $list[$i]['comment_cnt']; 
+								}
+								if($vote_rows) {
+									echo '<img src="http://gboard.codys.co.kr/gnuboard5/theme/codys_vote_board/skin/board/piree_PLUS_article_vote/img/icon_vote.gif" alt="투표수"><!--only works in vote_skin-->';
+									echo " <b>".$vote_rows['avl_vote_all_t']."</b>";
+								}
+								?>
+							</div>
+						</td>
+						<td class="td_name sv_use"><?php echo $list[$i]['name'] ?></td>
+						<td class="td_date"><?php echo $list[$i]['datetime2'] ?></td>
+						<td class="td_num"><?php echo $list[$i]['wr_hit'] ?></td>
+						<?php if ($is_good) { ?><td class="td_num"><?php echo $list[$i]['wr_good'] ?></td><?php } ?>
+						<?php if ($is_nogood) { ?><td class="td_num"><?php echo $list[$i]['wr_nogood'] ?></td><?php } ?>
+				</tr>
+				<?php } ?>
+				<?php if (count($list) == 0) { echo '<tr><td colspan="'.$colspan.'" class="empty_table">게시물이 없습니다.</td></tr>'; } ?>
+				</tbody>
+				</table>
+		</div>
+
 		<?php if ($list_href || $is_checkbox || $write_href) { ?>
 		<div class="bo_fx">
 				<?php if ($is_checkbox) { ?>

@@ -192,7 +192,7 @@
 															$graph_width = $avl_per_arr[$i] > 0 ? (int)$avl_per_arr[$i] : 0;
 
 ?>
-															<tr>
+															<tr class="vote_item" id="vote_item_<?=$i?>">
 																	<td><?php echo $i; ?>.</td>
 																	<?php IF ($avl_image_t > 0) { ?><td><?php IF ($image_in_u) { ?><img src="<?php echo $image_in_u; ?>" border="0" align="absmiddle"><?php } ?></td><?php } ?>
 																	<td>
@@ -283,3 +283,14 @@
 
 
 ?>
+
+<script>
+
+		// vote_item 스타일 변화 클릭시, 마우스오버시.
+		$("[id^=vote_item]").mouseenter(function(){
+			$(this).addClass("emp");
+		});
+		$("[id^=vote_item]").mouseleave(function(){
+			$(this).removeClass("emp");
+		});
+</script>

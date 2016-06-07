@@ -412,6 +412,7 @@ $(function() {
 
 		// 이미지 리사이즈
 		$("#bo_v_atc").viewimageresize();
+
 });
 
 function excute_good(href, $el, $tx)

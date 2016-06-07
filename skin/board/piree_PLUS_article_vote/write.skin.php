@@ -65,9 +65,7 @@
 	//=======================================================
 	// 피리_게시글에_투표__설정_정보__가져오기
 	$is_get__article_vote = 1;
-	// 피리_게시글에_투표__ROW_정보__가져오기 added by BryanPark
-	// 이걸 넣어야지 아래의 get__sam_file함수에서 $vote_row를 sql fetch를 통해 설정함.
-	$is_get__article_info = 1;
+
 
 	//=======================================================
 	// 피리_게시글에_투표__설정_정보_파일__경로
@@ -90,11 +88,6 @@
 	#########################################################
 	# 끝 => 보여주기__관련
 	#########################################################
-
-
-
-
-
 
 
 ?>
@@ -189,51 +182,16 @@
 					<?php } ?>
 
 					<?php if ($is_category) { ?>
-					<tr>
+					<tr style="display:none">
 							<th scope="row"><label for="ca_name">분류<strong class="sound_only">필수</strong></label></th>
 							<td>
 									<select name="ca_name" id="ca_name" required class="required" >
-											<option value="">선택하세요</option>
-											<?php echo $category_option ?>
+											<option value="투표">투표</option>
+											<?php //echo $category_option ?>
 									</select>
 							</td>
 					</tr>
 					<?php } ?>
-
-					<tr>
-							<th scope="row"><label for="wr_subject">제목<strong class="sound_only">필수</strong></label></th>
-							<td>
-									<div id="autosave_wrapper">
-											<input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="frm_input required" size="50" maxlength="255">
-											<?php if ($is_member) { // 임시 저장된 글 기능 ?>
-											<script src="<?php echo G5_JS_URL; ?>/autosave.js"></script>
-											<button type="button" id="btn_autosave" class="btn_frmline">임시 저장된 글 (<span id="autosave_count"><?php echo $autosave_count; ?></span>)</button>
-											<div id="autosave_pop">
-													<strong>임시 저장된 글 목록</strong>
-													<div><button type="button" class="autosave_close"><img src="<?php echo $board_skin_url; ?>/img/btn_close.gif" alt="닫기"></button></div>
-													<ul></ul>
-													<div><button type="button" class="autosave_close"><img src="<?php echo $board_skin_url; ?>/img/btn_close.gif" alt="닫기"></button></div>
-											</div>
-											<?php } ?>
-									</div>
-							</td>
-					</tr>
-
-					<tr>
-							<th scope="row"><label for="wr_content">내용<strong class="sound_only">필수</strong></label></th>
-							<td class="wr_content">
-									<?php if($write_min || $write_max) { ?>
-									<!-- 최소/최대 글자 수 사용 시 -->
-									<p id="char_count_desc">이 게시판은 최소 <strong><?php echo $write_min; ?></strong>글자 이상, 최대 <strong><?php echo $write_max; ?></strong>글자 이하까지 글을 쓰실 수 있습니다.</p>
-									<?php } ?>
-									<?php echo $editor_html; // 에디터 사용시는 에디터로, 아니면 textarea 로 노출 ?>
-									<?php if($write_min || $write_max) { ?>
-									<!-- 최소/최대 글자 수 사용 시 -->
-									<div id="char_count_wrap"><span id="char_count"></span>글자</div>
-									<?php } ?>
-							</td>
-					</tr>
-
 <?php
 
 		//*****************************************************
@@ -250,26 +208,17 @@
 		{
 
 				//=================================================
-				//added by BryanPark
 				// 시작 => 등록된_투표_항목_수__있으면
-				// 수정의 경우엔 그 누구도 투표하지 않았고, 투표 기간이 마감되지 않은 경우에만
-				// array $vote_row 가 sql_fetch 받은 배열, avl_vote_all_t -> 총 투표 인원
-				// avl_regi_time_n -> 등록시각 , aval_end_time_n -> 마감시간 , 
-				// last_time_n은 최종 수정일로 추정되나 기록되지 않음
-				// 
-				//echo "[vote_row] : " . $vote_row . "[end]";
-				IF ($ARTI_VOTE_vote_item_t > 0 
-					&& (($vote_row['avl_vote_all_t']==0 && $vote_row['avl_regi_time_n'] < $vote_row['avl_end_time_n'])
-						||$vote_row == null))
-				{//가능한 article vote가 하나 이상 && 이미 등록된 투표의 총득표수가 0 && 이미 등록된 투표가 마감.
+				IF ($ARTI_VOTE_vote_item_t > 0)
+				{
 
 ?>
-					<tr>
-							<th scope="row"><label for="wr_use_arti_vote_n">투표하기<strong class="sound_only">선택</strong></label></th>
+					<tr style="display:none;">
+							<th scope="row" style="display:none; height:0px;"><label for="wr_use_arti_vote_n">투표하기<strong class="sound_only">선택</strong></label></th>
 							<td>
 
 									<div style="line_h_2_4">
-											<input type="checkbox" name="wr_use_arti_vote_n" id="wr_use_arti_vote_n" value="1"<?php	IF ($wr_use_arti_vote_n == 1) { echo " checked"; }	?>> "투표하기" 추가 합니다.
+											<input type="checkbox" style="display:none;" name="wr_use_arti_vote_n" id="wr_use_arti_vote_n" value="1" checked<?php	//IF ($wr_use_arti_vote_n == 1) { echo " checked"; }	?>> <!--"투표하기" 추가 합니다.-->
 <?php
 
 											//===================================
@@ -278,6 +227,7 @@
 
 ?>
 									</div>
+
 							</td>
 					</tr>
 
@@ -286,12 +236,48 @@
 				}
 				// 끝 => 등록된_투표_항목_수__있으면
 				//=================================================
-				
+
 		}
 		// 끝 => 프로그램_정보__있으면
 		//=====================================================
 
 ?>
+					<tr>
+							<th scope="row"><label for="wr_subject">태그<strong class="sound_only">필수</strong></label></th>
+							<td>
+								
+									<div id="autosave_wrapper">
+											<input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="frm_input required" size="50" maxlength="255"><!--
+											<?php if ($is_member) { // 임시 저장된 글 기능 ?>
+											<script src="<?php echo G5_JS_URL; ?>/autosave.js"></script>
+											<button type="button" id="btn_autosave" class="btn_frmline">임시 저장된 글 (<span id="autosave_count"><?php echo $autosave_count; ?></span>)</button>
+											<div id="autosave_pop">
+													<strong>임시 저장된 글 목록</strong>
+													<ul></ul>
+											</div>
+											<?php } ?>-->
+									</div>
+								
+							</td>
+					</tr>
+
+					<tr>
+							<th scope="row"><label for="wr_content">투표 설명<strong class="sound_only">필수</strong></label></th>
+							<td class="wr_content">
+									<?php if($write_min || $write_max) { ?>
+									<!-- 최소/최대 글자 수 사용 시 -->
+									<p id="char_count_desc">이 게시판은 최소 <strong><?php echo $write_min; ?></strong>글자 이상, 최대 <strong><?php echo $write_max; ?></strong>글자 이하까지 글을 쓰실 수 있습니다.</p>
+									<?php } ?>
+									<input type="text" name="wr_content" value="<?php echo $content ?>" id="wr_content" required class="frm_input required" size="50" maxlength="255">
+									<?php //echo $editor_html; // 에디터 사용시는 에디터로, 아니면 textarea 로 노출 ?>
+									<?php if($write_min || $write_max) { ?>
+									<!-- 최소/최대 글자 수 사용 시 -->
+									<div id="char_count_wrap"><span id="char_count"></span>글자</div>
+									<?php } ?>
+							</td>
+					</tr>
+
+
 
 					<?php FOR ($i=1; $is_link && $i<=G5_LINK_COUNT; $i++) { ?>
 					<tr>
@@ -341,7 +327,7 @@
 			var char_max = parseInt(<?php echo $write_max; ?>); // 최대
 			check_byte("wr_content", "char_count");
 
-			$(function() {// $(function() {}); == $('document').ready(function() {});
+			$(function() {
 					$("#wr_content").on("keyup", function() {
 							check_byte("wr_content", "char_count");
 					});
@@ -378,8 +364,9 @@
 							async: false,
 							cache: false,
 							success: function(data, textStatus) {
-									subject = data.subject;
-									content = data.content;
+									subject =   data.subject;
+									content = data.content 
+										;
 							}
 					});
 

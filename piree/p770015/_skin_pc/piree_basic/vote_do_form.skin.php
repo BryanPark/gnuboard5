@@ -79,17 +79,12 @@
 							<caption>⊙ 투표하기 ⊙</caption>
 							<tbody>
 									<tr>
-											<th scope="row">투표 제목</th>
-											<td><strong><?php echo $avl_title_s ?></strong></td>
-									</tr>
-
-									<tr>
-											<th scope="row">투표 마감</th>
-											<td><?php
+											<td><strong>제목 : <?php echo $avl_title_s ?></strong><br>
+<?php
 
 											//===================================
-											// 투표_마감__날짜_시간
-											echo (date("Y년 m월 d일 H시 i분", $avl_end_time_n));
+											// 투표_시작~마감__날짜_시간
+											echo (date("Y.m.d H:i", $avl_start_time_n)." ~ ".date("Y.m.d H:i", $avl_end_time_n));
 
 
 									//=======================================
@@ -103,13 +98,12 @@
 									// 끝 => 투표_마감__되었으면
 									//=======================================
 
-											?></td>
-									</tr>
+											?>
 
-									<tr>
-											<th scope="row">참여 레벨</th>
-											<td>레벨 <?php echo $avl_level_n ?> 이상 투표 가능</td>
-									</tr>
+									<tr><td>
+											
+											<div>레벨 <?php echo $avl_level_n ?> 이상 투표 가능</div>
+									
 
 <?php
 
@@ -118,10 +112,10 @@
 							IF ($avl_vote_do_t > 1)
 							{
 ?>
-									<tr>
-											<th scope="row">1인 투표수</th>
-											<td><?php echo $avl_vote_do_t ?> 표까지 투표할수 있습니다.</td>
-									</tr>
+									
+											
+											<div><?php echo $avl_vote_do_t ?> 표까지 투표할수 있습니다.</div>
+									
 
 <?php
 							}
@@ -134,20 +128,20 @@
 							IF ($avl_re_vote_n == 1)
 							{
 ?>
-									<tr>
-											<th scope="row">재투표</th>
-											<td>재투표할수 있습니다.</td>
-									</tr>
+									
+											
+											<div>재투표할수 있습니다.</div>
+									
 
 <?php
 							}
 							// 끝 => 투표_가능__여부
 							//===========================================
-
 ?>
+									</td></tr>
 
 									<tr>
-											<th scope="row">투표 항목</th>
+											
 											<td>
 
 													<table>
@@ -195,7 +189,7 @@
 															//===========================
 
 ?>
-															<tr>
+															<tr class="vote_item" id="vote_item_<?=$i?>">
 															
 																	<td>
 																	<?php
@@ -267,3 +261,35 @@
 
 
 ?>
+<script>
+
+		// vote_item 스타일 변화 클릭시, 마우스오버시.
+		$("tr[id^=vote_item]").mouseenter(function(){
+			$(this).addClass("emp");
+		});
+		$("tr[id^=vote_item]").mouseleave(function(){
+			$(this).removeClass("emp");
+		});
+
+		// 항목 클릭시에 체크되게. 
+		$("tr[id^=vote_item]").click(function(){ 
+			var checkbox = $(this).children().children(); //해당 tr의 체크박스 선택
+			if(checkbox.is(":checked")){ //체크된 상황이면
+				checkbox.prop('checked',false); //체크를 해제
+				$(this).removeClass("emp_clicked"); //체크시에 설정한 클래스 제거
+				check_vote_multi(checkbox.closest('form')[0] , checkbox  );//다중투표 항목 활성/비활성 함수 호출
+			}else{						//체크안된 상황이면
+				if(!checkbox.is(':disabled')){  // disabled 아닌 경우에만
+					checkbox.prop('checked',true); //체크하고
+					if(checkbox.attr('type') == 'radio'){ //라디오 버튼인 경우에는 
+						$("tr[id^=vote_item]").removeClass("emp_clicked"); //다른 항목들의 스타일을 모두 해제.
+					}
+					$(this).addClass("emp_clicked"); // 해당 항목에 클릭된 항목 스타일 클래스 적용.
+				}
+				check_vote_multi(checkbox.closest('form')[0], checkbox  ); //다중투표 항목 활성/비활성 함수 호출.
+				
+				
+			}
+		});
+
+</script>
