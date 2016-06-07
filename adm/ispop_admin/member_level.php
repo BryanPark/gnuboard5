@@ -1,5 +1,5 @@
 <?php
-//error_reporting(E_ALL);ini_set("display_errors", 1);
+error_reporting(E_ALL);ini_set("display_errors", 1);
 
 
 $sub_menu = '800700';
@@ -12,7 +12,7 @@ auth_check($auth[$sub_menu], "r");
 include_once(ISPOP_CLASS_PATH.'/class.init.php');
 
 
-$g5['title'] = '이윰레벨설정';
+$g5['title'] = '회원레벨설정';
 include_once (G5_ADMIN_PATH.'/admin.head.php');
 
 $frm_submit = '
@@ -21,6 +21,9 @@ $frm_submit = '
     <a href="'.G5_URL.'">메인으로</a>
 </div>
 ';
+echo "어딨니";
+print_r($levelset);
+echo "어딨니";
 ?>
 <link rel="stylesheet" href="./css/ispop_admin.css">
 <!--<form name="fmemberlevel" action="./member_level_update.php" onsubmit="return fmemberlevel_check(this)" method="post">-->
@@ -43,13 +46,13 @@ $frm_submit = '
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="theme">이윰레벨 포인트 명칭</label></th>
+			<th scope="row"><label for="theme">회원레벨 포인트 명칭</label></th>
             <td>
-				<input type="text" name="levelset[ispop_name]" id="levelset[ispop_name]" value="<?php echo $levelset['ispop_name'];?>" style="width:80px;" class="frm_input"> <span class="exp">이윰 레벨을 결정하는 포인트의 명칭을 설정합니다.</span>
+				<input type="text" name="levelset[ispop_name]" id="levelset[ispop_name]" value="<?php echo $levelset['ispop_name'];?>" style="width:80px;" class="frm_input"> <span class="exp">회원 레벨을 결정하는 포인트의 명칭을 설정합니다.</span>
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="theme">이윰레벨 포인트값</label></th>
+			<th scope="row"><label for="theme">회원레벨 포인트값</label></th>
             <td>
 				<div class="inner_titme">커뮤니티 포인트</div>
 				<ul class="ispop_level_point_set">
@@ -92,8 +95,8 @@ $frm_submit = '
 
 <?php
 
-//이윰레벨 기본값 
-// max_use_gnu_level : 이윰레벨로 활용할 그누보드 레벨
+//회원레벨 기본값 
+// max_use_gnu_level : 회원레벨로 활용할 그누보드 레벨
 $mgl = !$_POST['max_use_gnu_level'] ? $levelset['max_use_gnu_level'] : $_POST['max_use_gnu_level'];
 
 $cgl2 = !$_POST['cnt_gnu_level_2'] ? $levelset['cnt_gnu_level_2'] : $_POST['cnt_gnu_level_2'];
@@ -111,7 +114,7 @@ $clr = !$_POST['calc_level_ratio'] ? $levelset['calc_level_ratio'] : $_POST['cal
 ?>
 <a name="calc"></a>
 <section id="anc_scf_info">
-    <h2 class="h2_frm"><b style='color:#f30;'>이윰레벨 설정</b></h2>
+    <h2 class="h2_frm"><b style='color:#f30;'>회원레벨 설정</b></h2>
 
     <div class="tbl_frm01 tbl_wrap">
         <table>
@@ -126,7 +129,7 @@ $clr = !$_POST['calc_level_ratio'] ? $levelset['calc_level_ratio'] : $_POST['cal
             <td>
 				<div style="height:30px;">
 					<span class="level_item">
-						이윰레벨로 사용할 그누레벨 : 
+						회원레벨로 사용할 그누레벨 : 
 						<select name="max_use_gnu_level" id="max_use_gnu_level">
 							<option value="2" <?php if($mgl == '2') echo "selected";?>>2레벨</option>
 							<option value="3" <?php if($mgl == '3') echo "selected";?>>3레벨</option>
@@ -156,7 +159,7 @@ $clr = !$_POST['calc_level_ratio'] ? $levelset['calc_level_ratio'] : $_POST['cal
 						</thead>
 						<tbody>
 						<tr>
-							<th rowspan="10">구간별 이윰레벨 갯수</th>
+							<th rowspan="10">구간별 회원레벨 갯수</th>
 							<th><input type="text" name="cnt_gnu_level_2" id="cnt_gnu_level_2" value="<?php echo $cgl2;?>" class="frm_input" style="width:50px;text-align:right;"></th>
 							<th><input type="text" name="cnt_gnu_level_3" id="cnt_gnu_level_3" value="<?php echo $cgl3;?>" class="frm_input" style="width:50px;text-align:right;"></th>
 							<th><input type="text" name="cnt_gnu_level_4" id="cnt_gnu_level_4" value="<?php echo $cgl4;?>" class="frm_input" style="width:50px;text-align:right;"></th>
@@ -193,8 +196,8 @@ $clr = !$_POST['calc_level_ratio'] ? $levelset['calc_level_ratio'] : $_POST['cal
 					<tr>
 						<th>그누레벨</th>
 						<th>그누레벨 별칭</th>
-						<th>이윰레벨</th>
-						<th>이윰레벨 별칭</th>
+						<th>회원레벨</th>
+						<th>회원레벨 별칭</th>
 						<th>최소 포인트</th>
 						<th>최대 포인트</th>
 						<th>레벨업 포인트</th>
@@ -258,7 +261,7 @@ function calc_ispop_level() {
 }
 function check_cnt_gnu_level(num) {
 	if($("#cnt_gnu_level_"+num).val() == '') {
-		alert("그누 "+num+"레벨 구간에 이윰레벨의 갯수를 설정해 주세요.");
+		alert("그누 "+num+"레벨 구간에 회원레벨의 갯수를 설정해 주세요.");
 		$("#cnt_gnu_level_"+num).focus();
 		return false;
 	}
