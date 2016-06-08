@@ -1,6 +1,6 @@
 <?php
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
-global $level_by_point;
+global $level_by_point,$ispoper;
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">', 0);
@@ -10,7 +10,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$outlogin_skin_url.'/style.css">'
 <section id="ol_after" class="ol">
     <header id="ol_after_hd">
         <h2>나의 회원정보</h2>
-        <strong><?php echo $nick ?>님 [레벨 : <?=$level_by_point?>]</strong>
+        <strong><?php echo $nick ?>님 [레벨 : <?=level_icon($member['mb_id']);?>]</strong>
         <?php if ($is_admin == 'super' || $is_auth) { ?>
         <a href="<?php echo G5_ADMIN_URL ?>" class="btn_admin">관리자 모드</a>
         <?php } else { ?>

@@ -491,7 +491,6 @@ class ispop extends qfile
 		}
 	}
 
-
 	// 이윰레벨에서 최종 조정된 그누레벨 가져오기
 	public function get_gnu_level($level,$mb_level) {
 		$_level = $this->get_gnulevel_from_ispoplevel($level);

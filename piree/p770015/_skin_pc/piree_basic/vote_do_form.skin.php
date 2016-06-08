@@ -76,12 +76,11 @@
 							<table>
 									<col class="td_left_100">
 									<col>
-							<caption>⊙ 투표하기 ⊙</caption>
+							<caption>⊙ <?php echo $avl_title_s ?> ⊙</caption>
 							<tbody>
 									<tr>
-											<td><strong>제목 : <?php echo $avl_title_s ?></strong><br>
+											<td>
 <?php
-
 											//===================================
 											// 투표_시작~마감__날짜_시간
 											echo (date("Y.m.d H:i", $avl_start_time_n)." ~ ".date("Y.m.d H:i", $avl_end_time_n));
@@ -215,7 +214,7 @@
 																	//=======================
 
 																	?></td>
-																	<?php IF ($avl_image_t > 0) { ?><td><?php IF ($image_in_u) { ?><img src="<?php echo $image_in_u; ?>" border="0" width="110" height="110" align="absmiddle"><?php } ?></td><?php } ?>
+																	<?php IF ($avl_image_t > 0) { ?><td><?php IF ($image_in_u) { ?><img src="<?php echo $image_in_u; ?>" border="0" width="110" align="absmiddle"><?php } ?></td><?php } ?>
 																	<td><label for="atvt_vote_<?php echo $i; ?>"><?php echo $avl_poll_arr[$i]; ?></label></td>
 															</tr>
 															

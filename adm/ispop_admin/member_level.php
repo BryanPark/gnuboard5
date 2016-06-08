@@ -146,7 +146,9 @@ $clr = !$_POST['calc_level_ratio'] ? $levelset['calc_level_ratio'] : $_POST['cal
 						$cgl = $$cgl_varname;
 						for($j=0;$j<$cgl;$j++) {
 							$min = $max;
-							$max = $min + $clp*$clr*$level/100;
+							//$max = $min + $clp*$clr*$level/100;단순증가에서 기하급수로.
+							$max = $min + $clp*pow($clr/100,$level);
+							
 					?>
 					<tr>
 						<?php if($j==0) {?>

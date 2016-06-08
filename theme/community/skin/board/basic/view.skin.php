@@ -23,7 +23,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
     <section id="bo_v_info">
         <h2>페이지 정보</h2>
-        작성자 <strong><?php echo $view['name'] ?><?php if ($is_ip_view) { echo "&nbsp;($ip)"; } ?></strong>
+        작성자 <strong><?=level_icon($view[mb_id])?> <?php echo $view['name'] ?><?php if ($is_ip_view) { echo "&nbsp;($ip)"; } ?></strong>
         <span class="sound_only">작성일</span><strong><?php echo date("y-m-d H:i", strtotime($view['wr_datetime'])) ?></strong>
         조회<strong><?php echo number_format($view['wr_hit']) ?>회</strong>
         댓글<strong><?php echo number_format($view['wr_comment']) ?>건</strong>

@@ -11,6 +11,7 @@
 /* 투표_보기__레이어 */
 #article_vote_view { }
 #article_vote_out { margin-bottom:30px; padding:4px 18px 10px 18px; border:2px solid #e5e8ec; }
+#article_vote_out .tbl_wrap caption{font-size:1.4em; text-align:center;}
 
 .vote_area { width:100%; background:#f5f5f5; }
 
@@ -22,6 +23,10 @@
 
 
 /* 투표_결과__레이어 */
-.vote_result_desc ( width:400px; background:#f5f5f5; line-height:2.4em; )
+.vote_result_desc { width:400px; background:#f5f5f5; line-height:2.4em; }
 .vote_result_graph { position:relative; height:5px; background:#eee; }
 .vote_result_graph span { position:absolute; top:0; left:0; height:5px; background:#565e60; font-size:0.1em; }
+
+.tbl_frm01.tbl_wrap th{min-width:60px}
+
+

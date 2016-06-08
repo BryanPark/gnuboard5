@@ -57,15 +57,43 @@ global $levelset,$ispoper;
 $ispoper = array();
 if($member['mb_id']) {
 	//get_user_info => 그누보드의 id 정보를 global ispoper에입력.
-	$ispoper = $eb->get_user_info($member['mb_id']);
-	
+	$ispoper = $member;
 	//get_ispop_level => gnuboard point로 계산해서 레벨(최대105)을 return.
 	$level_by_point = $eb->get_ispop_level($member['mb_point'],$member['mb_level']);
 	
 	// 그누레벨 자동조정 - 회원레벨설정(최대105)에 맞는 그누보드레벨이 업데이트됨.
 	//ex)$level_by_point == 43 이면 g5_member DB의 mb_level이 7로 update. 
-	if(!$is_admin && $member['mb_level'] <= $levelset['max_use_gnu_level']) $eb->set_gnu_level($level_by_point);
+	//if(!$is_admin && $member['mb_level'] <= $levelset['max_use_gnu_level']) $eb->set_gnu_level($level_by_point);
 }
+
+//포인트별 아이콘 부여 
+function level_icon($mb_id) {
+	global $eb,$g5;
+
+	$sql = "select mb_point, mb_level, mb_id from ". $g5['member_table'] ." where mb_id='{$mb_id}'"; 
+	$result = sql_query($sql); 
+	$data = sql_fetch_array($result); 
+
+	$is_admin = is_admin($mb_id); 
+	$ic_point = $data['mb_point']; 
+	$ic_mb_id = $data['mb_id'];//특정회원 지정아이콘 
+	$ic_mb_level = $data['mb_level'];
+
+	$icon_level = $eb->get_ispop_level($ic_point,$ic_mb_level);
+	if($is_admin == 'super') //최고 관리자 아이콘 
+			  {$icon_level =  "<img src='".G5_URL."/img/level_/sp.gif' align=absmiddle>";} 
+	else if(!$ic_point) //비회원 아이콘 
+			  {$icon_level =  "<img src='".G5_URL."/img/level_/guest.gif' align=absmiddle>";} 
+	else //회원아이콘
+			  {$icon_level =  "<img src='".G5_URL."/img/level_/".$icon_level.".gif' align=absmiddle>";} 
+
+	return $icon_level;
+} 
+
+
+
+
+
 
 	
 /*

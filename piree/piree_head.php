@@ -75,8 +75,10 @@
 	// SCPRIT__상수
 ?>
 
-			<script src="<?php echo PIREE_JS_URL ?>/pi__piree.js"></script>
-			<script src="<?php echo PIREE_JS_URL ?>/jquery.autogrow.js"></script>
+			<?php 
+			add_javascript('<script src="'.PIREE_JS_URL.'/pi__piree.js"></script>');
+			add_javascript('<script src="'.PIREE_JS_URL.'/jquery.autogrow.js"></script>');
+			?>
 
 
 			<script>

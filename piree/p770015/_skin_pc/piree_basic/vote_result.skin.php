@@ -87,12 +87,8 @@
 							<table>
 									<col class="td_left_100">
 									<col>
-							<caption>⊙ 투표 결과 보기 ⊙</caption>
+							<caption>⊙ <?php echo $avl_title_s ?> ⊙</caption>
 							<tbody>
-									<tr>
-											<th scope="row">투표 제목</th>
-											<td><strong><?php echo $avl_title_s ?></strong></td>
-									</tr>
 
 									<tr>
 											<th scope="row">투표 마감</th>
@@ -100,7 +96,7 @@
 
 											//===================================
 											// 투표_마감__날짜_시간
-											echo (date("Y년 m월 d일 H시 i분", $avl_end_time_n));
+											echo (date("Y년 m월 d일 H시 i분까지", $avl_end_time_n));
 
 
 									//=======================================
@@ -170,7 +166,8 @@
 																	$image_in_a = get_vote_image_info($bo_table, $wr_id);
 
 																	// 이미지__URL
-																	$image_in_u = $image_in_a['url'].'/'.thumbnail($avl_image_arr[$i], $image_in_a['path'], $image_in_a['path'], 110, 110, false);
+																	$image_in_u = $image_in_a['url'].'/'.thumbnail($avl_image_arr[$i], $image_in_a['path'], $image_in_a['path'], 110, 110, true);
+																	//echo $image_in_u;
 
 															}
 															ELSE
@@ -194,7 +191,7 @@
 ?>
 															<tr class="vote_item" id="vote_item_<?=$i?>">
 																	<td><?php echo $i; ?>.</td>
-																	<?php IF ($avl_image_t > 0) { ?><td><?php IF ($image_in_u) { ?><img src="<?php echo $image_in_u; ?>" border="0" align="absmiddle"><?php } ?></td><?php } ?>
+																	<?php IF ($avl_image_t > 0) { ?><td><?php IF ($image_in_u) { ?><img src="<?php echo $image_in_u; ?>" border="0" align="absmiddle" width="110px"><?php } ?></td><?php } ?>
 																	<td>
 																			<dl style="width:380px; line-height:2.4em;">
 																					<?php IF ($avl_poll_arr[$i]) { ?><dt><strong><?php echo $avl_poll_arr[$i]; ?></strong></dt><?php } ?>
