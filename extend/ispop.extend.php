@@ -46,6 +46,27 @@
 		}
 	}
 
+
+
+
+####필요한 변수
+include_once(ISPOP_CLASS_PATH.'/class.init.php');
+global $levelset,$ispoper;
+
+##### 포인트에 따른 레벨 조정
+$ispoper = array();
+if($member['mb_id']) {
+	//get_user_info => 그누보드의 id 정보를 global ispoper에입력.
+	$ispoper = $eb->get_user_info($member['mb_id']);
+	
+	//get_ispop_level => gnuboard point로 계산해서 레벨(최대105)을 return.
+	$level_by_point = $eb->get_ispop_level($member['mb_point'],$member['mb_level']);
+	
+	// 그누레벨 자동조정 - 회원레벨설정(최대105)에 맞는 그누보드레벨이 업데이트됨.
+	//ex)$level_by_point == 43 이면 g5_member DB의 mb_level이 7로 update. 
+	if(!$is_admin && $member['mb_level'] <= $levelset['max_use_gnu_level']) $eb->set_gnu_level($level_by_point);
+}
+
 	
 /*
 	if (!defined('_GNUBOARD_')) exit;

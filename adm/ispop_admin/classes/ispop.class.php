@@ -481,13 +481,16 @@ class ispop extends qfile
 
 	// 레벨포인트에 따른 조정된 이윰레벨 가져오기
 	public function get_ispop_level($point, $level) {
+		//echo '<script>alert("function on");</script>';
 		$_level = $this->get_level_from_point($point,$level);
+		//cho '<script>alert("_level = '.$_level. ' ");</script>';
 		if($_level == $level) {
 			return $_level;
 		} else {
 			return $this->get_ispop_level($point, $_level);
 		}
 	}
+
 
 	// 이윰레벨에서 최종 조정된 그누레벨 가져오기
 	public function get_gnu_level($level,$mb_level) {
