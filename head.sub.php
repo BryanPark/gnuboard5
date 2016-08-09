@@ -83,6 +83,27 @@ var g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
 <script src="<?php echo G5_JS_URL ?>/jquery.menu.js"></script>
 <script src="<?php echo G5_JS_URL ?>/common.js"></script>
 <script src="<?php echo G5_JS_URL ?>/wrest.js"></script>
+
+
+<?php
+
+	//*******************************************************
+	//** DEV_SOSS
+	//*******************************************************
+
+if (G5_IS_MOBILE) {
+?>
+<link rel="stylesheet" href="<?php echo PIREE_CSS_URL ?>/pi__mobile.css">
+<?php
+} else {
+?>
+<link rel="stylesheet" href="<?php echo PIREE_CSS_URL ?>/pi__style.css">
+<?php
+}
+?>
+<script src="<?php echo PIREE_JS_URL ?>/pi__piree.js"></script>
+
+
 <?php
 if(G5_IS_MOBILE) {
     echo '<script src="'.G5_JS_URL.'/modernizr.custom.70111.js"></script>'.PHP_EOL; // overflow scroll 감지

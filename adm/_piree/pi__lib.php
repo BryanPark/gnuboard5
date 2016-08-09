@@ -130,7 +130,7 @@
 		$sql	 = "SELECT COUNT(*) AS exist FROM `". $piree_table['program'] ."` WHERE `prog_n` = ".$g_program_n;
 		$row	 = sql_fetch($sql);
 		$exist = @$row["exist"];
-
+echo $sql;
 
 		//=====================================================
 		// 시작 => 설정_ROW__유무

@@ -6,6 +6,9 @@ if (!$board['bo_use_sns']) return;
 set_cookie('ck_facebook_checked', false, 86400*31);
 set_cookie('ck_twitter_checked' , false, 86400*31);
 
+
+//2016-07-08 by Bryan Park  -> 차단된 회원의 댓글쓰기를 막는다.
+block_blacklist_from_writing();
 //============================================================================
 // 페이스북
 //----------------------------------------------------------------------------

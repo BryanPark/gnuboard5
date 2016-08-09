@@ -127,6 +127,9 @@ if ($w == '' || $w == 'u') {
 		alert('관리자만 공지할 수 있습니다.');
     }
 
+	//2016-07-08 by Bryan Park  -> 차단된 회원의 글쓰기를 막는다.
+	block_blacklist_from_writing();
+
 } else if ($w == 'r') {
 
     if (in_array((int)$wr_id, $notice_array)) {

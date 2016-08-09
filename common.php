@@ -49,6 +49,34 @@ include_once($g5_path['path'].'/config.php');   // 설정 파일
 
 unset($g5_path);
 
+//2016-07-08 by Bryan Park  -> 차단된 회원의 글쓰기를 막는다.
+function block_blacklist_from_writing() {
+	global $member, $is_admin;
+
+	if($is_admin) return; //2016-07-08 by Bryan Park 관리자의 경우 바로 종료.
+
+	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+		$block_ip = $_SERVER['HTTP_CLIENT_IP'];
+	} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		$block_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+		$block_ip = $_SERVER['REMOTE_ADDR'];
+	}
+	$block_sql = "select * from g5__piree_770006_black_list where mb_id ='".$member['mb_id']."'"; 
+	if(is_array($block_ip)){//2016-07-08 by Bryan Park 아이피가 여러 서버를 경유해서 오는 경우엔 여러 주소를 가짐. 그것을 처리.
+		foreach($block_ip as $bl_ip){
+			$block_sql .=" OR `mb_ip`='".$bl_ip."' ";
+		}
+	}else{
+		$block_sql .= " OR `mb_ip`='".$block_ip."'";
+	}
+	$block = sql_fetch($block_sql);
+	if($block['mb_id']==$member['mb_id']){
+		alert('신고누적으로 글쓰기가 차단되었습니다. 자세한 내용은 쪽지를 확인해주세요.');
+	}else if($block['mb_ip'] == $block_ip){
+		alert('신고누적으로 글쓰기가 차단되었습니다. 자세한 내용은 쪽지를 확인해주세요.');
+	}
+}
 
 // multi-dimensional array에 사용자지정 함수적용
 function array_map_deep($fn, $array)

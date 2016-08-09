@@ -1527,6 +1527,17 @@ function sql_fetch_array($result)
     return $row;
 }
 
+// 결과값에서 한행 배열(첨자)로 얻는다.
+function sql_fetch_row($result)
+{
+    if(function_exists('mysqli_fetch_row') && G5_MYSQLI_USE)
+        $row = @mysqli_fetch_row($result);
+    else
+        $row = @mysql_fetch_row($result);
+
+    return $row;
+}
+
 
 // $result에 대한 메모리(memory)에 있는 내용을 모두 제거한다.
 // sql_free_result()는 결과로부터 얻은 질의 값이 커서 많은 메모리를 사용할 염려가 있을 때 사용된다.
@@ -1562,6 +1573,21 @@ function sql_insert_id($link=null)
     else
         return mysql_insert_id($link);
 }
+
+// 2016-07-12 affected_row()를 보기위해서 추가. by Bryan Park
+function sql_affected_rows($link=null)
+{
+    global $g5;
+
+    if(!$link)
+        $link = $g5['connect_db'];
+
+    if(function_exists('mysqli_affected_rows') && G5_MYSQLI_USE)
+        return mysqli_affected_rows($link);
+    else
+        return mysql_affected_rows($link);
+}
+
 
 
 function sql_num_rows($result)

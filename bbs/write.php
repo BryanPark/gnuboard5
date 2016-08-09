@@ -31,6 +31,10 @@ if ($w == 'u' || $w == 'r') {
     }
 }
 
+
+//2016-07-08 by Bryan Park  -> 차단된 회원의 글쓰기를 막는다.
+block_blacklist_from_writing();
+
 if ($w == '') {
     if ($wr_id) {
         alert('글쓰기에는 \$wr_id 값을 사용하지 않습니다.', G5_BBS_URL.'/board.php?bo_table='.$bo_table);

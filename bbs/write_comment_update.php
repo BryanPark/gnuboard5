@@ -8,6 +8,8 @@ if (substr_count($wr_content, "&#") > 50) {
     alert('내용에 올바르지 않은 코드가 다수 포함되어 있습니다.');
     exit;
 }
+//2016-07-08 by Bryan Park  -> 차단된 회원의 댓글쓰기를 막는다.
+block_blacklist_from_writing();
 
 @include_once($board_skin_path.'/write_comment_update.head.skin.php');
 

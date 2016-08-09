@@ -30,6 +30,7 @@
 	$menu["menu770"] = array (
 												    array("770000", "피리 PLUS G5",							G5_ADMIN_URL.'/p770001/pi__update.php',	"piree"),
 												    array("770001", "피리 테이블 생성",					G5_ADMIN_URL."/p770001/",								"table"),
+													array("770006", "신고하기 0.1.2",				G5_ADMIN_URL."/p770006__report/",				"report"),
 														array("770015",	"피리 게시글에 투표 0.1.1",	G5_ADMIN_URL."/p770015/",								"article_vote"),
 														array("770999", "피리 프로그램 소식",				G5_ADMIN_URL.'/p770001/pi__update.php',	"update",	1),
 														);

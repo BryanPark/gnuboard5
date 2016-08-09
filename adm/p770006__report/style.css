@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* PIREE 피리 */
+
+.tr_row_multi  {line-height:2.4em; padding:5px;}
+
+.report_box  {line-height:2.4em; width:600px; padding:5px;}
+
+.float_left_20  {float:left; position: relative; width:20px;}
+.float_left_40  {float:left; position: relative; width:40px;}
+.float_left_100 {float:left; position: relative; width:100px;}
+.float_left_120 {float:left; position: relative; width:120px;}
+.td_left_460 fl_left {float:left; position: relative; width:460px;}
+.float_left_600 {float:left; position: relative; width:600px;}
+
+.str_bold_0000ff {color:#0000ff;line-height:1.9em;font-weight:bold;}
+.str_bold_ff0000 {color:#ff0000;line-height:1.9em;font-weight:bold;}
+.str_default_6688ff {color:#6688ff;line-height:1.8em;}
+
+
+/* //2016-07-19 탭버튼 활성화 비활성화 추가 by Bryan Park */
+
+/*//2016-07-19 탭버튼으로 쓰는 버튼 by Bryan Park*/
+.tab_btn 
+{ padding:0 5px; height:24px; margin : 0 0 5px;} 
+/*//2016-07-19 탭버튼 활성화시 style by Bryan Park*/
+.tab_btn_active 
+{padding:0 5px; height:24px; margin : 0 0 5px; 
+background-color: #556655; font-weight:bold;}
+.active{background-color: #556655; font-weight:bold;}
+
+.tab_menu { border-bottom:#556655 solid 2px;}

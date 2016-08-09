@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* PIREE 고맹이 */
+
+/* 신고하기 */
+#report_do {margin-right:10px;padding:0 20px;}
+#report_do .report_guide {display:block;line-height:2.2em;color:#222;}
+#report_do .reason_title {padding:5px 0 5px 0;color:#222;font-size:1.2em;font-weight:bold;}
+#report_do .reason_box   {border:1px solid #dde4e9;padding:0 5px;width:100%;}
+#report_do .reason_box ul       {position:relative;list-style:none;padding:0 5px 4px 5px;zoom:1;}
+#report_do .reason_box ul:after {display:block; visibility:hidden; clear:both; content:"";}
+#report_do .reason_box li       {float:left;width:100%;padding:6px 0 6px 5px;}
+#report_do .reason_box textarea {margin:0 10px 15px 10px;width:93%;height:100px;}
+#report_do .reason_arti_s {float:left;width:50px;padding:2px 0 2px 0;color:#aaa;font-size:0.9em;}
+#report_do .reason_arti_b {float:left;padding:2px 0 2px 0;color:#222;font-size:1.1em;font-weight:bold;}
